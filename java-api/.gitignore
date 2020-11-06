@@ -1,5 +1,3 @@
-**/resources/application.properties
-
 *#
 *.iml
 *.ipr
@@ -43,3 +41,4 @@ transaction-logs
 secrets.yml
 .gradletasknamecache
 .sts4-cache
+**/application.properties
