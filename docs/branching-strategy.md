@@ -7,3 +7,4 @@ Aim to make every commit a deployable unit of code (i.e. one that can run throug
 It is your responsibility to handle potential merge conflicts before opening a Merge Request. 
 
 When opening a merge request, select the "squash commits before merging" option. This will ensure that `master`'s history will be linear, with each commit representing a meaningful feature, addition, or fix to the codebase.
+
