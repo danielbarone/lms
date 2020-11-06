@@ -1,10 +1,9 @@
 # LMS Project
 
-One Paragraph of project description goes here
+...
 
 ## Authors
 
-* **Ian Agostini** - [danielbarone](https://github.com/{})
+* **Ian Agostini** - [IanSmoothStack](https://github.com/IanSmoothStack)
 * **Daniel Barone** - [danielbarone](https://github.com/danielbarone)
-* **Avery Johnson** - [danielbarone](https://github.com/{})
-
+* **Avery Johnson** - [AveryJ13](https://github.com/AveryJ13)
