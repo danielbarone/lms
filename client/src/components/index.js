@@ -8,10 +8,8 @@ import Icon from './Icon/Icon';
 import LandingPage from './LandingPage/LandingPage';
 import Librarian from './Librarian/Librarian';
 import LogIn from './LogIn/LogIn';
-import Orders from './Orders/Orders';
 import Preview from './Preview/Preview';
 import Register from './Register/Register';
-import Result from './Result/Result';
 import { Canceled, Checkout, Success } from './Checkout';
 
 export {
@@ -27,9 +25,7 @@ export {
   LandingPage,
   Librarian,
   LogIn,
-  Orders,
   Preview,
   Register,
-  Result,
   Success,
 };
