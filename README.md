@@ -4,7 +4,7 @@
 
 ## Docs
 
-1. Branching Strategy - [branching-strategy.md](https://github.com/danielbarone/lms/blob/master/docs/branching-strategy.md)
+1. [Branching Strategy](https://github.com/danielbarone/lms/blob/master/docs/branching-strategy.md)
 2. ...
 
 - - - -
