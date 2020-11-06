@@ -5,7 +5,6 @@
 ## Docs
 
 1. [Branching Strategy](https://github.com/danielbarone/lms/blob/master/docs/branching-strategy.md)
-2. ...
 
 - - - -
 
