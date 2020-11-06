@@ -2,6 +2,13 @@
 
 ...
 
+## Docs
+
+1. Branching Strategy - [link](https://github.com/danielbarone/lms/blob/master/docs/branching-strategy.md)
+2. ...
+
+- - - -
+
 ## Authors
 
 * **Ian Agostini** - [IanSmoothStack](https://github.com/IanSmoothStack)
