@@ -10,15 +10,12 @@ import Librarian from './Librarian/Librarian';
 import LogIn from './LogIn/LogIn';
 import Preview from './Preview/Preview';
 import Register from './Register/Register';
-import { Canceled, Checkout, Success } from './Checkout';
 
 export {
   Admin,
   AuthButton,
   AvatarBtn,
   Borrower,
-  Canceled,
-  Checkout,
   Dashboard,
   Home,
   Icon,
@@ -27,5 +24,4 @@ export {
   LogIn,
   Preview,
   Register,
-  Success,
 };
