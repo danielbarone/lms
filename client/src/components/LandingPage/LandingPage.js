@@ -37,7 +37,7 @@ const tabPaths = {
   1: 'borrower',
   2: 'librarian',
 };
-const tabIcons = ['restroom', 'info', 'chat'];
+const tabIcons = ['admin', 'book', 'library'];
 
 function LandingPage(props) {
   const location = useLocation();
