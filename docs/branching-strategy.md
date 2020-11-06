@@ -1,4 +1,4 @@
-### Branching Strategy
+## Branching Strategy
 
 When adding features or other code, `git pull` the latest changes from `master` and check out a new branch. Make your changes and push your branch to GitHub. You can name your branch whatever you'd like locally, but make sure you give your branch a useful name such as `admin/add-book`, `docs/api-spec-update`, or `<ticket code>/<ticket summary>` when you push it.
 

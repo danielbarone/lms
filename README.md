@@ -1,10 +1,11 @@
 # LMS Project
 
-- [Client/README.MD](https://github.com/danielbarone/lms/blob/master/client/README.md)
+...
 
 ## Docs
 
 1. [Branching Strategy](https://github.com/danielbarone/lms/blob/master/docs/branching-strategy.md)
+2. [Theming Strategy](https://github.com/danielbarone/lms/blob/master/docs/theming-strategy.md)
 
 - - - -
 
