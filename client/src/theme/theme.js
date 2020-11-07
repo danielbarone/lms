@@ -28,6 +28,17 @@ const light = createMuiTheme({
         border: `solid 1px ${colors.HIGHLIGHTS[1]}`,
       },
     },
+    outlinedPrimary: {
+      backgroundColor: 'transparent',
+      color: colors.HIGHLIGHTS[3],
+      border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        backgroundColor: `${colors.WHITES[2]} !important`,
+        color: colors.HIGHLIGHTS[3],
+        border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
+      },
+    },
     disabled: {
       color: `${colors.DISABLED[0]} !important`,
       border: `solid 1px ${colors.DISABLED[1]}`,
@@ -112,12 +123,32 @@ const light = createMuiTheme({
   },
   // Material-UI Overrides
   overrides: {
+    MuiDataGrid: {
+      footer: {
+        fontWeight: 'bold',
+      },
+    },
+    MuiLinearProgress: {
+      colorPrimary: {
+        backgroundColor: colors.HIGHLIGHTS[2],
+      },
+      barColorPrimary: {
+        backgroundColor: colors.HIGHLIGHTS[3],
+      },
+    },
     MuiListItem: {
       root: {
         '&$selected': {
-          // backgroundColor: colors.WHITES[0],
           backgroundColor: 'transparent',
           color: colors.HIGHLIGHTS[3],
+        },
+      },
+    },
+    MuiTablePagination: {
+      root: {
+        color: colors.DARKS[4],
+        '& > div p.MuiTypography-body2': {
+          fontWeight: 'bold',
         },
       },
     },
@@ -148,6 +179,16 @@ const dark = createMuiTheme({
       '&:hover': {
         color: colors.HIGHLIGHTS[3],
         border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
+      },
+    },
+    outlinedPrimary: {
+      backgroundColor: 'transparent',
+      color: colors.WHITES[0],
+      border: `solid 1px ${colors.DARKS[4]}`,
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        color: colors.HIGHLIGHTS[1],
+        border: `solid 1px ${colors.HIGHLIGHTS[1]}`,
       },
     },
     disabled: {
@@ -235,12 +276,33 @@ const dark = createMuiTheme({
   },
   // Material-UI Overrides
   overrides: {
+    MuiDataGrid: {
+      footer: {
+        fontWeight: 'bold',
+      },
+    },
+    MuiLinearProgress: {
+      colorPrimary: {
+        backgroundColor: colors.HIGHLIGHTS[0],
+      },
+      barColorPrimary: {
+        backgroundColor: colors.SUCCESS,
+      },
+    },
     MuiListItem: {
       root: {
         '&$selected': {
           // backgroundColor: colors.DARKS[2],
           backgroundColor: 'transparent',
           color: colors.HIGHLIGHTS[1],
+        },
+      },
+    },
+    MuiTablePagination: {
+      root: {
+        color: colors.WHITES[2],
+        '& > div p.MuiTypography-body2': {
+          fontWeight: 'bold',
         },
       },
     },
