@@ -6,7 +6,7 @@ import {
 } from '@material-ui/data-grid';
 import { CircularProgress, LinearProgress } from '@material-ui/core';
 import useStyles from './EntityTable.styles';
-import { Svg } from '..';
+import { CustomChip, Icon, Svg } from '..';
 
 const CustomOverlay = (props) => {
   const classes = useStyles(props);
@@ -81,9 +81,11 @@ const EntityTable = (props) => {
       </div>
       <div>
       {selection.map((v, i) => (
-        <div key={`selection-key-${i}`}>
-          {v.id}
-        </div>
+        <CustomChip
+          key={`selection-key-${i}`}
+          label={v.name}
+          icon={<Icon name='face' />}
+       />
       ))}
     </div>
   </div>

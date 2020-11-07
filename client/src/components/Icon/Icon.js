@@ -12,6 +12,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import DevicesIcon from '@material-ui/icons/Devices';
 import EventIcon from '@material-ui/icons/Event';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FaceIcon from '@material-ui/icons/Face';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
@@ -36,6 +37,7 @@ const icons = {
   creditCard: PaymentIcon,
   default: SentimentVeryDissatisfiedIcon,
   email: MailOutlineIcon,
+  face: FaceIcon,
   help: LiveHelpIcon,
   info: DevicesIcon,
   library: AccountBalanceIcon,

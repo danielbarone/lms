@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   viewBtn: {
     ...theme.buttons.outlined,
-    height: 36,
+    minHeight: 36,
     margin: '12px 4px',
   },
   viewContainer: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   viewBtnActive: {
     ...theme.buttons.disabled,
-    height: 36,
+    minHeight: 36,
     margin: '12px 4px',
   },
   viewRoot: {
