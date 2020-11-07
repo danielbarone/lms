@@ -5,12 +5,13 @@ import { Typography } from '@material-ui/core';
 import useStyles from './Admin.styles';
 /* Components */
 import Branch from '../Branch/Branch';
+import Genre from '../Genre/Genre';
 import { TabbedMenu } from '..';
 
 const adminTabs = [
   { id: 1, name: 'Books', content: 'Books...' },
   { id: 2, name: 'Borrowers', content: 'Borrowers...' },
-  { id: 3, name: 'Genres', content: 'Genres...' },
+  { id: 3, name: 'Genres', content: <Genre /> },
   { id: 4, name: 'Library Branches', content: <Branch /> },
   { id: 5, name: 'Loans', content: 'Loans...' },
   { id: 6, name: 'Publishers', content: 'Publishers...' },

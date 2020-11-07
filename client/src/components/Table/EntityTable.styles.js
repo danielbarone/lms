@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root: (props) => ({
     height: 400,
-    width: '100%',
-  },
+    width: props.tblWidth || '100%',
+  }),
   noRowsOverlay: {
     flexDirection: 'column',
     '& .ant-empty-img-1': {

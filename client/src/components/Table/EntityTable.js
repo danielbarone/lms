@@ -5,7 +5,7 @@ import {
   GridOverlay,
 } from '@material-ui/data-grid';
 import { CircularProgress, LinearProgress } from '@material-ui/core';
-import useStyles from './BranchTable.styles';
+import useStyles from './EntityTable.styles';
 import { Svg } from '..';
 
 const CustomOverlay = (props) => {
@@ -45,7 +45,7 @@ CustomOverlay.propTypes = {
   overlay: PropTypes.string,
 };
 
-const BranchTable = (props) => {
+const EntityTable = (props) => {
   const classes = useStyles(props);
   const { cols, rows } = props;
   const [selection, setSelection] = useState([]);
@@ -90,9 +90,9 @@ const BranchTable = (props) => {
   );
 };
 
-BranchTable.propTypes = {
+EntityTable.propTypes = {
   cols: PropTypes.array,
   rows: PropTypes.array,
 };
 
-export default BranchTable;
+export default EntityTable;
