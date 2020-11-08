@@ -1,10 +1,11 @@
 /* React */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Genre.styles';
 /* Components */
-import { adminApi } from '../../utils/api';
 import { EntityTable } from '..';
+import { genreActions } from '../../services/actions';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 75 },
@@ -13,26 +14,22 @@ const columns = [
 
 const Genre = (props) => {
   const classes = useStyles(props);
-  const [genres, setGenres] = useState(null);
-
-  const createRows = (gs) => gs.map((v) => ({
-    id: v.genreId,
-    name: v.genreName || '--',
-  }));
-
-  const loadGenres = useCallback(() => {
-    adminApi.genres().getAll().then((response) => {
-      setGenres(createRows(response.data));
-    });
-  }, []);
+  const genres = useSelector((state) => state.genres.genres);
+  const loading = useSelector((state) => state.genres.loading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    loadGenres();
-  }, [loadGenres]);
+    dispatch(genreActions.getGenres());
+  }, []);
 
   return (
     <div className={classes.root}>
-      <EntityTable rows={genres} cols={columns} tblWidth='25%' />
+      <EntityTable
+        rows={genres}
+        cols={columns}
+        loading={loading}
+        tblWidth='35%'
+      />
     </div>
   );
 };

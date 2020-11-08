@@ -1,18 +1,18 @@
-import { 
-  applyMiddleware, 
+import {
+  applyMiddleware,
   combineReducers,
-  compose, 
-  createStore
+  compose,
+  createStore,
 } from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 
-import * as reducers from "./reducers";
+import * as reducers from './reducers';
 
 const rootReducer = combineReducers(reducers);
 
 /**
- * 
+ *
  * @param {string} currentPage - current page we are showing in ui
  */
 function configureStore(initialState) {
@@ -21,14 +21,16 @@ function configureStore(initialState) {
     thunk,
   ];
 
+  // eslint-disable-next-line no-underscore-dangle
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
   const store = createStore(
     rootReducer,
     initialState,
     composeEnhancers(
-    applyMiddleware(...middlewares)
-  ));
+      applyMiddleware(...middlewares),
+    ),
+  );
 
   return store;
 }

@@ -76,7 +76,7 @@ const EntityTable = (props) => {
             // eslint-disable-next-line react/display-name
             noRowsOverlay: () => <CustomOverlay overlay='noRows' />,
           }}
-          loading={!rows}
+          loading={props.loading}
         />
       </div>
       <div>
@@ -94,6 +94,7 @@ const EntityTable = (props) => {
 
 EntityTable.propTypes = {
   cols: PropTypes.array,
+  loading: PropTypes.bool,
   rows: PropTypes.array,
 };
 

@@ -1,10 +1,11 @@
 /* React */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Branch.styles';
 /* Components */
-import { adminApi } from '../../utils/api';
 import { EntityTable } from '..';
+import { branchActions } from '../../services/actions';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 75 },
@@ -14,27 +15,21 @@ const columns = [
 
 const Branch = (props) => {
   const classes = useStyles(props);
-  const [branches, setBranches] = useState(null);
-
-  const createRows = (brnchs) => brnchs.map((v) => ({
-    id: v.branchId,
-    name: v.branchName || '--',
-    address: v.branchAddress || '--',
-  }));
-
-  const loadBranches = useCallback(() => {
-    adminApi.branches().getAll().then((response) => {
-      setBranches(createRows(response.data));
-    });
-  }, []);
+  const branches = useSelector((state) => state.branches.branches);
+  const loading = useSelector((state) => state.branches.loading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    loadBranches();
-  }, [loadBranches]);
+    dispatch(branchActions.getBranches());
+  }, []);
 
   return (
     <div className={classes.root}>
-      <EntityTable rows={branches} cols={columns} />
+      <EntityTable
+        rows={branches}
+        cols={columns}
+        loading={loading}
+      />
     </div>
   );
 };
