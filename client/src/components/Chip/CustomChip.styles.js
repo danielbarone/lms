@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 4px 8px 0',
   },
   customChip: (props) => ({
-    ...theme.chips[props.style][props.color],
+    ...theme.chips(props.style, props.color),
   }),
 }));
 

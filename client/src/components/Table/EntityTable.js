@@ -88,7 +88,7 @@ const EntityTable = (props) => {
               <Icon name={props.icon} color='purple' />
             }
             style='outlined'
-            color='purple'
+            color='PURPLE'
           />
         ))}
       </div>

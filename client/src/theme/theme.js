@@ -55,34 +55,16 @@ const light = createMuiTheme({
       },
     })),
   },
-  chips: {
-    filled: {
-      green: {
-        backgroundColor: colors.SUCCESS,
-        color: colors.WHITE,
-        paddingLeft: '8px',
-      },
-      purple: {
-        backgroundColor: colors.PURPLE,
-        color: colors.WHITE,
-        paddingLeft: '8px',
-      },
-    },
-    outlined: {
-      green: {
-        color: colors.SUCCESS,
-        border: `solid 1px ${colors.SUCCESS}`,
-        backgroundColor: 'transparent',
-        paddingLeft: '8px',
-      },
-      purple: {
-        color: colors.PURPLE,
-        border: `solid 1px ${colors.PURPLE}`,
-        backgroundColor: 'transparent',
-        paddingLeft: '8px',
-      },
-    },
-  },
+  chips: (style, color) => (style === 'filled' ? ({
+    backgroundColor: colors[color],
+    color: colors.WHITE,
+    paddingLeft: '8px',
+  }) : ({
+    color: colors[color],
+    border: `solid 1px ${colors[color]}`,
+    backgroundColor: 'transparent',
+    paddingLeft: '8px',
+  })),
   // Colors
   colors: {
     background: {
@@ -254,34 +236,16 @@ const dark = createMuiTheme({
       },
     })),
   },
-  chips: {
-    filled: {
-      green: {
-        backgroundColor: colors.SUCCESS,
-        color: colors.WHITE,
-        paddingLeft: '8px',
-      },
-      purple: {
-        backgroundColor: colors.PURPLE,
-        color: colors.WHITE,
-        paddingLeft: '8px',
-      },
-    },
-    outlined: {
-      green: {
-        color: colors.SUCCESS,
-        border: `solid 1px ${colors.SUCCESS}`,
-        backgroundColor: 'transparent',
-        paddingLeft: '8px',
-      },
-      purple: {
-        color: colors.PURPLE,
-        border: `solid 1px ${colors.PURPLE}`,
-        backgroundColor: 'transparent',
-        paddingLeft: '8px',
-      },
-    },
-  },
+  chips: (style, color) => (style === 'filled' ? ({
+    backgroundColor: colors[color],
+    color: colors.WHITE,
+    paddingLeft: '8px',
+  }) : ({
+    color: colors[color],
+    border: `solid 1px ${colors[color]}`,
+    backgroundColor: 'transparent',
+    paddingLeft: '8px',
+  })),
   // Colors
   colors: {
     background: {
