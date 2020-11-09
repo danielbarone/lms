@@ -2,6 +2,7 @@ import Admin from './Admin/Admin';
 import AuthButton from './Button/AuthButton';
 import AvatarBtn from './Button/AvatarBtn';
 import Borrower from './Borrower/Borrower';
+import BorrowerInput from './BorrowerInput/BorrowerInput';
 import BranchList from './Branch/BranchList';
 import Dashboard from './Dashboard/Dashboard';
 import Home from './Home/Home';
@@ -17,6 +18,7 @@ export {
   AuthButton,
   AvatarBtn,
   Borrower,
+  BorrowerInput,
   BranchList,
   Dashboard,
   Home,

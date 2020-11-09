@@ -14,7 +14,7 @@ const BranchList = (props) => {
   const loadBranches = useCallback(() => {
     adminApi.branches().getAll().then((response) => {
       setBranches(response.data);
-      console.log(response.data);
+     // console.log(response.data);
     });
   }, []);
 

@@ -50,7 +50,7 @@ public class BorrowerService {
 	
 	
 	
-	@RequestMapping(value = "/getBorrowerByCardNo", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBorrowerByCardNo", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
 	public Borrower getBorrowerByCardNo(@RequestBody Borrower borrower) throws SQLException { 
 		if(borrower.getCardNo() == null)
 			return null;

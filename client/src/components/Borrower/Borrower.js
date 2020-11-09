@@ -3,7 +3,9 @@ import React from 'react';
 /* Styles */
 import useStyles from './Borrower.styles';
 
-console.log("Borrower test");
+import { BorrowerInput } from '..';
+
+//console.log("Borrower test");
 // const axios = require('axios');
 // axios.get("http://localhost:8080/getAllBranches").then(resp => {
 //   console.log("Test2:");
@@ -15,6 +17,8 @@ const Borrower = (props) => {
   return (
     <div className={classes.root}>
       Borrowers.....
+      Please enter your borrower Id
+      <BorrowerInput />
     </div>
   );
 };
