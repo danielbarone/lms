@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const adminBaseUrl = process.env.REACT_APP_ADMIN_SERVICE_URL;
+const adminBaseUrl = "https://a178963a462c.ngrok.io";
 
 const admin = {
   branches: () => ({
