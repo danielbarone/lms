@@ -80,7 +80,7 @@ const EntityTable = (props) => {
         />
       </div>
       <div className={classes.selectedContainer}>
-        {selection !== null ? (
+        {selection ? (
           selection.map((v, i) => (
             <CustomChip
               key={`selection-key-${i}`}
