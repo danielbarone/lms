@@ -4,6 +4,9 @@ const useStyles = makeStyles((theme) => ({
   root: (props) => ({
     height: 400,
     width: props.tblWidth || '100%',
+    '& *': {
+      outline: '0 !important',
+    },
   }),
   noRowsOverlay: {
     flexDirection: 'column',

@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '2em',
     backgroundColor: theme.colors.divider.secondary,
   },
-  signUpButton: theme.buttons.outlined,
+  signUpButton: theme.buttons.secondary,
   logInButton: {
     ...theme.buttons.primary,
     borderRadius: 0,

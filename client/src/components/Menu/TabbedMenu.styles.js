@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'start',
   },
   viewBtn: {
-    ...theme.buttons.outlined,
+    ...theme.buttons.custom('outlined', 'PURPLE'),
     minHeight: 36,
     margin: '12px 4px',
   },
   viewContainer: {
     marginTop: '16px',
   },
-  viewBtnActive: {
+  viewBtnInactive: {
     ...theme.buttons.disabled,
     minHeight: 36,
     margin: '12px 4px',

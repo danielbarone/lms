@@ -43,14 +43,14 @@ const TabbedMenu = (props) => {
       {data.map((obj) => (
         obj.id !== 0 ? (
           <Button
-            className={view !== obj.id ? classes.viewBtnActive : classes.viewBtn}
+            className={view !== obj.id ? classes.viewBtnInactive : classes.viewBtn}
             onClick={(evt) => handleClick(evt, obj.id)}
             key={`view-btn--${obj.id}`}
           >
             {obj.name}
           </Button>
         ) : ('')
-      ))};
+      ))}
     </div>
   );
 

@@ -17,7 +17,7 @@ const light = createMuiTheme({
         filter: 'brightness(85%)',
       },
     },
-    outlined: {
+    secondary: {
       backgroundColor: 'transparent',
       color: colors.HIGHLIGHTS[1],
       border: `solid 1px ${colors.HIGHLIGHTS[1]}`,
@@ -28,21 +28,32 @@ const light = createMuiTheme({
         border: `solid 1px ${colors.HIGHLIGHTS[1]}`,
       },
     },
-    outlinedPrimary: {
-      backgroundColor: 'transparent',
-      color: colors.HIGHLIGHTS[3],
-      border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
-      transition: 'all 0.3s ease',
-      '&:hover': {
-        backgroundColor: `${colors.WHITES[2]} !important`,
-        color: colors.HIGHLIGHTS[3],
-        border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
-      },
-    },
     disabled: {
       color: `${colors.DISABLED[0]} !important`,
       border: `solid 1px ${colors.DISABLED[1]}`,
     },
+    custom: (style, color) => (style === 'filled' ? ({
+      color: colors.WHITE,
+      border: 'solid 1px rgba(0, 0, 0, 0)',
+      transition: 'all 0.3s ease',
+      backgroundColor: colors[color],
+      boxShadow: 'none !important',
+      '&:hover': {
+        backgroundColor: `${colors[color]} !important`,
+        color: colors.WHITE,
+        filter: 'brightness(85%)',
+      },
+    }) : ({
+      backgroundColor: 'transparent',
+      color: colors[color],
+      border: `solid 1px ${colors[color]}`,
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        backgroundColor: `${colors.WHITES[2]} !important`,
+        color: colors[color],
+        border: `solid 1px ${colors[color]}`,
+      },
+    })),
   },
   chips: {
     filled: {
@@ -155,6 +166,14 @@ const light = createMuiTheme({
       footer: {
         fontWeight: 'bold',
       },
+      root: {
+        '& .Mui-selected': {
+          backgroundColor: `${colors.LIGHT_PURPLE} !important`,
+        },
+        '& .Mui-checked': {
+          color: colors.PURPLE,
+        },
+      },
     },
     MuiLinearProgress: {
       colorPrimary: {
@@ -199,7 +218,7 @@ const dark = createMuiTheme({
         filter: 'brightness(85%)',
       },
     },
-    outlined: {
+    secondary: {
       backgroundColor: 'transparent',
       color: colors.WHITES[0],
       border: `solid 1px ${colors.DARKS[4]}`,
@@ -209,19 +228,58 @@ const dark = createMuiTheme({
         border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
       },
     },
-    outlinedPrimary: {
-      backgroundColor: 'transparent',
-      color: colors.WHITES[0],
-      border: `solid 1px ${colors.DARKS[4]}`,
-      transition: 'all 0.3s ease',
-      '&:hover': {
-        color: colors.HIGHLIGHTS[1],
-        border: `solid 1px ${colors.HIGHLIGHTS[1]}`,
-      },
-    },
     disabled: {
       color: `${colors.DISABLED[0]} !important`,
       border: `solid 1px ${colors.DISABLED[0]} !important`,
+    },
+    custom: (style, color) => (style === 'filled' ? ({
+      color: colors.DARKS[2],
+      border: 'solid 1px rgba(0, 0, 0, 0)',
+      transition: 'all 0.3s ease',
+      backgroundColor: colors[color],
+      boxShadow: 'none !important',
+      '&:hover': {
+        backgroundColor: `${colors[color]} !important`,
+        color: colors.DARKS[1],
+        filter: 'brightness(85%)',
+      },
+    }) : ({
+      backgroundColor: 'transparent',
+      color: colors[color],
+      border: `solid 1px ${colors[color]}`,
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        color: colors[color],
+        border: `solid 1px ${colors[color]}`,
+      },
+    })),
+  },
+  chips: {
+    filled: {
+      green: {
+        backgroundColor: colors.SUCCESS,
+        color: colors.WHITE,
+        paddingLeft: '8px',
+      },
+      purple: {
+        backgroundColor: colors.PURPLE,
+        color: colors.WHITE,
+        paddingLeft: '8px',
+      },
+    },
+    outlined: {
+      green: {
+        color: colors.SUCCESS,
+        border: `solid 1px ${colors.SUCCESS}`,
+        backgroundColor: 'transparent',
+        paddingLeft: '8px',
+      },
+      purple: {
+        color: colors.PURPLE,
+        border: `solid 1px ${colors.PURPLE}`,
+        backgroundColor: 'transparent',
+        paddingLeft: '8px',
+      },
     },
   },
   // Colors
@@ -307,6 +365,14 @@ const dark = createMuiTheme({
     MuiDataGrid: {
       footer: {
         fontWeight: 'bold',
+      },
+      root: {
+        '& .Mui-selected': {
+          backgroundColor: `${colors.DARKS[2]} !important`,
+        },
+        '& .Mui-checked': {
+          color: colors.HIGHLIGHTS[1],
+        },
       },
     },
     MuiLinearProgress: {

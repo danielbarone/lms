@@ -28,7 +28,6 @@ const Genre = (props) => {
         rows={genres}
         cols={columns}
         loading={loading}
-        tblWidth='35%'
       />
     </div>
   );
