@@ -79,7 +79,7 @@ const EntityTable = (props) => {
           loading={props.loading}
         />
       </div>
-      <div>
+      <div className={classes.selectedContainer}>
       {selection.map((v, i) => (
         <CustomChip
           key={`selection-key-${i}`}
