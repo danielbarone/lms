@@ -1,9 +1,10 @@
 import { CLEAR, SET } from './actionTypes';
 
-export const setSession = session => {
-  return { session, type: SET };
-};
+export const setSession = (session) => ({
+  session,
+  type: SET,
+});
 
-export const clearSession = () => {
-  return { type: CLEAR };
-};
+export const clearSession = () => ({
+  type: CLEAR,
+});
