@@ -81,7 +81,7 @@ public class LibrarianService {
 		return bookLoans;
 	}
 	
-	@RequestMapping(value = "/getBranchBooks", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBranchBooks", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<Book> getBranchBooks(@RequestBody Branch sBranch) throws SQLException { 
 		List<Book> books = new ArrayList<>();
 		if(sBranch.getBranchId()==null)
@@ -97,7 +97,7 @@ public class LibrarianService {
 	}
 	
 	
-	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<BookCopies> getBookCopiesByBranchId(@RequestBody Branch sBranch) throws SQLException { 
 		if(sBranch.getBranchId()==null)
 			return null;
@@ -107,7 +107,7 @@ public class LibrarianService {
 		return bc;
 	}
 	
-	@RequestMapping(value = "/getBookCopyNo", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookCopyNo", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public BookCopies getBookCopyNo(@RequestBody BookCopies bookCopies) throws SQLException { 
 		if(bookCopies.getId().getBranchId()==null)
 			return null;
