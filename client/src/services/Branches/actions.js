@@ -41,5 +41,6 @@ const getBranches = () => (dispatch) => {
 };
 
 export {
+  // eslint-disable-next-line import/prefer-default-export
   getBranches,
 };
