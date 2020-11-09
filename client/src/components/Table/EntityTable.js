@@ -80,20 +80,25 @@ const EntityTable = (props) => {
         />
       </div>
       <div className={classes.selectedContainer}>
-      {selection.map((v, i) => (
-        <CustomChip
-          key={`selection-key-${i}`}
-          label={v.name}
-          icon={<Icon name='face' />}
-       />
-      ))}
-    </div>
+        {selection.map((v, i) => (
+          <CustomChip
+            key={`selection-key-${i}`}
+            label={v.name}
+            icon={
+              <Icon name={props.icon} color='purple' />
+            }
+            style='outlined'
+            color='purple'
+          />
+        ))}
+      </div>
   </div>
   );
 };
 
 EntityTable.propTypes = {
   cols: PropTypes.array,
+  icon: PropTypes.string,
   loading: PropTypes.bool,
   rows: PropTypes.array,
 };

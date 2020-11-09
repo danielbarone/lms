@@ -44,6 +44,34 @@ const light = createMuiTheme({
       border: `solid 1px ${colors.DISABLED[1]}`,
     },
   },
+  chips: {
+    filled: {
+      green: {
+        backgroundColor: colors.SUCCESS,
+        color: colors.WHITE,
+        paddingLeft: '8px',
+      },
+      purple: {
+        backgroundColor: colors.PURPLE,
+        color: colors.WHITE,
+        paddingLeft: '8px',
+      },
+    },
+    outlined: {
+      green: {
+        color: colors.SUCCESS,
+        border: `solid 1px ${colors.SUCCESS}`,
+        backgroundColor: 'transparent',
+        paddingLeft: '8px',
+      },
+      purple: {
+        color: colors.PURPLE,
+        border: `solid 1px ${colors.PURPLE}`,
+        backgroundColor: 'transparent',
+        paddingLeft: '8px',
+      },
+    },
+  },
   // Colors
   colors: {
     background: {

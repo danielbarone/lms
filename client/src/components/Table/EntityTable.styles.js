@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     width: '100%',
   },
+  selectedContainer: {
+    marginTop: '20px',
+    display: 'flex',
+    // justifyContent: 'start',
+    flexWrap: 'wrap',
+  },
   spinner: {
     color: theme.colors.text.highlight,
   },

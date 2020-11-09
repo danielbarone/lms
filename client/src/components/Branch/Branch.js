@@ -26,9 +26,10 @@ const Branch = (props) => {
   return (
     <div className={classes.root}>
       <EntityTable
-        rows={branches}
         cols={columns}
+        icon='library'
         loading={loading}
+        rows={branches}
       />
     </div>
   );

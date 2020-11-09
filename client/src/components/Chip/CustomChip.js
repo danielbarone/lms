@@ -10,21 +10,21 @@ import useStyles from './CustomChip.styles';
 
 const CustomChip = (props) => {
   const classes = useStyles(props);
-  const { handleDelete, icon, label } = props;
+  const { icon, label } = props;
   return (
     <div className={classes.root}>
       <Chip
+        className={classes.customChip}
         icon={icon}
         label={label}
-        onDelete={() => handleDelete()}
-        className={classes.chip}
       />
     </div>
   );
 };
 
 CustomChip.propTypes = {
-  handleDelete: PropTypes.func,
+  style: PropTypes.string,
+  color: PropTypes.string,
   icon: PropTypes.any,
   label: PropTypes.string,
 };
