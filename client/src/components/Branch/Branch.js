@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Branch.styles';
 /* Components */
-import { EntityTable } from '..';
+import { EntityTable, InputModal } from '..';
 import { branchActions } from '../../services/actions';
 
 const columns = [
@@ -25,6 +25,7 @@ const Branch = (props) => {
 
   return (
     <div className={classes.root}>
+      <InputModal />
       <EntityTable
         cols={columns}
         icon='library'

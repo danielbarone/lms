@@ -9,6 +9,7 @@ import EntityTable from './Table/EntityTable';
 import Genre from './Genre/Genre';
 import Home from './Home/Home';
 import Icon from './Icon/Icon';
+import InputModal from './Modal/InputModal';
 import LandingPage from './LandingPage/LandingPage';
 import Librarian from './Librarian/Librarian';
 import LogIn from './LogIn/LogIn';
@@ -29,6 +30,7 @@ export {
   Genre,
   Home,
   Icon,
+  InputModal,
   LandingPage,
   Librarian,
   LogIn,
