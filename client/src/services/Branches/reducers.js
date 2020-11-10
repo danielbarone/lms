@@ -34,6 +34,38 @@ const branchReducer = (state = initialStateCreate, action) => {
   }
 };
 
+/* UPDATE */
+const initialStateUpdate = {
+  branch: null,
+  error: null,
+  loading: false,
+};
+
+const updateBranchStarted = (state, action) => updateObject(state, {
+  error: null,
+  loading: true,
+});
+
+const updateBranchSuccess = (state, action) => updateObject(state, {
+  branch: action.branch,
+  error: null,
+  loading: false,
+});
+
+const updateBranchFailure = (state, action) => updateObject(state, {
+  error: action.error,
+  loading: false,
+});
+
+const updatedBranchReducer = (state = initialStateUpdate, action) => {
+  switch (action.type) {
+    case actionTypes.UPDATE_BRANCH_STARTED: return updateBranchStarted(state, action);
+    case actionTypes.UPDATE_BRANCH_SUCCESS: return updateBranchSuccess(state, action);
+    case actionTypes.UPDATE_BRANCH_FAILURE: return updateBranchFailure(state, action);
+    default: return state;
+  }
+};
+
 /* READ */
 const initialState = {
   branches: null,
@@ -69,4 +101,5 @@ const branchesReducer = (state = initialState, action) => {
 export {
   branchReducer,
   branchesReducer,
+  updatedBranchReducer,
 };

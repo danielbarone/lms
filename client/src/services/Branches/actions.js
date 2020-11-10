@@ -29,6 +29,33 @@ const addBranch = (branch) => (dispatch) => {
     .catch((e) => dispatch(addBranchFailure(e)));
 };
 
+/* UPDATE */
+const updateBranchStarted = (loading) => ({
+  type: actionTypes.UPDATE_BRANCH_STARTED,
+  loading,
+});
+
+const updateBranchSuccess = (branch) => ({
+  type: actionTypes.UPDATE_BRANCH_SUCCESS,
+  branch,
+});
+
+const updateBranchFailure = (error) => ({
+  type: actionTypes.UPDATE_BRANCH_FAILURE,
+  error,
+});
+
+const updateBranch = (branch) => (dispatch) => {
+  dispatch(updateBranchStarted(true));
+
+  return admin.branches().update(branch)
+    .then((response) => {
+      dispatch(updateBranchSuccess(branch));
+      return response;
+    })
+    .catch((e) => dispatch(updateBranchFailure(e)));
+};
+
 /* READ */
 const getBranchesStarted = (loading) => ({
   type: actionTypes.GET_BRANCHES_STARTED,
@@ -67,4 +94,5 @@ const getBranches = () => (dispatch) => {
 export {
   addBranch,
   getBranches,
+  updateBranch,
 };

@@ -162,7 +162,31 @@ public class AdministratorService {
 	}
 	
 	
-	
+	@RequestMapping(value = "/addGenreRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addGenreRE(@RequestBody Genre genre) {
+		try {
+			grepo.save(genre);
+			return new ResponseEntity<>(genre, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to add genre", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/updateGenreRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> updateGenreRE(@RequestBody Genre genre) {
+		try {
+			if (grepo.existsById(genre.getGenreId())) {
+				grepo.save(genre);
+				return new ResponseEntity<>(genre, HttpStatus.OK);
+			}
+			return new ResponseEntity<>("Could not locate genre", HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to update genre", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@Transactional
 	@RequestMapping(value = "/addGenre", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<Genre> addGenre(@RequestBody Genre genre) throws SQLException { 
@@ -552,11 +576,4 @@ public class AdministratorService {
 		return null;
 		
 	}
-	
-	
-	
-
-
-
-
 }
