@@ -24,7 +24,8 @@ const Branch = (props) => {
   const loading = useSelector((state) => state.branches.loading);
   const dispatch = useDispatch();
 
-  const refresh = () => dispatch(branchActions.getBranches());
+  const createBranch = (branch) => branchActions.addBranch(branch);
+  const getBranches = () => dispatch(branchActions.getBranches());
 
   useEffect(() => {
     dispatch(branchActions.getBranches());
@@ -33,11 +34,11 @@ const Branch = (props) => {
   return (
     <div className={classes.root}>
       <InputModal
-        action={(branch) => branchActions.addBranch(branch)}
+        action={createBranch}
         columns={formColumns}
         details='Enter details for the new branch you would like to add.'
         title='New Branch'
-        refresh={refresh}
+        refresh={getBranches}
       />
       <EntityTable
         cols={columns}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -13,7 +13,13 @@ import useStyles from './InputModal.styles';
 
 const InputModal = (props) => {
   const classes = useStyles(props);
-  const { action, columns, details, refresh, title } = props;
+  const {
+    action,
+    columns,
+    details,
+    refresh,
+    title,
+  } = props;
   const [formError, setFormError] = useState();
 
   const dispatch = useDispatch();
