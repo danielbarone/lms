@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -11,14 +11,11 @@ import {
 } from '@material-ui/core';
 import useStyles from './InputModal.styles';
 
-// import { setSession } from '../../services/Session/actions';
-// import { createSession } from '../../utils/mutations';
-import { branchActions } from '../../services/actions';
-
 const InputModal = (props) => {
   const classes = useStyles(props);
-  const { columns } = props;
+  const { action, columns, details, refresh, title } = props;
   const [formError, setFormError] = useState();
+
   const dispatch = useDispatch();
   const {
     formState: { isSubmitting },
@@ -31,32 +28,35 @@ const InputModal = (props) => {
   const handleToggle = () => setOpen(!open);
   const handleClose = () => setOpen(false);
 
-  const onSubmit = handleSubmit(async (branch) => {
+  const onSubmit = handleSubmit(async (formData) => {
     try {
-      dispatch(branchActions.addBranch(branch));
+      const response = await dispatch(action(formData));
+      if (!response.data) {
+        throw new Error(response.error);
+      }
       reset();
       setOpen(false);
+      refresh();
     } catch (e) {
-      setFormError(e);
+      setFormError(e.message.split(':')[1]);
     }
   });
 
   return (
     <div>
-      <Button onClick={handleToggle}>{open ? 'close' : 'open'}</Button>
+      <Button onClick={handleToggle} className={classes.toggleModal}>{title}</Button>
       <Dialog
         open={open}
         onClose={() => handleClose()}
         aria-labelledby='input-modal'
         aria-describedby='input-modal'
       >
-        <Button onClick={handleToggle}>Close</Button>
         <form onSubmit={onSubmit} className={classes.formModalContainer}>
-          <Typography className={classes.welcomeMsg} variant='h6'>Welcome Back</Typography>
+          <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
           <Typography className={classes.formError}>{formError}</Typography>
           {columns.map((c) => (
             <TextField
-              className={classes.logInInput}
+              className={classes.modalInput}
               key={c.field}
               id={c.field}
               variant='outlined'
@@ -68,14 +68,15 @@ const InputModal = (props) => {
             />
           ))}
           <Button
-            className={classes.logInButton}
+            className={classes.modalSubmitBtn}
             variant='contained'
             disabled={isSubmitting}
             type='submit'
           >
-            Button
+            Submit
           </Button>
           <Divider className={classes.btnDivider} />
+          <Typography className={classes.details}>{details}</Typography>
         </form>
       </Dialog>
     </div>
@@ -83,7 +84,11 @@ const InputModal = (props) => {
 };
 
 InputModal.propTypes = {
+  action: PropTypes.func,
   columns: PropTypes.array,
+  details: PropTypes.string,
+  refresh: PropTypes.func,
+  title: PropTypes.string,
 };
 
 export default InputModal;

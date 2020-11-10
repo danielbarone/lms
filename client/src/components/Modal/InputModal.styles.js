@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '4em',
     backgroundColor: theme.colors.background.primary,
   },
-  logInInput: {
+  modalInput: {
     marginBottom: '1em',
     '& > label': {
       color: theme.colors.text.input.label.primary,
@@ -68,17 +68,29 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.colors.divider.secondary,
   },
   signUpButton: theme.buttons.secondary,
-  logInButton: {
+  modalSubmitBtn: {
     ...theme.buttons.primary,
     borderRadius: 0,
     borderBottomLeftRadius: '5px',
     borderBottomRightRadius: '5px',
   },
-  authError: {
+  formError: {
     textAlign: 'center',
     color: theme.colors.text.error,
     minHeight: '1.5em',
     marginBottom: '0.5em',
+  },
+  details: {
+    textAlign: 'center',
+    color: theme.colors.text.primary,
+    minHeight: '1.5em',
+    marginBottom: '0.5em',
+    maxWidth: 300
+  },
+  toggleModal: {
+    ...theme.buttons.custom('filled', 'PURPLE'),
+    height: 30,
+    margin: '12px 4px',
   },
   welcomeMsg: {
     textAlign: 'center',

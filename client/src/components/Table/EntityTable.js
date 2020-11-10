@@ -10,7 +10,7 @@ import { CustomChip, Icon, Svg } from '..';
 
 const CustomOverlay = (props) => {
   const classes = useStyles(props);
-  const { overlay } = props;
+  const { msg, overlay } = props;
 
   const indicators = {
     linear: (
@@ -33,7 +33,7 @@ const CustomOverlay = (props) => {
     noRows: (
       <GridOverlay className={classes.noRowsOverlay}>
         <Svg name='noData' />
-        <div className={classes.label}>No Rows</div>
+        <div className={classes.label}>{msg}</div>
       </GridOverlay>
     ),
   };
@@ -42,6 +42,7 @@ const CustomOverlay = (props) => {
 };
 
 CustomOverlay.propTypes = {
+  msg: PropTypes.string,
   overlay: PropTypes.string,
 };
 
@@ -74,7 +75,7 @@ const EntityTable = (props) => {
             // eslint-disable-next-line react/display-name
             loadingOverlay: () => <CustomOverlay overlay='loading' indicator='spinner' />,
             // eslint-disable-next-line react/display-name
-            noRowsOverlay: () => <CustomOverlay overlay='noRows' />,
+            noRowsOverlay: () => <CustomOverlay overlay='noRows' msg={rows ? 'No data available.' : 'Failed to retrieve data.'} />,
           }}
           loading={props.loading}
         />

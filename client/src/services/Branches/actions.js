@@ -21,10 +21,10 @@ const addBranchFailure = (error) => ({
 const addBranch = (branch) => (dispatch) => {
   dispatch(addBranchStarted(true));
 
-  admin.branches().create(branch)
+  return admin.branches().create(branch)
     .then((response) => {
-      console.log(response);
       dispatch(addBranchSuccess(branch));
+      return response;
     })
     .catch((e) => dispatch(addBranchFailure(e)));
 };
