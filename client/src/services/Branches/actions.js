@@ -1,23 +1,47 @@
-import {
-  GET_BRANCHES_STARTED,
-  GET_BRANCHES_SUCCESS,
-  GET_BRANCHES_FAILURE,
-} from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 import admin from '../api';
 
+/* CREATE */
+const addBranchStarted = (loading) => ({
+  type: actionTypes.ADD_BRANCH_STARTED,
+  loading,
+});
+
+const addBranchSuccess = (branch) => ({
+  type: actionTypes.ADD_BRANCH_SUCCESS,
+  branch,
+});
+
+const addBranchFailure = (error) => ({
+  type: actionTypes.ADD_BRANCH_FAILURE,
+  error,
+});
+
+const addBranch = (branch) => (dispatch) => {
+  dispatch(addBranchStarted(true));
+
+  return admin.branches().create(branch)
+    .then((response) => {
+      dispatch(addBranchSuccess(branch));
+      return response;
+    })
+    .catch((e) => dispatch(addBranchFailure(e)));
+};
+
+/* READ */
 const getBranchesStarted = (loading) => ({
-  type: GET_BRANCHES_STARTED,
+  type: actionTypes.GET_BRANCHES_STARTED,
   loading,
 });
 
 const getBranchesSuccess = (branches) => ({
-  type: GET_BRANCHES_SUCCESS,
+  type: actionTypes.GET_BRANCHES_SUCCESS,
   branches,
 });
 
 const getBranchesFailure = (error) => ({
-  type: GET_BRANCHES_FAILURE,
+  type: actionTypes.GET_BRANCHES_FAILURE,
   error,
 });
 
@@ -41,6 +65,6 @@ const getBranches = () => (dispatch) => {
 };
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
+  addBranch,
   getBranches,
 };

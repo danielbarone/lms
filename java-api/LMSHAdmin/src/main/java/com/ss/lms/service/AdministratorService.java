@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -454,6 +456,16 @@ public class AdministratorService {
 		
 	}
 	
+	@RequestMapping(value = "/addBranch", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addBranch(@RequestBody Branch branch) {
+		try {
+			brrepo.save(branch);
+			return new ResponseEntity<>(branch, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Could not add branch.", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	///meant for overriding due date but can be used to change any of the loan's values
 	@RequestMapping(value = "/overrideBookLoan", method = RequestMethod.GET, produces = "application/json")

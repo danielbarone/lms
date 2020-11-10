@@ -4,6 +4,7 @@ const adminBaseUrl = process.env.REACT_APP_ADMIN_SERVICE_URL;
 
 const admin = {
   branches: () => ({
+    create: (branch) => axios.post(`${adminBaseUrl}/addBranch`, branch),
     getAll: () => axios.get(`${adminBaseUrl}/getAllBranches`),
   }),
   genres: () => ({
