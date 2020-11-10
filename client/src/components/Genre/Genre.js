@@ -16,10 +16,10 @@ const formColumns = [
   { field: 'genreName', label: 'Genre', type: 'text' },
 ];
 
-// const formColumnsUpdate = [
-//   { field: 'genreId', label: 'Genre ID', type: 'text' },
-//   { field: 'genreName', label: 'Genre', type: 'text' },
-// ];
+const formColsUpdDel = [
+  { field: 'genreId', label: 'Genre ID', type: 'text' },
+  { field: 'genreName', label: 'Genre', type: 'text' },
+];
 
 const Genre = (props) => {
   const classes = useStyles(props);
@@ -28,7 +28,8 @@ const Genre = (props) => {
   const dispatch = useDispatch();
 
   const createGenre = (genre) => genreActions.addGenre(genre);
-  // const updateGenre = (genre) => genreActions.updateGenre(genre);
+  const updateGenre = (genre) => genreActions.updateGenre(genre);
+  const deleteGenre = (genre) => genreActions.deleteGenre(genre);
   const getGenres = () => dispatch(genreActions.getGenres());
 
   useEffect(() => {
@@ -37,20 +38,30 @@ const Genre = (props) => {
 
   return (
     <div className={classes.root}>
-      <InputModal
-        action={createGenre}
-        columns={formColumns}
-        details='Enter details for the new genre you would like to add.'
-        title='New Genre'
-        refresh={getGenres}
-      />
-      {/* <InputModal
-        action={updateGenre}
-        columns={formColumnsUpdate}
-        details='Edit details for the genre you would like to update.'
-        title='Update Genre'
-        refresh={getGenres}
-      /> */}
+      {/* Temp div style */}
+      <div style={{ display: 'flex', justifyContent: 'start' }}>
+        <InputModal
+          action={createGenre}
+          columns={formColumns}
+          details='Enter details for the new genre you would like to add.'
+          title='New Genre'
+          refresh={getGenres}
+        />
+        <InputModal
+          action={updateGenre}
+          columns={formColsUpdDel}
+          details='Edit details for the genre you would like to update.'
+          title='Update Genre'
+          refresh={getGenres}
+        />
+        <InputModal
+          action={deleteGenre}
+          columns={formColsUpdDel}
+          details='Review details of the genre you are about to delete.'
+          title='Delete Genre'
+          refresh={getGenres}
+        />
+      </div>
       <EntityTable
         rows={genres}
         cols={columns}

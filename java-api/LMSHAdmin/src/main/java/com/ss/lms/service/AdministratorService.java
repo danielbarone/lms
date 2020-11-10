@@ -173,6 +173,17 @@ public class AdministratorService {
 		}
 	}
 
+	@RequestMapping(value = "/deleteGenreRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deleteGenreRE(@RequestBody Genre genre) {
+		try {
+			grepo.delete(genre);
+			return new ResponseEntity<>(genre, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete genre", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@RequestMapping(value = "/updateGenreRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<?> updateGenreRE(@RequestBody Genre genre) {
 		try {
@@ -480,8 +491,8 @@ public class AdministratorService {
 		
 	}
 	
-	@RequestMapping(value = "/addBranch", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	public ResponseEntity<?> addBranch(@RequestBody Branch branch) {
+	@RequestMapping(value = "/addBranchRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addBranchRE(@RequestBody Branch branch) {
 		try {
 			brrepo.save(branch);
 			return new ResponseEntity<>(branch, HttpStatus.OK);

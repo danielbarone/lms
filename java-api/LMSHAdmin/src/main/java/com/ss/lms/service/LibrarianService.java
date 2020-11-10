@@ -188,9 +188,21 @@ public class LibrarianService {
 		return null;
 		
 	}
+
+	@CrossOrigin
+	@RequestMapping(value = "/deleteBranchRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deleteBranchRE(@RequestBody Branch branch) {
+		try {
+			brrepo.delete(branch);
+			return new ResponseEntity<>(branch, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete branch.", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
-	@RequestMapping(value = "/updateBranchDetails", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	public ResponseEntity<?> updateBranchDetails(@RequestBody Branch branch) {
+	@RequestMapping(value = "/updateBranchRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> updateBranchRE(@RequestBody Branch branch) {
 		try {
 			if (brrepo.existsById(branch.getBranchId())) {
 				Branch updatedBranch = brrepo.getOne(branch.getBranchId());

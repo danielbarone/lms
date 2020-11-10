@@ -55,6 +55,33 @@ const updateGenre = (genre) => (dispatch) => {
     .catch((e) => dispatch(updateGenreFailure(e)));
 };
 
+/* DELETE */
+const deleteGenreStarted = (loading) => ({
+  type: actionTypes.DELETE_GENRE_STARTED,
+  loading,
+});
+
+const deleteGenreSuccess = (genre) => ({
+  type: actionTypes.DELETE_GENRE_SUCCESS,
+  genre,
+});
+
+const deleteGenreFailure = (error) => ({
+  type: actionTypes.DELETE_GENRE_FAILURE,
+  error,
+});
+
+const deleteGenre = (genre) => (dispatch) => {
+  dispatch(deleteGenreStarted(true));
+
+  return admin.genres().delete(genre)
+    .then((response) => {
+      dispatch(deleteGenreSuccess(genre));
+      return response;
+    })
+    .catch((e) => dispatch(deleteGenreFailure(e)));
+};
+
 /* READ */
 const getGenresStarted = (loading) => ({
   type: actionTypes.GET_GENRES_STARTED,
@@ -91,6 +118,7 @@ const getGenres = () => (dispatch) => {
 
 export {
   addGenre,
+  deleteGenre,
   updateGenre,
   getGenres,
 };
