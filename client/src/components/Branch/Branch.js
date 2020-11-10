@@ -18,11 +18,11 @@ const formColumns = [
   { field: 'branchAddress', label: 'Branch Address', type: 'text' },
 ];
 
-// const formColumnsUpdate = [
-//   { field: 'branchId', label: 'Branch ID', type: 'text' },
-//   { field: 'branchName', label: 'Branch Name', type: 'text' },
-//   { field: 'branchAddress', label: 'Branch Address', type: 'text' },
-// ];
+const formColsUpdDel = [
+  { field: 'branchId', label: 'Branch ID', type: 'text' },
+  { field: 'branchName', label: 'Branch Name', type: 'text' },
+  { field: 'branchAddress', label: 'Branch Address', type: 'text' },
+];
 
 const Branch = (props) => {
   const classes = useStyles(props);
@@ -31,7 +31,8 @@ const Branch = (props) => {
   const dispatch = useDispatch();
 
   const createBranch = (branch) => branchActions.addBranch(branch);
-  // const updateBranch = (branch) => branchActions.updateBranch(branch);
+  const updateBranch = (branch) => branchActions.updateBranch(branch);
+  const deleteBranch = (branch) => branchActions.deleteBranch(branch);
   const getBranches = () => dispatch(branchActions.getBranches());
 
   useEffect(() => {
@@ -40,20 +41,30 @@ const Branch = (props) => {
 
   return (
     <div className={classes.root}>
-      <InputModal
-        action={createBranch}
-        columns={formColumns}
-        details='Enter details for the new branch you would like to add.'
-        title='New Branch'
-        refresh={getBranches}
-      />
-      {/* <InputModal
-        action={updateBranch}
-        columns={formColumnsUpdate}
-        details='Edit details for the branch you would like to update.'
-        title='Update Branch'
-        refresh={getBranches}
-      /> */}
+      {/* Temp div style */}
+      <div style={{ display: 'flex', justifyContent: 'start' }}>
+        <InputModal
+          action={createBranch}
+          columns={formColumns}
+          details='Enter details for the new branch you would like to add.'
+          title='New Branch'
+          refresh={getBranches}
+        />
+        <InputModal
+          action={updateBranch}
+          columns={formColsUpdDel}
+          details='Edit details for the branch you would like to update.'
+          title='Update Branch'
+          refresh={getBranches}
+        />
+        <InputModal
+          action={deleteBranch}
+          columns={formColsUpdDel}
+          details='Review details of the branch you are about to delete.'
+          title='Delete Branch'
+          refresh={getBranches}
+        />
+      </div>
       <EntityTable
         cols={columns}
         icon='library'
