@@ -13,6 +13,11 @@ const columns = [
   { field: 'address', headerName: 'Address', width: 250 },
 ];
 
+const formColumns = [
+  { field: 'branchName', label: 'Branch Name', type: 'text' },
+  { field: 'branchAddress', label: 'Branch Address', type: 'text' },
+];
+
 const Branch = (props) => {
   const classes = useStyles(props);
   const branches = useSelector((state) => state.branches.branches);
@@ -25,7 +30,7 @@ const Branch = (props) => {
 
   return (
     <div className={classes.root}>
-      <InputModal />
+      <InputModal columns={formColumns} />
       <EntityTable
         cols={columns}
         icon='library'

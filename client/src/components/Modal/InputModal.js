@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import {
   Button,
+  Dialog,
   Divider,
   TextField,
   Typography,
@@ -12,9 +13,11 @@ import useStyles from './InputModal.styles';
 
 // import { setSession } from '../../services/Session/actions';
 // import { createSession } from '../../utils/mutations';
+import { branchActions } from '../../services/actions';
 
 const InputModal = (props) => {
   const classes = useStyles(props);
+  const { columns } = props;
   const [formError, setFormError] = useState();
   const dispatch = useDispatch();
   const {
@@ -26,23 +29,11 @@ const InputModal = (props) => {
 
   const [open, setOpen] = useState(false);
   const handleToggle = () => setOpen(!open);
+  const handleClose = () => setOpen(false);
 
-  // const [createUserSession] = useMutation(createSession);
-  // const onSubmit = handleSubmit(async ({ email, password }) => {
-  //   try {
-  //     const {
-  //       data: { createUserSession: createdSession },
-  //     } = await createUserSession({ variables: { email, password } });
-  //     reset();
-  //     props.handleClose();
-  //     dispatch(setSession(createdSession));
-  //   } catch (e) {
-  //     setFormError(e.message.split(':')[1]);
-  //   }
-  // });
-  const onSubmit = handleSubmit(async ({ a, b }) => {
+  const onSubmit = handleSubmit(async (branch) => {
     try {
-      console.log(a, b);
+      dispatch(branchActions.addBranch(branch));
       reset();
       setOpen(false);
     } catch (e) {
@@ -50,51 +41,49 @@ const InputModal = (props) => {
     }
   });
 
-  return open ? (
+  return (
     <div>
-      <Button onClick={handleToggle}>Close</Button>
-      <form onSubmit={onSubmit} className={classes.formModalContainer}>
-        <Typography className={classes.welcomeMsg} variant='h6'>Welcome Back</Typography>
-        <Typography className={classes.formError}>{formError}</Typography>
-        <TextField
-          className={classes.logInInput}
-          id='a'
-          variant='outlined'
-          label='a'
-          name='a'
-          type='text'
-          inputRef={register}
-          disabled={isSubmitting}
-        />
-        <TextField
-          className={classes.passwordInput}
-          id='b'
-          variant='outlined'
-          label='b'
-          name='b'
-          type='text'
-          inputRef={register}
-          disabled={isSubmitting}
-        />
-        <Button
-          className={classes.logInButton}
-          variant='contained'
-          disabled={isSubmitting}
-          type='submit'
-        >
-          Button
-        </Button>
-        <Divider className={classes.btnDivider} />
-      </form>
+      <Button onClick={handleToggle}>{open ? 'close' : 'open'}</Button>
+      <Dialog
+        open={open}
+        onClose={() => handleClose()}
+        aria-labelledby='input-modal'
+        aria-describedby='input-modal'
+      >
+        <Button onClick={handleToggle}>Close</Button>
+        <form onSubmit={onSubmit} className={classes.formModalContainer}>
+          <Typography className={classes.welcomeMsg} variant='h6'>Welcome Back</Typography>
+          <Typography className={classes.formError}>{formError}</Typography>
+          {columns.map((c) => (
+            <TextField
+              className={classes.logInInput}
+              key={c.field}
+              id={c.field}
+              variant='outlined'
+              label={c.label}
+              name={c.field}
+              type={c.type}
+              inputRef={register}
+              disabled={isSubmitting}
+            />
+          ))}
+          <Button
+            className={classes.logInButton}
+            variant='contained'
+            disabled={isSubmitting}
+            type='submit'
+          >
+            Button
+          </Button>
+          <Divider className={classes.btnDivider} />
+        </form>
+      </Dialog>
     </div>
-  ) : (
-    <Button onClick={handleToggle}>Open</Button>
   );
 };
 
 InputModal.propTypes = {
-  handleClose: PropTypes.func,
-  handleToggle: PropTypes.func,
+  columns: PropTypes.array,
 };
 
 export default InputModal;
