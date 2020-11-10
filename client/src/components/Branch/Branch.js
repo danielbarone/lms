@@ -18,6 +18,12 @@ const formColumns = [
   { field: 'branchAddress', label: 'Branch Address', type: 'text' },
 ];
 
+// const formColumnsUpdate = [
+//   { field: 'branchId', label: 'Branch ID', type: 'text' },
+//   { field: 'branchName', label: 'Branch Name', type: 'text' },
+//   { field: 'branchAddress', label: 'Branch Address', type: 'text' },
+// ];
+
 const Branch = (props) => {
   const classes = useStyles(props);
   const branches = useSelector((state) => state.branches.branches);
@@ -25,10 +31,11 @@ const Branch = (props) => {
   const dispatch = useDispatch();
 
   const createBranch = (branch) => branchActions.addBranch(branch);
+  // const updateBranch = (branch) => branchActions.updateBranch(branch);
   const getBranches = () => dispatch(branchActions.getBranches());
 
   useEffect(() => {
-    dispatch(branchActions.getBranches());
+    getBranches();
   }, []);
 
   return (
@@ -40,6 +47,13 @@ const Branch = (props) => {
         title='New Branch'
         refresh={getBranches}
       />
+      {/* <InputModal
+        action={updateBranch}
+        columns={formColumnsUpdate}
+        details='Edit details for the branch you would like to update.'
+        title='Update Branch'
+        refresh={getBranches}
+      /> */}
       <EntityTable
         cols={columns}
         icon='library'
