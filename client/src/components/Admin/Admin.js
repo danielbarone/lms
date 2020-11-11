@@ -6,6 +6,8 @@ import useStyles from './Admin.styles';
 /* Components */
 import Branch from '../Branch/Branch';
 import Genre from '../Genre/Genre';
+import Publisher from '../Publisher/Publisher';
+import Loans from '../Loans/Loans';
 import { TabbedMenu } from '..';
 
 const adminTabs = [
@@ -13,8 +15,8 @@ const adminTabs = [
   { id: 2, name: 'Borrowers', content: 'Borrowers...' },
   { id: 3, name: 'Genres', content: <Genre /> },
   { id: 4, name: 'Library Branches', content: <Branch /> },
-  { id: 5, name: 'Loans', content: 'Loans...' },
-  { id: 6, name: 'Publishers', content: 'Publishers...' },
+  { id: 5, name: 'Loans', content: <Loans /> },
+  { id: 6, name: 'Publishers', content: <Publisher /> },
 ];
 
 const Admin = (props) => {

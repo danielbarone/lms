@@ -5,3 +5,5 @@ export { branchesReducer as branches } from './Branches/reducers';
 export { genresReducer as genres } from './Genres/reducers';
 export { genreReducer as genre } from './Genres/reducers';
 export { updatedGenreReducer as updatedGenre } from './Genres/reducers';
+export { publishersReducer as publishers } from './Publishers/reducers';
+export { loansReducer as loans } from './Loans/reducers';

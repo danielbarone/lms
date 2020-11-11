@@ -13,6 +13,12 @@ const admin = {
     update: (genre) => axios.post(`${adminBaseUrl}/updateGenreRE`, genre),
     getAll: () => axios.get(`${adminBaseUrl}/getAllGenres`),
   }),
+  publishers: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllPublishers`)
+  }),
+  loans: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)
+  })
 };
 
 export default admin;
