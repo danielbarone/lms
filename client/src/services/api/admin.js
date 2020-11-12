@@ -14,7 +14,10 @@ const admin = {
     getAll: () => axios.get(`${adminBaseUrl}/getAllGenres`),
   }),
   publishers: () => ({
-    getAll: () => axios.get(`${adminBaseUrl}/getAllPublishers`)
+    getAll: () => axios.get(`${adminBaseUrl}/getAllPublishers`),
+    create: (publisher) => axios.post(`${adminBaseUrl}/addPublisher`, publisher),
+    update: (publisher) => axios.post(`${adminBaseUrl}/updatePublisher`, publisher),
+    delete: (publisher) => axios.post(`${adminBaseUrl}/deletePublisher`, publisher)
   }),
   loans: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)

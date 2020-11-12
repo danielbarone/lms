@@ -34,6 +34,84 @@ const getPublishers = () => (dispatch) => {
     }).catch((e) => dispatch(getPublishersFailure(e)));
 }
 
+//adding publisher
+const addPublisherStarted = (loading) => ({
+    type: actionTypes.ADD_PUBLISHER_STARTED,
+    loading
+})
+
+const addPublisherSuccess = (publisher) => ({
+    type: actionTypes.ADD_PUBLISHER_SUCCESS,
+    publisher
+})
+
+const addPublisherFailure = (error) => ({
+    type: actionTypes.ADD_PUBLISHER_FAILURE,
+    error
+})
+
+const addPublisher = (publisher) => (dispatch) => {
+    dispatch(addPublisherStarted(true));
+
+    return admin.publishers().create(publisher).then((res) => {
+        dispatch(addPublisherSuccess(publisher));
+        return res;
+    }).catch((err) => dispatch(addPublisherFailure(err)))
+}
+
+//updating publisher
+const updatePublisherStarted = (loading) => ({
+    type: actionTypes.UPDATE_PUBLISHER_STARTED,
+    loading
+})
+
+const updatePublisherSuccess = (publisher) => ({
+    type: actionTypes.UPDATE_PUBLISHER_STARTED,
+    publisher
+})
+
+const updatePublisherFailure = (error) => ({
+    type: actionTypes.UPDATE_PUBLISHER_FAILURE,
+    error
+})
+
+const updatePublisher = (publisher) => (dispatch) => {
+    dispatch(updatePublisherStarted(true));
+
+    return admin.publishers().update(publisher).then((res) => {
+        dispatch(updatePublisherSuccess(publisher));
+        return res;
+    }).catch((err) => dispatch(updatePublisherFailure(err)));
+}
+
+//deleting a publisher
+const deletePublisherStarted = (loading) => ({
+    type: actionTypes.DELETE_PUBLISHER_STARTED,
+    loading
+})
+
+const deletePublisherSuccess = (publisher) => ({
+    type: actionTypes.DELETE_PUBLISHER_SUCCESS,
+    publisher
+})
+
+const deletePublisherFailure = (error) => ({
+    type: actionTypes.DELETE_PUBLISHER_FAILURE,
+    error
+})
+
+const deletePublisher = (publisher) => (dispatch) => {
+    dispatch(deletePublisherStarted(true));
+
+    return admin.publishers().delete(publisher).then((res) => {
+        dispatch(deletePublisherSuccess(publisher));
+        return res;
+    }).catch((err) => dispatch(deletePublisherFailure(err)));
+}
+
 export {
-    getPublishers
+    getPublishers,
+    addPublisher,
+    updatePublisher,
+    deletePublisher
 }

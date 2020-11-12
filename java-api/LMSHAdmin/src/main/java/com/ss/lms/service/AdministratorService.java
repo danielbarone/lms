@@ -375,6 +375,13 @@ public class AdministratorService {
 		
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/addPublisher", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public List<Publisher> AddPublisher(@RequestBody Publisher publisher){
+			prepo.save(publisher);
+			return prepo.findAll();
+	}
+	
 	
 	@Transactional
 	@RequestMapping(value = "/updatePublisher", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")

@@ -11,6 +11,21 @@ const columns = [
     { field: 'address', headerName: 'Address', width: 250 }
 ]
 
+const addFormColumns = [
+    { field: 'publisherName', label: 'Publisher Name', type: 'text' },
+    { field: 'publisherAddress', label: 'Publisher Address', type: 'text' }
+]
+
+const updateFormColumns = [
+    { field: 'publisherId', label: 'Publisher Id', type: 'text' },
+    { field: 'publisherName', label: 'Publisher Name', type: 'text' },
+    { field: 'publisherAddress', label: 'Publisher Address', type: 'text' }
+]
+
+const deleteFormColumns = [
+    { field: 'publisherId', label: 'Publisher Id', type: 'text' }
+]
+
 const Publisher = (props) => {
     const classes = useStyles(props);
     const publishers = useSelector((state) => state.publishers.publishers);
@@ -18,6 +33,9 @@ const Publisher = (props) => {
     const dispatch = useDispatch();
 
     const getPublishers = () => dispatch(publisherActions.getPublishers());
+    const addPublisher = (publisher) => publisherActions.addPublisher(publisher);
+    const updatePublisher = (publisher) => publisherActions.updatePublisher(publisher);
+    const deletePublisher = (publisher) => publisherActions.deletePublisher(publisher);
 
     useEffect(() => {
         getPublishers();
@@ -25,6 +43,27 @@ const Publisher = (props) => {
 
     return (
         <div className={classes.root}>
+            <InputModal
+                action={addPublisher}
+                columns={addFormColumns}
+                details='Enter details for the new publisher you would like to add.'
+                title='New Publisher'
+                refresh={getPublishers}
+            />
+            <InputModal
+                action={updatePublisher}
+                columns={updateFormColumns}
+                details='Edit details for the publisher you would like to update.'
+                title='Update Publisher'
+                refresh={getPublishers}
+            />
+            <InputModal
+                action={deletePublisher}
+                columns={deleteFormColumns}
+                details='Enter the id of the publisher you would like to delete'
+                title='Delete Publisher'
+                refresh={getPublishers}
+            />
             <EntityTable
                 cols={columns}
                 icon='library'
