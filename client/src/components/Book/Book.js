@@ -10,6 +10,12 @@ import { bookActions } from '../../services/actions';
 const columns = [
   { field: 'id', headerName: 'ID', width: 75 },
   { field: 'name', headerName: 'Book', width: 250 },
+  {
+    field: 'publisher',
+    headerName: 'Publisher',
+    width: 250,
+    valueFormatter: (params) => (params.value ? params.value.publisherName : '--'),
+  },
 ];
 
 // const formColumns = [
