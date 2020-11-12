@@ -4,12 +4,13 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import useStyles from './Admin.styles';
 /* Components */
+import Book from '../Book/Book';
 import Branch from '../Branch/Branch';
 import Genre from '../Genre/Genre';
 import { TabbedMenu } from '..';
 
 const adminTabs = [
-  { id: 1, name: 'Books', content: 'Books...' },
+  { id: 1, name: 'Books', content: <Book /> },
   { id: 2, name: 'Borrowers', content: 'Borrowers...' },
   { id: 3, name: 'Genres', content: <Genre /> },
   { id: 4, name: 'Library Branches', content: <Branch /> },

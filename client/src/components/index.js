@@ -1,6 +1,7 @@
 import Admin from './Admin/Admin';
 import AuthButton from './Button/AuthButton';
 import AvatarBtn from './Button/AvatarBtn';
+import Book from './Book/Book';
 import Borrower from './Borrower/Borrower';
 import Branch from './Branch/Branch';
 import CustomChip from './Chip/CustomChip';
@@ -22,6 +23,7 @@ export {
   Admin,
   AuthButton,
   AvatarBtn,
+  Book,
   Borrower,
   Branch,
   CustomChip,

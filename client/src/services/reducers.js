@@ -1,5 +1,8 @@
 /* User Session */
 export { default as session } from './Session/reducers';
+
+export { booksReducer as books } from './Books/reducers';
+
 /* Admin Branch Reducers */
 export { branchReducer as branch } from './Branches/reducers';
 export { deletedBranchReducer as deletedBranch } from './Branches/reducers';
