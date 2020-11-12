@@ -7,24 +7,74 @@ import useStyles from './Book.styles';
 import { EntityTable, InputModal } from '..';
 import { bookActions } from '../../services/actions';
 
+const formatAuthors = (authors) => {
+  if (authors === null || authors.length === 0) {
+    return '';
+  }
+  let authorString = '';
+  authors.map((a, i) => {
+    if (i === 0) {
+      authorString += a.authorName;
+    } else if (i === authors.length - 1) {
+      authorString += `, and ${a.authorName}`;
+    } else {
+      authorString += `, ${a.authorName}`;
+    }
+  });
+  return authorString;
+}
+
+const formatGenres = (genres) => {
+  if (genres === null || genres.length === 0) {
+    return '--';
+  }
+  let genreString = '';
+  genres.map((g, i) => {
+    if (i === 0) {
+      genreString += g.genreName;
+    } else if (i === genres.length - 1) {
+      genreString += `, and ${g.genreName}`;
+    } else {
+      genreString += `, ${g.genreName}`;
+    }
+  });
+  return genreString;
+}
+
+const formatBook = (params) => {
+  const authors = params.getValue('authors');
+  let authorString = '';
+  if (authors !== null && authors.length !== 0) {
+    authorString = 'by ' + formatAuthors(authors);
+  }
+  
+  return `${params.getValue('name') || ''} ${authorString}`
+}
+
 const columns = [
   { field: 'id', headerName: 'ID', width: 75 },
-  { field: 'name', headerName: 'Book', width: 250 },
+  { field: 'title', headerName: 'Book', width: 450, valueGetter: formatBook },
   {
     field: 'publisher',
     headerName: 'Publisher',
     width: 250,
     valueFormatter: (params) => (params.value ? params.value.publisherName : '--'),
   },
+  {
+    field: 'genres',
+    headerName: 'Genre',
+    width: 250,
+    valueFormatter: (params) => (params.value ? formatGenres((params.value)) : '--'),
+  },
 ];
 
 // const formColumns = [
-//   { field: 'bookName', label: 'Book', type: 'text' },
+//   { field: 'title', label: 'Book', type: 'text' },
 // ];
 
 // const formColsUpdDel = [
 //   { field: 'bookId', label: 'Book ID', type: 'text' },
-//   { field: 'bookName', label: 'Book', type: 'text' },
+//   { field: 'title', label: 'Book', type: 'text' },
 // ];
 
 const Book = (props) => {
