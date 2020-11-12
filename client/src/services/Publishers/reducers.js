@@ -36,6 +36,7 @@ const publishersReducer = (state = initialState, action) => {
 
 //adding publisher
 const initialStateCreate = {
+    publisher: null,
     error: null,
     loading: false
 }
@@ -46,6 +47,7 @@ const addPublisherStarted = (state, action) => updateObject(state, {
 })
 
 const addPublisherSuccess = (state, action) => updateObject(state, {
+    publisher: action.publisher,
     error: null,
     loading: false
 })

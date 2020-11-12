@@ -28,7 +28,7 @@ const admin = {
     getAll: () => axios.get(`${adminBaseUrl}/getAllPublishers`),
     create: (publisher) => axios.post(`${adminBaseUrl}/addPublisher`, publisher),
     update: (publisher) => axios.post(`${adminBaseUrl}/updatePublisher`, publisher),
-    delete: (publisher) => axios.post(`${adminBaseUrl}/deletePublisher`, publisher)
+    delete: (publisher) => axios(deleteConfig(publisher, `${adminBaseUrl}/deletePublisherRE`))
   }),
   loans: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)

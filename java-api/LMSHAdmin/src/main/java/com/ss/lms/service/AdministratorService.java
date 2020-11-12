@@ -435,6 +435,18 @@ public class AdministratorService {
 		
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/deletePublisherRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deletePublisherRE(@RequestBody Publisher publisher) {
+		try {
+			prepo.delete(publisher);
+			return new ResponseEntity<>(publisher, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete publisher", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	
 	@Transactional
 	@RequestMapping(value = "/deletePublisherById", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
