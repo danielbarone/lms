@@ -66,6 +66,38 @@ const updatedBranchReducer = (state = initialStateUpdate, action) => {
   }
 };
 
+/* DELETE */
+const initialStateDelete = {
+  branch: null,
+  error: null,
+  loading: false,
+};
+
+const deleteBranchStarted = (state, action) => updateObject(state, {
+  error: null,
+  loading: true,
+});
+
+const deleteBranchSuccess = (state, action) => updateObject(state, {
+  branch: action.branch,
+  error: null,
+  loading: false,
+});
+
+const deleteBranchFailure = (state, action) => updateObject(state, {
+  error: action.error,
+  loading: false,
+});
+
+const deletedBranchReducer = (state = initialStateDelete, action) => {
+  switch (action.type) {
+    case actionTypes.UPDATE_BRANCH_STARTED: return deleteBranchStarted(state, action);
+    case actionTypes.UPDATE_BRANCH_SUCCESS: return deleteBranchSuccess(state, action);
+    case actionTypes.UPDATE_BRANCH_FAILURE: return deleteBranchFailure(state, action);
+    default: return state;
+  }
+};
+
 /* READ */
 const initialState = {
   branches: null,
@@ -101,5 +133,6 @@ const branchesReducer = (state = initialState, action) => {
 export {
   branchReducer,
   branchesReducer,
+  deletedBranchReducer,
   updatedBranchReducer,
 };

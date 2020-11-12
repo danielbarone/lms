@@ -66,6 +66,38 @@ const updatedGenreReducer = (state = initialStateUpdate, action) => {
   }
 };
 
+/* DELETE */
+const initialStateDelete = {
+  genre: null,
+  error: null,
+  loading: false,
+};
+
+const deleteGenreStarted = (state, action) => updateObject(state, {
+  error: null,
+  loading: true,
+});
+
+const deleteGenreSuccess = (state, action) => updateObject(state, {
+  genre: action.genre,
+  error: null,
+  loading: false,
+});
+
+const deleteGenreFailure = (state, action) => updateObject(state, {
+  error: action.error,
+  loading: false,
+});
+
+const deletedGenreReducer = (state = initialStateDelete, action) => {
+  switch (action.type) {
+    case actionTypes.UPDATE_GENRE_STARTED: return deleteGenreStarted(state, action);
+    case actionTypes.UPDATE_GENRE_SUCCESS: return deleteGenreSuccess(state, action);
+    case actionTypes.UPDATE_GENRE_FAILURE: return deleteGenreFailure(state, action);
+    default: return state;
+  }
+};
+
 /* READ */
 const initialState = {
   genres: null,
@@ -100,6 +132,7 @@ const genresReducer = (state = initialState, action) => {
 };
 
 export {
+  deletedGenreReducer,
   genreReducer,
   genresReducer,
   updatedGenreReducer,

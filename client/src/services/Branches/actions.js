@@ -56,6 +56,33 @@ const updateBranch = (branch) => (dispatch) => {
     .catch((e) => dispatch(updateBranchFailure(e)));
 };
 
+/* DELETE */
+const deleteBranchStarted = (loading) => ({
+  type: actionTypes.DELETE_BRANCH_STARTED,
+  loading,
+});
+
+const deleteBranchSuccess = (branch) => ({
+  type: actionTypes.DELETE_BRANCH_SUCCESS,
+  branch,
+});
+
+const deleteBranchFailure = (error) => ({
+  type: actionTypes.DELETE_BRANCH_FAILURE,
+  error,
+});
+
+const deleteBranch = (branch) => (dispatch) => {
+  dispatch(deleteBranchStarted(true));
+
+  return admin.branches().delete(branch)
+    .then((response) => {
+      dispatch(deleteBranchSuccess(branch));
+      return response;
+    })
+    .catch((e) => dispatch(deleteBranchFailure(e)));
+};
+
 /* READ */
 const getBranchesStarted = (loading) => ({
   type: actionTypes.GET_BRANCHES_STARTED,
@@ -93,6 +120,7 @@ const getBranches = () => (dispatch) => {
 
 export {
   addBranch,
+  deleteBranch,
   getBranches,
   updateBranch,
 };
