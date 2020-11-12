@@ -1,7 +1,7 @@
-import adminApi from './admin';
+//import adminApi from './admin';
 import borrowerApi from './borrower';
 
 export {
-  adminApi,
+  //adminApi,
   borrowerApi,
 };

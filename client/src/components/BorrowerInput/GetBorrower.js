@@ -1,8 +1,9 @@
 /* React */
 import React, { useEffect, useState, useCallback } from 'react';
 import { CircularProgress } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { borrowerActions } from '../../services/actions';
 
-import axios from 'axios';
 
 /* Components */
 import { borrowerApi } from '../../utils/api';
@@ -10,24 +11,37 @@ import { borrowerApi } from '../../utils/api';
 import useStyles from './BorrowerInput.styles';
 
 const GetBorrower = (props) => {
-  const classes = useStyles(props);
-  const [borrower, setBorrower] = useState([]);
+
+ const borrower = useSelector((state) => state.borrower.borrowers);
+
+ const dispatch = useDispatch();
+ const classes = useStyles(props);
+  //const [borrower, setBorrower] = useState([]);
   const cardNo = 111;
  // console.log(props.cardNo);
 //   console.log("cardNo");
 //   console.log(props);
 
-  const loadBorrower = useCallback(() => {
-    borrowerApi.borrower().getByCardNo(props.cardNo).then((response) => {
-      setBorrower(response.data);
-     // console.log("This is get borrower");
-     // console.log(response.data);
-    });
-  }, []);
+//   const loadBorrower = useCallback(() => {
+//     borrowerApi.borrower().getByCardNo(props.cardNo).then((response) => {
+//       setBorrower(response.data);
+//      // console.log("This is get borrower");
+//      // console.log(response.data);
+//     });
+//   }, []);
 
-  useEffect(() => {
-    loadBorrower();
-  }, [loadBorrower]);
+//   useEffect(() => {
+//     loadBorrower();
+//   }, [loadBorrower]);
+
+useEffect(() => {
+  dispatch(borrowerActions.getBorrowerByCardNo(props.cardNo));
+}, []);
+// const borrower2 = useSelector((state) => state.borrower.borrowers);
+// console.log("Borrower");
+// console.log(borrower);
+// console.log(borrower2);
+// console.log(props.cardNo);
 
   if (!borrower) {
     return (
@@ -52,8 +66,8 @@ const GetBorrower = (props) => {
     <div>
     ----------------Borrower---------------
     <br />
-    CardNo: {borrower.cardNo}<br />
-    Name: {borrower.name}
+        CardNo: {borrower.cardNo}<br />
+        Name: {borrower.name}
     <br />
     ---------------------------------------
     <br />   

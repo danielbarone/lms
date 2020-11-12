@@ -2,13 +2,10 @@ import Admin from './Admin/Admin';
 import AuthButton from './Button/AuthButton';
 import AvatarBtn from './Button/AvatarBtn';
 import Borrower from './Borrower/Borrower';
-<<<<<<< HEAD
 import BorrowerInput from './BorrowerInput/BorrowerInput';
 import BranchList from './Branch/BranchList';
-=======
 import Branch from './Branch/Branch';
 import CustomChip from './Chip/CustomChip';
->>>>>>> 2208aa72e7562870af30811c51cf5d193a645748
 import Dashboard from './Dashboard/Dashboard';
 import EntityTable from './Table/EntityTable';
 import Genre from './Genre/Genre';
@@ -27,13 +24,10 @@ export {
   AuthButton,
   AvatarBtn,
   Borrower,
-<<<<<<< HEAD
   BorrowerInput,
   BranchList,
-=======
   Branch,
   CustomChip,
->>>>>>> 2208aa72e7562870af30811c51cf5d193a645748
   Dashboard,
   EntityTable,
   Genre,

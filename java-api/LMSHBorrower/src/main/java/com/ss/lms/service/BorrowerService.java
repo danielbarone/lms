@@ -180,7 +180,7 @@ public class BorrowerService {
 		return bookLoans;
 	}
 	
-	@RequestMapping(value = "/getBranchBooks", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBranchBooks", method = RequestMethod.POST, produces = "application/json")
 	public List<Book> getBranchBooks(@RequestBody Branch sBranch) throws SQLException { 
 		List<Book> books = new ArrayList<>();
 		if(sBranch.getBranchId()==null)
@@ -196,7 +196,7 @@ public class BorrowerService {
 	}
 	
 	
-	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.POST, produces = "application/json")
 	public List<BookCopies> getBookCopiesByBranchId(@RequestBody Branch sBranch) throws SQLException { 
 		if(sBranch.getBranchId()==null)
 			return null;
@@ -206,7 +206,7 @@ public class BorrowerService {
 		return bc;
 	}
 	
-	@RequestMapping(value = "/getBookCopyNo", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookCopyNo", method = RequestMethod.POST, produces = "application/json")
 	public BookCopies getBookCopyNo(@RequestBody BookCopies bookCopies) throws SQLException { 
 		if(bookCopies.getId().getBranchId()==null)
 			return null;
@@ -244,7 +244,7 @@ public class BorrowerService {
 	}
 	
 	///Shorter version of body u need to send. Just CardNo, not wrapped in id
-	@RequestMapping(value = "/getBookLoansByCardNo", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByCardNo", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
 	public List<BookLoans> getBookLoansByCardNo(@RequestBody Borrower borrower) throws SQLException { 
 		if(borrower.getCardNo()==null)
 			return null;
@@ -255,7 +255,7 @@ public class BorrowerService {
 	}
 	
 	///// cardNo needs to be wrapped in id
-	@RequestMapping(value = "/getBookLoansByCardNo2", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByCardNo2", method = RequestMethod.POST, produces = "application/json")
 	public List<BookLoans> getBookLoansByCardNo2(@RequestBody BookLoans loan) throws SQLException { 
 		if(loan.getId().getCardNo()==null)
 			return null;
@@ -265,7 +265,7 @@ public class BorrowerService {
 		return bl;
 	}
 	
-	@RequestMapping(value = "/getBookLoansByBranchId", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByBranchId", method = RequestMethod.POST, produces = "application/json")
 	public List<BookLoans> getBookLoansByBranchId(@RequestBody BookLoans loan) throws SQLException { 
 		List<Book> books = new ArrayList<>();
 		if(loan.getId().getBranchId()==null)
