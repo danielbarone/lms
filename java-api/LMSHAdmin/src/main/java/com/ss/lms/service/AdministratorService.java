@@ -64,6 +64,17 @@ public class AdministratorService {
 	@Autowired
 	public BookLoansRepo blrepo;
 
+	@RequestMapping(value = "/addBookRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addBookRE(@RequestBody Book book) {
+		try {
+			brepo.save(book);
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to add book", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@Transactional
 	@RequestMapping(value = "/addBook", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<Book> addBook(@RequestBody Book book) throws SQLException {

@@ -13,7 +13,7 @@ const deleteConfig = (data, url) => ({
 
 const admin = {
   books: () => ({
-    // create: (branch) => axios.post(`${adminBaseUrl}/addBranchRE`, branch),
+    create: (book) => axios.post(`${adminBaseUrl}/addBookRE`, book),
     // update: (branch) => axios.post(`${adminBaseUrl}/updateBranchRE`, branch),
     // delete: (branch) => axios(deleteConfig(branch, `${adminBaseUrl}/deleteBranchRE`)),
     getAll: () => axios.get(`${adminBaseUrl}/getAllBooks`),

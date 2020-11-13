@@ -1,5 +1,6 @@
 /* User Session */
 export { default as session } from './Session/reducers';
+export { bookReducer as book } from './Books/reducers';
 
 export { booksReducer as books } from './Books/reducers';
 

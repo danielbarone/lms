@@ -6,6 +6,7 @@ import useStyles from './Book.styles';
 /* Components */
 import { EntityTable, InputModal } from '..';
 import { bookActions } from '../../services/actions';
+import BookForm from './BookForm';
 
 const formatAuthors = (authors) => {
   if (authors === null || authors.length === 0) {
@@ -68,25 +69,14 @@ const columns = [
   },
 ];
 
-// const formColumns = [
-//   { field: 'title', label: 'Book', type: 'text' },
-//   { field: 'publisher', label: 'Publisher', type: 'text' },
-//   { field: 'authors', label: 'Authors', type: 'select' },
-//   { field: 'genres', label: 'Genres', type: 'text' },
-// ];
-
-// const formColsUpdDel = [
-//   { field: 'bookId', label: 'Book ID', type: 'text' },
-//   { field: 'title', label: 'Book', type: 'text' },
-// ];
-
 const Book = (props) => {
   const classes = useStyles(props);
   const books = useSelector((state) => state.books.books);
   const loading = useSelector((state) => state.books.loading);
   const dispatch = useDispatch();
 
-  // const createBook = (book) => bookActions.addBook(book);
+  const createBook = (book) => bookActions.addBook(book);
+
   // const updateBook = (book) => bookActions.updateBook(book);
   // const deleteBook = (book) => bookActions.deleteBook(book);
   const getBooks = () => dispatch(bookActions.getBooks());
@@ -97,15 +87,15 @@ const Book = (props) => {
 
   return (
     <div className={classes.root}>
+      <InputModal
+        action={createBook}
+        details='Enter details for the new book you would like to add.'
+        title='New Book'
+        refresh={getBooks}
+        CustomForm={BookForm}
+      />
       {/* Temp div style */}
       {/* <div style={{ display: 'flex', justifyContent: 'start' }}>
-        <InputModal
-          action={createBook}
-          columns={formColumns}
-          details='Enter details for the new book you would like to add.'
-          title='New Book'
-          refresh={getBooks}
-        />
         <InputModal
           action={updateBook}
           columns={formColsUpdDel}
