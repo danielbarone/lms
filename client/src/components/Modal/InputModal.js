@@ -60,19 +60,21 @@ const InputModal = (props) => {
         <form onSubmit={onSubmit} className={classes.formModalContainer}>
           <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
           <Typography className={classes.formError}>{formError}</Typography>
-          {columns.map((c) => (
-            <TextField
-              className={classes.modalInput}
-              key={c.field}
-              id={c.field}
-              variant='outlined'
-              label={c.label}
-              name={c.field}
-              type={c.type}
-              inputRef={register}
-              disabled={isSubmitting}
-            />
-          ))}
+          {columns.map((c) => {
+            return (
+              <TextField
+                className={classes.modalInput}
+                key={c.field}
+                id={c.field}
+                variant='outlined'
+                label={c.label}
+                name={c.field}
+                type={c.type}
+                inputRef={register}
+                disabled={isSubmitting}
+              />
+            )
+          })}
           <Button
             className={classes.modalSubmitBtn}
             variant='contained'
