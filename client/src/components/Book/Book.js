@@ -68,12 +68,12 @@ const columns = [
   },
 ];
 
-const formColumns = [
-  { field: 'title', label: 'Book', type: 'text' },
-  { field: 'publisher', label: 'Publisher', type: 'text' },
-  { field: 'authors', label: 'Authors', type: 'select' },
-  { field: 'genres', label: 'Genres', type: 'text' },
-];
+// const formColumns = [
+//   { field: 'title', label: 'Book', type: 'text' },
+//   { field: 'publisher', label: 'Publisher', type: 'text' },
+//   { field: 'authors', label: 'Authors', type: 'select' },
+//   { field: 'genres', label: 'Genres', type: 'text' },
+// ];
 
 // const formColsUpdDel = [
 //   { field: 'bookId', label: 'Book ID', type: 'text' },
@@ -86,7 +86,7 @@ const Book = (props) => {
   const loading = useSelector((state) => state.books.loading);
   const dispatch = useDispatch();
 
-  const createBook = (book) => bookActions.addBook(book);
+  // const createBook = (book) => bookActions.addBook(book);
   // const updateBook = (book) => bookActions.updateBook(book);
   // const deleteBook = (book) => bookActions.deleteBook(book);
   const getBooks = () => dispatch(bookActions.getBooks());
@@ -98,15 +98,14 @@ const Book = (props) => {
   return (
     <div className={classes.root}>
       {/* Temp div style */}
-      <InputModal
+      {/* <div style={{ display: 'flex', justifyContent: 'start' }}>
+        <InputModal
           action={createBook}
           columns={formColumns}
           details='Enter details for the new book you would like to add.'
           title='New Book'
           refresh={getBooks}
         />
-      {/* <div style={{ display: 'flex', justifyContent: 'start' }}>
-
         <InputModal
           action={updateBook}
           columns={formColsUpdDel}
