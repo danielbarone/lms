@@ -2,3 +2,6 @@
 **/.node_modules
 java-api/LMSHAdmin/src/main/resources/application.properties
 java-api/LMSHBorrower/src/main/resources/application.properties
+terraform/terraform.tfvars
+terraform/*.key
+terraform/*.pem
