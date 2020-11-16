@@ -1,6 +1,7 @@
 import Admin from './Admin/Admin';
 import AuthButton from './Button/AuthButton';
 import AvatarBtn from './Button/AvatarBtn';
+import Book from './Book/Book';
 import Borrower from './Borrower/Borrower';
 import BorrowerInput from './BorrowerInput/BorrowerInput';
 import BranchList from './Branch/BranchList';
@@ -11,6 +12,7 @@ import EntityTable from './Table/EntityTable';
 import Genre from './Genre/Genre';
 import Home from './Home/Home';
 import Icon from './Icon/Icon';
+import InputModal from './Modal/InputModal';
 import LandingPage from './LandingPage/LandingPage';
 import Librarian from './Librarian/Librarian';
 import LogIn from './LogIn/LogIn';
@@ -23,6 +25,7 @@ export {
   Admin,
   AuthButton,
   AvatarBtn,
+  Book,
   Borrower,
   BorrowerInput,
   BranchList,
@@ -33,6 +36,7 @@ export {
   Genre,
   Home,
   Icon,
+  InputModal,
   LandingPage,
   Librarian,
   LogIn,

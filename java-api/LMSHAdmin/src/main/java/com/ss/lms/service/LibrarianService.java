@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -186,11 +188,40 @@ public class LibrarianService {
 		return null;
 		
 	}
-	
-	
 
+	@CrossOrigin
+	@RequestMapping(value = "/deleteBranchRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deleteBranchRE(@RequestBody Branch branch) {
+		try {
+			brrepo.delete(branch);
+			return new ResponseEntity<>(branch, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete branch.", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
+	@RequestMapping(value = "/updateBranchRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> updateBranchRE(@RequestBody Branch branch) {
+		try {
+			if (brrepo.existsById(branch.getBranchId())) {
+				Branch updatedBranch = brrepo.getOne(branch.getBranchId());
+				if (branch.getBranchName() != null) {
+					updatedBranch.setBranchName(branch.getBranchName());
+				}
 	
+				if (branch.getBranchAddress() != null) {
+					updatedBranch.setBranchAddress(branch.getBranchAddress());
+				}
+				brrepo.save(updatedBranch);
+				return new ResponseEntity<>(branch, HttpStatus.OK);
+			}
+			return new ResponseEntity<>("Could not locate branch.", HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to update branch", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@Transactional
 	@RequestMapping(value = "/updateBranch", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")

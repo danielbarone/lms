@@ -1,23 +1,101 @@
-import {
-  GET_BRANCHES_STARTED,
-  GET_BRANCHES_SUCCESS,
-  GET_BRANCHES_FAILURE,
-} from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 import admin from '../api';
 
+/* CREATE */
+const addBranchStarted = (loading) => ({
+  type: actionTypes.ADD_BRANCH_STARTED,
+  loading,
+});
+
+const addBranchSuccess = (branch) => ({
+  type: actionTypes.ADD_BRANCH_SUCCESS,
+  branch,
+});
+
+const addBranchFailure = (error) => ({
+  type: actionTypes.ADD_BRANCH_FAILURE,
+  error,
+});
+
+const addBranch = (branch) => (dispatch) => {
+  dispatch(addBranchStarted(true));
+
+  return admin.branches().create(branch)
+    .then((response) => {
+      dispatch(addBranchSuccess(branch));
+      return response;
+    })
+    .catch((e) => dispatch(addBranchFailure(e)));
+};
+
+/* UPDATE */
+const updateBranchStarted = (loading) => ({
+  type: actionTypes.UPDATE_BRANCH_STARTED,
+  loading,
+});
+
+const updateBranchSuccess = (branch) => ({
+  type: actionTypes.UPDATE_BRANCH_SUCCESS,
+  branch,
+});
+
+const updateBranchFailure = (error) => ({
+  type: actionTypes.UPDATE_BRANCH_FAILURE,
+  error,
+});
+
+const updateBranch = (branch) => (dispatch) => {
+  dispatch(updateBranchStarted(true));
+
+  return admin.branches().update(branch)
+    .then((response) => {
+      dispatch(updateBranchSuccess(branch));
+      return response;
+    })
+    .catch((e) => dispatch(updateBranchFailure(e)));
+};
+
+/* DELETE */
+const deleteBranchStarted = (loading) => ({
+  type: actionTypes.DELETE_BRANCH_STARTED,
+  loading,
+});
+
+const deleteBranchSuccess = (branch) => ({
+  type: actionTypes.DELETE_BRANCH_SUCCESS,
+  branch,
+});
+
+const deleteBranchFailure = (error) => ({
+  type: actionTypes.DELETE_BRANCH_FAILURE,
+  error,
+});
+
+const deleteBranch = (branch) => (dispatch) => {
+  dispatch(deleteBranchStarted(true));
+
+  return admin.branches().delete(branch)
+    .then((response) => {
+      dispatch(deleteBranchSuccess(branch));
+      return response;
+    })
+    .catch((e) => dispatch(deleteBranchFailure(e)));
+};
+
+/* READ */
 const getBranchesStarted = (loading) => ({
-  type: GET_BRANCHES_STARTED,
+  type: actionTypes.GET_BRANCHES_STARTED,
   loading,
 });
 
 const getBranchesSuccess = (branches) => ({
-  type: GET_BRANCHES_SUCCESS,
+  type: actionTypes.GET_BRANCHES_SUCCESS,
   branches,
 });
 
 const getBranchesFailure = (error) => ({
-  type: GET_BRANCHES_FAILURE,
+  type: actionTypes.GET_BRANCHES_FAILURE,
   error,
 });
 
@@ -41,6 +119,8 @@ const getBranches = () => (dispatch) => {
 };
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
+  addBranch,
+  deleteBranch,
   getBranches,
+  updateBranch,
 };

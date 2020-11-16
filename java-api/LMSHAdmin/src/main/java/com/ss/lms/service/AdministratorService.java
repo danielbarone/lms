@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -160,7 +162,42 @@ public class AdministratorService {
 	}
 	
 	
-	
+	@RequestMapping(value = "/addGenreRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addGenreRE(@RequestBody Genre genre) {
+		try {
+			grepo.save(genre);
+			return new ResponseEntity<>(genre, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to add genre", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/deleteGenreRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deleteGenreRE(@RequestBody Genre genre) {
+		try {
+			grepo.delete(genre);
+			return new ResponseEntity<>(genre, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete genre", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/updateGenreRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> updateGenreRE(@RequestBody Genre genre) {
+		try {
+			if (grepo.existsById(genre.getGenreId())) {
+				grepo.save(genre);
+				return new ResponseEntity<>(genre, HttpStatus.OK);
+			}
+			return new ResponseEntity<>("Could not locate genre", HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to update genre", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@Transactional
 	@RequestMapping(value = "/addGenre", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<Genre> addGenre(@RequestBody Genre genre) throws SQLException { 
@@ -454,6 +491,16 @@ public class AdministratorService {
 		
 	}
 	
+	@RequestMapping(value = "/addBranchRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addBranchRE(@RequestBody Branch branch) {
+		try {
+			brrepo.save(branch);
+			return new ResponseEntity<>(branch, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Could not add branch.", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	///meant for overriding due date but can be used to change any of the loan's values
 	@RequestMapping(value = "/overrideBookLoan", method = RequestMethod.GET, produces = "application/json")
@@ -540,11 +587,4 @@ public class AdministratorService {
 		return null;
 		
 	}
-	
-	
-	
-
-
-
-
 }
