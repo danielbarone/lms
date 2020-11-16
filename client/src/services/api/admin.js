@@ -32,6 +32,12 @@ const admin = {
   }),
   loans: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)
+  }),
+  borrowers: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),
+    create: (borrower) => axios.post(`${adminBaseUrl}/addBorrower`, borrower),
+    update: (borrower) => axios.post(`${adminBaseUrl}/updateBorrowerById`, borrower),
+    delete: (borrower) => axios.post(`${adminBaseUrl}/deleteBorrowerById`, borrower)
   })
 };
 

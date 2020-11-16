@@ -43,27 +43,29 @@ const Publisher = (props) => {
 
     return (
         <div className={classes.root}>
-            <InputModal
-                action={addPublisher}
-                columns={addFormColumns}
-                details='Enter details for the new publisher you would like to add.'
-                title='New Publisher'
-                refresh={getPublishers}
-            />
-            <InputModal
-                action={updatePublisher}
-                columns={updateFormColumns}
-                details='Edit details for the publisher you would like to update.'
-                title='Update Publisher'
-                refresh={getPublishers}
-            />
-            <InputModal
-                action={deletePublisher}
-                columns={deleteFormColumns}
-                details='Enter the id of the publisher you would like to delete'
-                title='Delete Publisher'
-                refresh={getPublishers}
-            />
+            <div style={{ display: 'flex', justifyContent: 'start' }}>
+                <InputModal
+                    action={addPublisher}
+                    columns={addFormColumns}
+                    details='Enter details for the new publisher you would like to add.'
+                    title='New Publisher'
+                    refresh={getPublishers}
+                />
+                <InputModal
+                    action={updatePublisher}
+                    columns={updateFormColumns}
+                    details='Edit details for the publisher you would like to update.'
+                    title='Update Publisher'
+                    refresh={getPublishers}
+                />
+                <InputModal
+                    action={deletePublisher}
+                    columns={deleteFormColumns}
+                    details='Enter the id of the publisher you would like to delete'
+                    title='Delete Publisher'
+                    refresh={getPublishers}
+                />
+            </div>
             <EntityTable
                 cols={columns}
                 icon='library'

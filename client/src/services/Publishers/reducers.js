@@ -43,7 +43,7 @@ const initialStateCreate = {
 
 const addPublisherStarted = (state, action) => updateObject(state, {
     error: null,
-    loading: false
+    loading: true
 })
 
 const addPublisherSuccess = (state, action) => updateObject(state, {
@@ -98,7 +98,7 @@ const updatePublisherReducer = (state = initialStateUpdate, action) => {
     }
 }
 
-//deleteing publisher
+//deleting publisher
 const initialStateDelete = {
     publisher: null,
     error: null,
