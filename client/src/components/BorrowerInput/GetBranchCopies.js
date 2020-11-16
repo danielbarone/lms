@@ -73,7 +73,7 @@ const dispatch = useDispatch();
   // }, [loadBranchCopies]);
   useEffect(() => {
     if(bookCheckedOut){
-      setBookCheckedOut(false);
+      //setBookCheckedOut(false);
       console.log("You checked out a book")
       dispatch(loanActions.checkOutBook(bookId, branchId, cardNo, dateOut2, dueDate2));
     }
@@ -81,7 +81,7 @@ const dispatch = useDispatch();
     //   console.log("No book id")
     // }
     loadBranchCopies();
-  });
+  },[bookCheckedOut]);
 
   if (!branchCopies) {
     return (

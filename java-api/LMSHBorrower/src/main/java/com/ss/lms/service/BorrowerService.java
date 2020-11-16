@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopies;
+import com.ss.lms.entity.BookCopiesId;
 import com.ss.lms.entity.BookLoans;
 import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.Branch;
@@ -64,8 +65,12 @@ public class BorrowerService {
 		
 		addBookLoan(bookLoans);
 		BookCopies bookCopy = new BookCopies();
-		bookCopy.getId().setBookId(bookLoans.getId().getBookId());
-		bookCopy.getId().setBranchId(bookLoans.getId().getBranchId());
+		int bookId =bookLoans.getId().getBookId();
+		int branchId = bookLoans.getId().getBranchId();
+		BookCopiesId id = new BookCopiesId(bookId, branchId); 
+		bookCopy.setId(id);
+//		bookCopy.getId().setBookId(bookLoans.getId().getBookId());
+//		bookCopy.getId().setBranchId(bookLoans.getId().getBranchId());
 		bookCopy = getBookCopyNo(bookCopy);
 		bookCopy.setNumOfCopies(bookCopy.getNumOfCopies()-1);
 		updateBookCopies(bookCopy);
@@ -74,14 +79,19 @@ public class BorrowerService {
 	}
 	
 	@Transactional
-	@RequestMapping(value = "/returnBook", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/returnBook", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
 	public List<BookLoans> returnBook(@RequestBody BookLoans bookLoans) throws SQLException { 
 		
+	
 		updateBookLoan(bookLoans);
 		BookCopies bookCopy = new BookCopies();
-		bookCopy.getId().setBookId(bookLoans.getId().getBookId());
-		bookCopy.getId().setBranchId(bookLoans.getId().getBranchId());
+		int bookId =bookLoans.getId().getBookId();
+		int branchId = bookLoans.getId().getBranchId();
+		BookCopiesId id = new BookCopiesId(bookId, branchId); 
+		bookCopy.setId(id);
+		
 		bookCopy = getBookCopyNo(bookCopy);
+		
 		bookCopy.setNumOfCopies(bookCopy.getNumOfCopies()+1);
 		updateBookCopies(bookCopy);
 		
@@ -113,6 +123,9 @@ public class BorrowerService {
 		int branchId = bookLoans.getId().getBranchId();
 		int cardNo = bookLoans.getId().getCardNo();
 		BookLoans oldLoan = getBookLoansById(bookId, branchId, cardNo);
+	
+	
+		
 		
 		if(bookLoans.getDateIn()!=null) {
 			oldLoan.setDateIn(bookLoans.getDateIn());

@@ -33,7 +33,7 @@ const borrower= {
     {
             "branchId": branchId
     }),
-    checkOutBook: (bookId, branchId, cardNo, dateOut, dueDate) => axios.post(`${borrowerBaseUrl}/addBookLoan`,
+    checkOutBook: (bookId, branchId, cardNo, dateOut, dueDate) => axios.post(`${borrowerBaseUrl}/checkOutBook`,
     {
             "id":{
                 "bookId": bookId,
@@ -48,7 +48,7 @@ const borrower= {
     returnBook: (bookId, branchId, cardNo, dateOut, dueDate, dateIn) => axios.post(`${borrowerBaseUrl}/returnBook`,
     {
         "id":{
-                "bookId": bookId,
+            "bookId": bookId,
             "branchId": branchId,
             "cardNo": cardNo,
             },

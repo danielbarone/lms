@@ -72,7 +72,7 @@ const checkOutBook = (bookId, branchId, cardNo, dateOut, dueDate) => (dispatch) 
 const returnBook = (bookId, branchId, cardNo, dateOut, dueDate, dateIn) => (dispatch) => {
   dispatch(getLoansStarted(true));
 
-  borrower.borrower().returnBook(bookId, branchId, cardNo, dateOut, dueDate)
+  borrower.borrower().returnBook(bookId, branchId, cardNo, dateOut, dueDate, dateIn)
     .then((response) => {
       const loans = parseLoanData(response.data);
       dispatch(getLoansSuccess(loans));

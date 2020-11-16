@@ -46,6 +46,18 @@ const GetBorrowerBranchLoans = (props) => {
 
   ////This code brok my comp for a bit be carful with uncommenting
   useEffect(() => {
+    if(bookReturn){
+      console.log("Returning book")
+      //alert("Book returned");
+      // return(
+      //   <div>
+      //     Book Returned
+      //   </div>
+      // )
+      //console.log("BookId: "+bookId2+" branchId: "+branchId2+" cardNo: "+cardNo2);
+      console.log("DateIn: "+dateIn2);
+      dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
+    }
     // if(bookReturn){
     //   setBookReturn(false)
     //   console.log("Book Returned")
@@ -54,9 +66,11 @@ const GetBorrowerBranchLoans = (props) => {
     // else{  
     //   console.log("nope");
     // }  
+    else{
 
-    dispatch(loanActions.getLoansByCardNo(props.cardNo));
-  },[]);
+      dispatch(loanActions.getLoansByCardNo(props.cardNo));
+    }
+  },[bookReturn]);
 
   if (!loans) {
     return (
@@ -92,16 +106,34 @@ const GetBorrowerBranchLoans = (props) => {
     // console.log("DateOut DueDate DateIn")
     // console.log(dateOut)
     // console.log(dueDate)
+
+// let sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+// let output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+// let d = sdf.parse(dateOut);
+// let formattedTime = output.format(d);
+// console.log("Format");
+// console.log(new Date().toISOString());
+// console.log(dateOut);
+
     // console.log("Sql Format");
     // console.log(sqlDO)
     // console.log(sqlDD)
+    // console.log(sqlDI)
+
+    let DO2 = sqlDO.substring(0,10)+"T00:00:00.000Z";
+    let DD2 = sqlDD.substring(0,10)+"T00:00:00.000Z";
+    let DI2 = sqlDI.substring(0,10)+"T00:00:00.000Z";
+    // console.log("Added bit")
+    // console.log(DO2);
+    //   console.log(DD2);
+    //     console.log(DI2);
 
     setBookId(bookId);
     setBranchId(branchId);
     setCardNo(cardNo);
-    setDateOut(sqlDO);
-    setDueDate(sqlDD);
-    setDateIn(sqlDI);
+    setDateOut(DO2);
+    setDueDate(DD2);
+    setDateIn(DI2);
     setBookReturn(true);
     console.log("isReturning")
   
@@ -121,9 +153,14 @@ if(loans[0]){
     // console.log(loans);
     // console.log("branches");
     // console.log(props.branchId);
+
+  ///Loan will sometimes return all loans so this needs to filter
   loans2= loans.filter(function(loan){
       return loan.branchId == props.branchId;
   } );
+  loans2= loans2.filter(function(loan){
+    return loan.cardNo == props.cardNo;
+} );
   //console.log(loans2);
 }
 else{
