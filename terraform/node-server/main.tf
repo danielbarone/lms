@@ -29,7 +29,7 @@ chmod +x init.sh
 /bin/su -c "/tmp/init.sh" - ec2-user
 rm init.sh
 ' >> init.sh
-EOF;
+EOF
 
   tags = {
     Name = var.name

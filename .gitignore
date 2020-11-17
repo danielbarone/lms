@@ -5,3 +5,10 @@ java-api/LMSHBorrower/src/main/resources/application.properties
 terraform/terraform.tfvars
 terraform/*.key
 terraform/*.pem
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+api-gateway/.deploy.env
+users-service/.deploy.env
+node-deploy/node_modules
+node-deploy/package-lock.json
+client/.env
