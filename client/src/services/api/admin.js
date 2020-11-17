@@ -30,6 +30,21 @@ const admin = {
     delete: (genre) => axios(deleteConfig(genre, `${adminBaseUrl}/deleteGenreRE`)),
     getAll: () => axios.get(`${adminBaseUrl}/getAllGenres`),
   }),
+  publishers: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllPublishers`),
+    create: (publisher) => axios.post(`${adminBaseUrl}/addPublisher`, publisher),
+    update: (publisher) => axios.post(`${adminBaseUrl}/updatePublisher`, publisher),
+    delete: (publisher) => axios(deleteConfig(publisher, `${adminBaseUrl}/deletePublisherRE`))
+  }),
+  loans: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)
+  }),
+  borrowers: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),
+    create: (borrower) => axios.post(`${adminBaseUrl}/addBorrower`, borrower),
+    update: (borrower) => axios.post(`${adminBaseUrl}/updateBorrowerById`, borrower),
+    delete: (borrower) => axios.post(`${adminBaseUrl}/deleteBorrowerById`, borrower)
+  })
 };
 
 export default admin;
