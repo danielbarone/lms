@@ -11,6 +11,7 @@ import Dashboard from './Dashboard/Dashboard';
 import EntityTable from './Table/EntityTable';
 import EntityTable2 from './Table/EntityTable2';
 import EntityTable3 from './Table/EntityTable3';
+import EntityTable4 from './Table/EntityTable4';
 import Genre from './Genre/Genre';
 import Home from './Home/Home';
 import Icon from './Icon/Icon';
@@ -37,6 +38,7 @@ export {
   EntityTable,
   EntityTable2,
   EntityTable3,
+  EntityTable4,
   Genre,
   Home,
   Icon,
