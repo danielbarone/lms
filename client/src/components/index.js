@@ -9,6 +9,8 @@ import Branch from './Branch/Branch';
 import CustomChip from './Chip/CustomChip';
 import Dashboard from './Dashboard/Dashboard';
 import EntityTable from './Table/EntityTable';
+import EntityTable2 from './Table/EntityTable2';
+import EntityTable3 from './Table/EntityTable3';
 import Genre from './Genre/Genre';
 import Home from './Home/Home';
 import Icon from './Icon/Icon';
@@ -33,6 +35,8 @@ export {
   CustomChip,
   Dashboard,
   EntityTable,
+  EntityTable2,
+  EntityTable3,
   Genre,
   Home,
   Icon,

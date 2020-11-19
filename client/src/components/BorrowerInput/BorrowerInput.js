@@ -195,7 +195,7 @@ const BorrowerInput = (props) => {
             <br />
             ######## */}
                 {/* <BranchList /> */}
-                
+                {/*This text field will be taken out once the ui table works */}
                 <TextField id="branchIdField" type="number"  InputProps={{
                         className: classes.root
                     }}
@@ -337,6 +337,9 @@ onChange={(e) => handleCardNo(e.target.value)}
        <RenderBorrower /> <br />
        <RenderBorrowerLoansButton /> <br />
        <RenderBranches /> <br />
+       {/* For Testing remove later */}
+       {/* <GetBranchCopies branchId={1} cardNo={123}  /><br/> */}
+       {/* <GetBorrowerBranchLoans cardNo={123} branchId={1} /><br/> */}
         
     </div>
 );

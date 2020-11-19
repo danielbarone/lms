@@ -69,12 +69,11 @@ public class BorrowerService {
 		int branchId = bookLoans.getId().getBranchId();
 		BookCopiesId id = new BookCopiesId(bookId, branchId); 
 		bookCopy.setId(id);
-//		bookCopy.getId().setBookId(bookLoans.getId().getBookId());
-//		bookCopy.getId().setBranchId(bookLoans.getId().getBranchId());
+		bookCopy.getId().setBookId(bookId);
+		bookCopy.getId().setBranchId(branchId);
 		bookCopy = getBookCopyNo(bookCopy);
 		bookCopy.setNumOfCopies(bookCopy.getNumOfCopies()-1);
 		updateBookCopies(bookCopy);
-		
 		return getAllBookLoans();
 	}
 	
@@ -226,7 +225,7 @@ public class BorrowerService {
 		int branchId = bookCopies.getId().getBranchId();
 		if(bookCopies.getId().getBookId()==null)
 			return null;
-		int bookId = bookCopies.getId().getBranchId();
+		int bookId = bookCopies.getId().getBookId();
 		BookCopies bc = getBookCopiesById(bookId, branchId);	
 		return bc;
 	}

@@ -3,6 +3,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import {Button, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { loanActions } from '../../services/actions';
+import { EntityTable } from '..';
+import { EntityTable3 } from '..';
 
 
 /* Components */
@@ -26,6 +28,20 @@ const GetBorrowerBranchLoans = (props) => {
   const [dueDate2, setDueDate] = useState();
   const [dateIn2, setDateIn] = useState();
   const [bookReturn, setBookReturn] = useState(false);
+
+  const loading = useSelector((state) => state.loans.loading);
+
+  const columns = [
+    // { field: 'id', headerName: 'ID', width: 75 },
+    // { field: 'cardNo', headerName: 'CardNo', width: 75 },
+     { field: 'branchId', headerName: 'BranchId', width: 100 },
+     { field: 'bookId', headerName: 'BookId', width: 100 },
+     { field: 'dateOut', headerName: 'DateOut', width: 110 },
+     { field: 'dueDate', headerName: 'DueDate', width: 110 },
+     { field: 'dateIn', headerName: 'DateIn', width: 110 },
+   ];
+
+
  // console.log(props.cardNo);
 //   console.log("cardNo");
 //   console.log(props);
@@ -55,7 +71,7 @@ const GetBorrowerBranchLoans = (props) => {
       //   </div>
       // )
       //console.log("BookId: "+bookId2+" branchId: "+branchId2+" cardNo: "+cardNo2);
-      console.log("DateIn: "+dateIn2);
+      //console.log("DateIn: "+dateIn2);
       dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
     }
     // if(bookReturn){
@@ -176,13 +192,21 @@ if(!loans2[0]){
     )
 }
 
+
+
   return (
     <div>
     ----------------Loans from Branch {props.branchId}---------------
     <br />
     {/* CardNo: {loans.cardNo}<br />
     Name: {borrower.name} */}
-    <ol>
+    <EntityTable3
+        rows={loans2}
+        cols={columns}
+        loading={loading}
+      /> <br/>
+
+    {/* <ol>
     {loans2.map(
         (val, index) => (
             <div key={`loan${index}-loanId${val.dateOut}`}>
@@ -202,7 +226,7 @@ if(!loans2[0]){
         ),
       )}
       </ol>
-    <br />
+    <br /> */}
     ---------------------------------------
     <br />   
       
