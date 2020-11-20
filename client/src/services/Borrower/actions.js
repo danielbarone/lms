@@ -4,7 +4,7 @@ import {
     GET_Borrowers_FAILURE,
   } from './actionTypes';
   
-  import {borrower}  from '../api';
+  import { borrower}  from '../api';
   
   const getBorrowersStarted = (loading) => ({
     type: GET_Borrowers_STARTED,
@@ -37,16 +37,16 @@ const parseBorrowerData = (Borrowers) => ({
     }
   );
   
-  const getBorrowers = () => (dispatch) => {
-    dispatch(getBorrowersStarted(true));
+  // const getBorrowers = () => (dispatch) => {
+  //   dispatch(getBorrowersStarted(true));
   
-    borrower.Borrowers().getAll()
-      .then((response) => {
-        const borrowers = parseBorrowerData(response.data);
-        dispatch(getBorrowersSuccess(borrowers));
-      })
-      .catch((e) => dispatch(getBorrowersFailure(e)));
-  };
+  //   borrower.Borrowers().getAll()
+  //     .then((response) => {
+  //       const borrowers = parseBorrowerData(response.data);
+  //       dispatch(getBorrowersSuccess(borrowers));
+  //     })
+  //     .catch((e) => dispatch(getBorrowersFailure(e)));
+  // };
 
   const getBorrowerByCardNo = (cardNo) => (dispatch) => {
     dispatch(getBorrowersStarted(true));
@@ -76,7 +76,7 @@ const parseBorrowerData = (Borrowers) => ({
   
   export {
     // eslint-disable-next-line import/prefer-default-export
-    getBorrowers,
+    //getBorrowers,
     getBorrowerByCardNo,
   };
   

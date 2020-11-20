@@ -57,7 +57,7 @@ const getLoansByCardNo = (cardNo) => (dispatch) => {
 
   borrower.borrower().getLoansByCardNo(cardNo)
     .then((response) => {
-      const loans = parseLoanData(response.data);
+      const loans = parseLoanData2(response.data);
       dispatch(getLoansSuccess(loans));
     })
     .catch((e) => dispatch(getLoansFailure(e)));

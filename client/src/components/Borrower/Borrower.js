@@ -29,7 +29,7 @@ const deleteFormColumns = [
   { field: 'cardNo', label: 'CardNo', type: 'text' }
 ]
 
-import { BorrowerInput } from '..';
+
 
 
 

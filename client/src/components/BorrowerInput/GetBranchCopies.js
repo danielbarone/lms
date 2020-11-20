@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import {Button, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { loanActions } from '../../services/actions';
-import { borrowerActions } from '../../services/actions';
+import { borrower2Actions as borrowerActions } from '../../services/actions';
 import { branchBookCopiesActions } from '../../services/actions';
 import { bookActions } from '../../services/actions';
 import { EntityTable } from '..';
@@ -220,7 +220,7 @@ branchBooks.forEach(function(item, index, array) {
       // console.log(loans3[0].dateIn);
       loans3.forEach(function(item, index, array) {
         //console.log("Loans3: "+index)
-        if(item.dateIn == "null" && item.dateOut != null){
+        if((item.dateIn == "null" || item.dateIn == null) && item.dateOut != null){
           isCheckedOut = true;
         }
       });
@@ -256,8 +256,8 @@ if(!branchBookCopies[0]){
 // console.log(theState);
 // console.log("BranchBooks2");
 // console.log(branchBooks);
-// console.log("Book Copies2");
-// console.log(branchCopies);
+// console.log("Book Copies");
+// console.log(branchBookCopies);
 
 
 

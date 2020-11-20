@@ -3,6 +3,7 @@ import AuthButton from './Button/AuthButton';
 import AvatarBtn from './Button/AvatarBtn';
 import Book from './Book/Book';
 import Borrower from './Borrower/Borrower';
+import BorrowerHome from './Borrower/BorrowerHome';
 import BorrowerInput from './BorrowerInput/BorrowerInput';
 import BranchList from './Branch/BranchList';
 import Branch from './Branch/Branch';
@@ -30,6 +31,7 @@ export {
   AvatarBtn,
   Book,
   Borrower,
+  BorrowerHome,
   BorrowerInput,
   BranchList,
   Branch,

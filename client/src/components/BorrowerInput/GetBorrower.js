@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { borrowerActions } from '../../services/actions';
+import { borrower2Actions as borrowerActions } from '../../services/actions';
 
 
 /* Components */
@@ -12,8 +12,10 @@ import useStyles from './BorrowerInput.styles';
 
 const GetBorrower = (props) => {
 
- const borrower = useSelector((state) => state.borrower.borrowers);
-
+  const theState = useSelector((state) => state);
+ const borrower = useSelector((state) => state.borrower2.borrowers);
+// console.log("The State");
+// console.log(theState);
  const dispatch = useDispatch();
  const classes = useStyles(props);
   //const [borrower, setBorrower] = useState([]);

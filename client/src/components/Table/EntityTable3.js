@@ -146,10 +146,10 @@ function isReturningBook (loan){
           }))}
           
           onRowClick={(evt,rowData)=>{{
+             //console.log("RowData");
               //console.log(evt);
-             // console.log("RowData");
-             // console.log(evt.rowModel);
-              if(evt.rowModel.data.dateIn != "null"){
+             //console.log(evt.rowModel);
+              if(evt.rowModel.data.dateIn!= null && evt.rowModel.data.dateIn != "null" ){
                 
                   //console.log("You have already returned this book");
                   alert("You have already returned this book");
