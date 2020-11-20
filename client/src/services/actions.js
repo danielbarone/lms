@@ -4,6 +4,8 @@ import * as genreActions from './Genres/actions';
 import * as borrowerActions from './Borrower/actions';
 import * as loanActions from './Loans/actions';
 import * as branchBookCopiesActions from './BranchBookCopies/actions';
+import * as publisherActions from './Publishers/actions';
+
 
 export {
   bookActions,
@@ -12,4 +14,6 @@ export {
   borrowerActions,
   loanActions,
   branchBookCopiesActions,
+  publisherActions,
+
 };
