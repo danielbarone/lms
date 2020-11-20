@@ -100,7 +100,11 @@ function isReturningBook (loan){
     setReturnLoan(loan);
     setReturningBook(true);
     setCounter(counter+1);
-    console.log("isReturning")
+
+    ///Should this have a confirmation like checkout?
+    //Also will change bookId to just have title
+    alert("You have returned bookId: '"+ loan.bookId+"' on "+DI2)
+    //console.log("isReturning")
   }
 
 
@@ -109,8 +113,8 @@ function isReturningBook (loan){
   useEffect(() => {
       //console.log("ET3 Use Effect");
       if(returningBook){
-          console.log("Returning Book");
-          console.log(returnLoan);
+          //console.log("Returning Book");
+          //console.log(returnLoan);
           //console.log(cardNo);
         dispatch(loanActions.returnBook(returnLoan.bookId, returnLoan.branchId, returnLoan.cardNo, dateOut2, dueDate2, dateIn2));
         //  dispatch(loanActions.checkOutBook(checkOutBook.bookId, checkOutBook.branchId, cardNo, dateOut2, dueDate2));
@@ -146,12 +150,13 @@ function isReturningBook (loan){
              // console.log("RowData");
              // console.log(evt.rowModel);
               if(evt.rowModel.data.dateIn != "null"){
-                  //console.log("No go")
-                  console.log("You have already returned this book");
+                
+                  //console.log("You have already returned this book");
+                  alert("You have already returned this book");
               }
               else{
                 isReturningBook(evt.rowModel.data);
-                  console.log("Returned Book");
+                  //console.log("Returned Book");
               }
               }}}
           components={{

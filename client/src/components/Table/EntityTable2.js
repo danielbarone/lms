@@ -89,7 +89,11 @@ function isCheckingOut (book){
     // setBookCheckedOut(true);
     // console.log("Book");
     // console.log(book);
-   console.log("Is checking out now"); 
+
+    ///Change this to a confirmation at some point
+    alert("You have checked out '"+book.title
+    +"'. It will be due by "+dueDate+".");
+  // console.log("Is checking out now"); 
   }
 
 
@@ -98,7 +102,7 @@ function isCheckingOut (book){
   useEffect(() => {
       //console.log("ET2 Use Effect");
       if(checkingOut){
-          console.log("CheckingOut");
+          //console.log("CheckingOut");
           //console.log(checkOutBook);
           //console.log(cardNo);
           dispatch(loanActions.checkOutBook(checkOutBook.bookId, checkOutBook.branchId, cardNo, dateOut2, dueDate2));
@@ -134,12 +138,19 @@ function isCheckingOut (book){
             //   console.log("RowData");
             //   console.log(evt.rowModel);
               if(evt.rowModel.data.locked){
-                  //console.log("No go")
-                  console.log("You already have this book checked out");
+                  //Replace this with a model?
+                  //console.log("You already have this book checked out");
+                  alert("You already have this book checked out")
               }
               else{
+                  ///Eventually add confirmation they want 2 check out
+                  ////dueDate is created twice, should b eaway around that
+                //   var dueDate = new Date();
+                // dueDate.setDate(dueDate.getDate()+7);
                 isCheckingOut(evt.rowModel.data);
-                  console.log("Book checked out");
+               
+                  //console.log("Book checked out");
+                  //console.log(evt.rowModel.data);
               }
               }}}
           components={{

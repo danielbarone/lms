@@ -252,8 +252,8 @@ if(!branchBookCopies[0]){
 
 
 
-console.log("The state");
-console.log(theState);
+// console.log("The state");
+// console.log(theState);
 // console.log("BranchBooks2");
 // console.log(branchBooks);
 // console.log("Book Copies2");

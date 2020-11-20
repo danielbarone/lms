@@ -9,7 +9,7 @@ import { branchActions } from '../../services/actions';
 
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 75 },
+ // { field: 'id', headerName: 'ID', width: 75 },
   { field: 'name', headerName: 'Branch Name', width: 250 },
   { field: 'address', headerName: 'Address', width: 250 },
 ];
@@ -67,6 +67,7 @@ const BranchSelector = (props) => {
           refresh={getBranches}
         /> */}
       </div>
+      Select which branch you want
       <EntityTable4
         cols={columns}
         icon='library'
