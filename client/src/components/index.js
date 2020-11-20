@@ -2,6 +2,7 @@ import Admin from './Admin/Admin';
 import AuthButton from './Button/AuthButton';
 import AvatarBtn from './Button/AvatarBtn';
 import Book from './Book/Book';
+import BookForm from './Book/BookForm';
 import Borrower from './Borrower/Borrower';
 import Branch from './Branch/Branch';
 import CustomChip from './Chip/CustomChip';
@@ -24,6 +25,7 @@ export {
   AuthButton,
   AvatarBtn,
   Book,
+  BookForm,
   Borrower,
   Branch,
   CustomChip,

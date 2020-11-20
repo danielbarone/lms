@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Book.styles';
 /* Components */
-import { EntityTable, InputModal } from '..';
+import { BookForm, EntityTable, InputModal } from '..';
 import { bookActions } from '../../services/actions';
-import BookForm from './BookForm';
 
 const formatAuthors = (authors) => {
   if (authors === null || authors.length === 0) {
     return '';
   }
   let authorString = '';
+  // eslint-disable-next-line array-callback-return
   authors.map((a, i) => {
     if (i === 0) {
       authorString += a.authorName;
@@ -23,13 +23,14 @@ const formatAuthors = (authors) => {
     }
   });
   return authorString;
-}
+};
 
 const formatGenres = (genres) => {
   if (genres === null || genres.length === 0) {
     return '--';
   }
   let genreString = '';
+  // eslint-disable-next-line array-callback-return
   genres.map((g, i) => {
     if (i === 0) {
       genreString += g.genreName;
@@ -40,21 +41,26 @@ const formatGenres = (genres) => {
     }
   });
   return genreString;
-}
+};
 
 const formatBook = (params) => {
   const authors = params.getValue('authors');
   let authorString = '';
   if (authors !== null && authors.length !== 0) {
-    authorString = 'by ' + formatAuthors(authors);
+    authorString = `by ${formatAuthors(authors)}`;
   }
-  
-  return `${params.getValue('name') || ''} ${authorString}`
-}
+
+  return `${params.getValue('name') || ''} ${authorString}`;
+};
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 75 },
-  { field: 'title', headerName: 'Book', width: 450, valueGetter: formatBook },
+  {
+    field: 'title',
+    headerName: 'Book',
+    width: 450,
+    valueGetter: formatBook,
+  },
   {
     field: 'publisher',
     headerName: 'Publisher',
@@ -76,7 +82,6 @@ const Book = (props) => {
   const dispatch = useDispatch();
 
   const createBook = (book) => bookActions.addBook(book);
-
   // const updateBook = (book) => bookActions.updateBook(book);
   // const deleteBook = (book) => bookActions.deleteBook(book);
   const getBooks = () => dispatch(bookActions.getBooks());

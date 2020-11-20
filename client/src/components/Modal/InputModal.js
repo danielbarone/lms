@@ -37,7 +37,6 @@ const InputModal = (props) => {
 
   const onSubmit = handleSubmit(async (formData) => {
     try {
-      console.log(formData)
       const response = await dispatch(action(formData));
       if (!response.data) {
         throw new Error(response.error);
@@ -59,35 +58,42 @@ const InputModal = (props) => {
         aria-labelledby='input-modal'
         aria-describedby='input-modal'
       >
-        <form onSubmit={onSubmit} className={classes.formModalContainer}>
-          <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
-          <Typography className={classes.formError}>{formError}</Typography>
-          {CustomForm ? <CustomForm inputRef={register} disabled={isSubmitting} />
-            : (columns.map((c) => (
-              <TextField
-                className={classes.modalInput}
-                key={c.field}
-                id={c.field}
-                variant='outlined'
-                label={c.label}
-                name={c.field}
-                type={c.type}
-                inputRef={register}
-                disabled={isSubmitting}
-              />
-            )))
-          }
-          <Button
-            className={classes.modalSubmitBtn}
-            variant='contained'
-            disabled={isSubmitting}
-            type='submit'
-          >
-            Submit
-          </Button>
-          <Divider className={classes.btnDivider} />
-          <Typography className={classes.details}>{details}</Typography>
-        </form>
+        {CustomForm ? (
+          <CustomForm
+            action={action}
+            details={details}
+            title={title}
+            classes={classes}
+          />
+        ) : (
+          <form onSubmit={onSubmit} className={classes.formModalContainer}>
+            <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
+            <Typography className={classes.formError}>{formError}</Typography>
+            {columns.map((c) => (
+                <TextField
+                  className={classes.modalInput}
+                  key={c.field}
+                  id={c.field}
+                  variant='outlined'
+                  label={c.label}
+                  name={c.field}
+                  type={c.type}
+                  inputRef={register}
+                  disabled={isSubmitting}
+                />
+            ))}
+            <Button
+              className={classes.modalSubmitBtn}
+              variant='contained'
+              disabled={isSubmitting}
+              type='submit'
+            >
+              Submit
+            </Button>
+            <Divider className={classes.btnDivider} />
+            <Typography className={classes.details}>{details}</Typography>
+          </form>
+        )}
       </Dialog>
     </div>
   );
@@ -99,6 +105,7 @@ InputModal.propTypes = {
   details: PropTypes.string,
   refresh: PropTypes.func,
   title: PropTypes.string,
+  CustomForm: PropTypes.any,
 };
 
 export default InputModal;

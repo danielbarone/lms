@@ -11,5 +11,5 @@ export {
   genreActions,
   publisherActions,
   loanActions,
-  borrowerActions
+  borrowerActions,
 };
