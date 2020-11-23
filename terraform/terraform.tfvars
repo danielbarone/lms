@@ -1,5 +1,0 @@
-aws-access-key = "AKIARI4S7VPOKJDHSNVY"
-aws-secret-key = "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"
-aws-region     = "us-east-1"
-users-service-db-password = "m1croservices"
-users-service-db-username = "user"
