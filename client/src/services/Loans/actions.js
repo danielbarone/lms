@@ -39,6 +39,32 @@ const getLoans = () => (dispatch) => {
     }).catch((err) => dispatch(getLoansFailure(err)))
 }
 
+//overriding loan
+const overrideStarted = (loading) => ({
+    type: actionTypes.OVERRIDE_STARTED,
+    loading
+})
+
+const overrideSuccess = (loan) => ({
+    type: actionTypes.OVERRIDE_SUCCESS,
+    loan
+})
+
+const overrideFailure = (error) => ({
+    type: actionTypes.OVERRIDE_FAILURE,
+    error
+})
+
+const overrideLoan = (loan) => (dispatch) => {
+    dispatch(overrideStarted(true));
+
+    return admin.loans().overrideDueDate(loan).then((res) => {
+        dispatch(overrideSuccess(loan));
+        return res;
+    }).catch((err) => dispatch(overrideFailure(err)));
+}
+
 export {
-    getLoans
+    getLoans,
+    overrideLoan
 }

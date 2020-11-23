@@ -16,6 +16,7 @@ export { updatedGenreReducer as updatedGenre } from './Genres/reducers';
 
 //Admin Loans Reducers
 export { loansReducer as loans } from './Loans/reducers';
+export { overrideReducer as updatedLoan } from './Loans/reducers';
 
 //Admin Publisher Reducers
 export { publishersReducer as publishers } from './Publishers/reducers';
@@ -28,3 +29,8 @@ export { borrowersReducer as borrowers } from './Borrowers/reducers';
 export { createBorrowerReducer as borrower } from './Borrowers/reducers';
 export { updateBorrowerReducer as updatedBorrower } from './Borrowers/reducers';
 export { deleteBorrowerReducer as deletedBorrower } from './Borrowers/reducers';
+
+//Librarian Reducers
+export { editBookCopiesReducer as updatedCopies } from './Librarian/reducers';
+export { copiesReducer as copies } from './Librarian/reducers';
+export { branchBooksReducer as branchBooks } from './Librarian/reducers';

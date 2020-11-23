@@ -37,7 +37,8 @@ const admin = {
     delete: (publisher) => axios(deleteConfig(publisher, `${adminBaseUrl}/deletePublisherRE`))
   }),
   loans: () => ({
-    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
+    overrideDueDate: (loan) => axios.post(`${adminBaseUrl}/overrideBookLoan`, loan)
   }),
   borrowers: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),

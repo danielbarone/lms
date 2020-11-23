@@ -33,6 +33,39 @@ const loansReducer = (state = initialState, action) => {
     }
 }
 
+//overriding due date
+const overrideInitialState = {
+    loan: null,
+    error: null,
+    loading: false
+}
+
+const overrideStarted = (state, action) => updateObject(state, {
+    error: null,
+    loading: true
+})
+
+const overrideSuccess = (state, action) => updateObject(state, {
+    loan: action.loan,
+    error: null,
+    loading: false
+})
+
+const overrideFailure = (state, action) => updateObject(state, {
+    error: action.error,
+    loading: false
+})
+
+const overrideReducer = (state = overrideInitialState, action) => {
+    switch (action.type) {
+        case actionTypes.OVERRIDE_STARTED: return overrideStarted(state, action);
+        case actionTypes.OVERRIDE_SUCCESS: return overrideSuccess(state, action);
+        case actionTypes.OVERRIDE_FAILURE: return overrideFailure(state, action);
+        default: return state;
+    }
+}
+
 export {
-    loansReducer
+    loansReducer,
+    overrideReducer
 }

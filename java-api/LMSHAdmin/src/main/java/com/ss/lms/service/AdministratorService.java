@@ -503,7 +503,7 @@ public class AdministratorService {
 	}
 	
 	///meant for overriding due date but can be used to change any of the loan's values
-	@RequestMapping(value = "/overrideBookLoan", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/overrideBookLoan", method = RequestMethod.POST, produces = "application/json")
 	public List<BookLoans> overrideBookLoan(@RequestBody BookLoans bookLoans) throws SQLException { 
 		
 		LibrarianService ls = new LibrarianService();
