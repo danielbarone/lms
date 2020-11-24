@@ -208,7 +208,7 @@ public class BorrowerService {
 	}
 	
 	
-	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<BookCopies> getBookCopiesByBranchId(@RequestBody Branch sBranch) throws SQLException { 
 		if(sBranch.getBranchId()==null)
 			return null;

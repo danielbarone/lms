@@ -68,7 +68,7 @@ const EntityTable4 = (props) => {
   const [data, setData] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const cardNo = props.cardNo;
 //    console.log("Table2");
 //    console.log(props);

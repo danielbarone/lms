@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 import admin from '../api';
+import { borrower}  from '../api';
 
 /* CREATE */
 const addBranchStarted = (loading) => ({
@@ -118,9 +119,22 @@ const getBranches = () => (dispatch) => {
     .catch((e) => dispatch(getBranchesFailure(e)));
 };
 
+
+const getBranches2 = () => (dispatch) => {
+  dispatch(getBranchesStarted(true));
+
+  borrower.branches().getAll()
+    .then((response) => {
+      const branches = parseBranchData(response.data);
+      dispatch(getBranchesSuccess(branches));
+    })
+    .catch((e) => dispatch(getBranchesFailure(e)));
+};
+
 export {
   addBranch,
   deleteBranch,
   getBranches,
+  getBranches2,
   updateBranch,
 };

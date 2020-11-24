@@ -34,7 +34,7 @@ const BranchSelector = (props) => {
   const createBranch = (branch) => branchActions.addBranch(branch);
   const updateBranch = (branch) => branchActions.updateBranch(branch);
   const deleteBranch = (branch) => branchActions.deleteBranch(branch);
-  const getBranches = () => dispatch(branchActions.getBranches());
+  const getBranches = () => dispatch(branchActions.getBranches2());
   const cardNo = props.cardNo;
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const borrowerBaseUrl = process.env.REACT_APP_ADMIN_SERVICE_URL;
-//const borrowerBaseUrl = process.env.REACT_APP_BORROWER_SERVICE_URL;
+//const borrowerBaseUrl = process.env.REACT_APP_ADMIN_SERVICE_URL;
+const borrowerBaseUrl = process.env.REACT_APP_BORROWER_SERVICE_URL;
 
 const borrower= {
   branches: () => ({
