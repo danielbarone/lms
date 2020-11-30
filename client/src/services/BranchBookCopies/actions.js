@@ -5,19 +5,19 @@ import {borrower}  from '../api';
 
 
 /* READ */
-const getBooksStarted = (loading) => ({
-  type: actionTypes.GET_BOOKS_STARTED,
+const getBBooksStarted = (loading) => ({
+  type: actionTypes.GET_BBOOKS_STARTED,
   loading,
 });
 
-const getBooksSuccess = (books, branchId) => ({
-  type: actionTypes.GET_BOOKS_SUCCESS,
+const getBBooksSuccess = (books, branchId) => ({
+  type: actionTypes.GET_BBOOKS_SUCCESS,
   books,
   branchId
 });
 
-const getBooksFailure = (error) => ({
-  type: actionTypes.GET_BOOKS_FAILURE,
+const getBBooksFailure = (error) => ({
+  type: actionTypes.GET_BBOOKS_FAILURE,
   error,
 });
 
@@ -30,6 +30,17 @@ const parseBookData = (books, branchId) => books.map(
     publisher: b.publisher,
     bookId: b.bookId,
     branchId: parseInt(branchId),
+  }),
+);
+
+const parseBookData2 = (books) => books.map(
+  (b) => ({
+    id: b.bookId,
+    title: b.title || '--',
+    authors: b.authors,
+    genres: b.genres,
+    publisher: b.publisher,
+    bookId: b.bookId,
   }),
 );
 
@@ -60,29 +71,29 @@ const parseBookCopiesData = (bookCopies) => bookCopies.map(
 );
 
 const getBooks = () => (dispatch) => {
-  dispatch(getBooksStarted(true));
+  dispatch(getBBooksStarted(true));
 
-  admin.books().getAll()
+  borrower.books().getAll()
     .then((response) => {
-      const books = parseBookData(response.data);
-      dispatch(getBooksSuccess(books));
-      console.log(response.data);
+      const books = parseBookData2(response.data);
+      dispatch(getBBooksSuccess(books));
+     // console.log(response.data);
     })
-    .catch((e) => dispatch(getBooksFailure(e)));
+    .catch((e) => dispatch(getBBooksFailure(e)));
 };
 
 const getBooksByBranchId = (branchId) => (dispatch) => {
-  dispatch(getBooksStarted(true));
+  dispatch(getBBooksStarted(true));
   borrower.borrower().getBranchBooks(branchId)
     .then((response) => {
       const books = parseBookData(response.data, branchId);
-      dispatch(getBooksSuccess(books, branchId));
+      dispatch(getBBooksSuccess(books, branchId));
       // console.log("Branch Books");
       // console.log(books);
       // console.log(response.data);
       //getBookCopiesByBranchId(branchId);
     })
-    .catch((e) => dispatch(getBooksFailure(e)));
+    .catch((e) => dispatch(getBBooksFailure(e)));
 };
 
 const getBookCopiesByBranchId = (branchId) => (dispatch) => {

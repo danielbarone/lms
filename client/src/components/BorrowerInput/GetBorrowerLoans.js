@@ -37,6 +37,7 @@ const GetBorrowerLoans = (props) => {
     const loans = useSelector((state) => state.loans.loans);
     const loading = useSelector((state) => state.loans.loading);
    const lState = useSelector((state) => state);
+   
   const classes = useStyles(props);
   //const [loans, setLoans] = useState([]);
   
@@ -78,9 +79,7 @@ useEffect(() => {
 
 
 
-// console.log(
-//     axios.post("http://localhost:8090/getBorrowerByCardNo",{ params: { "cardNo": 111 } })
-// )
+
 
 // console.log("Loans");
 // console.log(loans);

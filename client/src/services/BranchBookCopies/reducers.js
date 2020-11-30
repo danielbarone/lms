@@ -12,27 +12,27 @@ const initialState = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const getBooksStarted = (state, action) => updateObject(state, {
+const getBBooksStarted = (state, action) => updateObject(state, {
   error: null,
   loading: true,
 });
 
-const getBooksSuccess = (state, action) => updateObject(state, {
+const getBBooksSuccess = (state, action) => updateObject(state, {
   books: action.books,
   error: null,
   loading: false,
 });
 
-const getBooksFailure = (state, action) => updateObject(state, {
+const getBBooksFailure = (state, action) => updateObject(state, {
   error: action.error,
   loading: false,
 });
 
-const booksReducer = (state = initialState, action) => {
+const bBooksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_BOOKS_STARTED: return getBooksStarted(state, action);
-    case actionTypes.GET_BOOKS_SUCCESS: return getBooksSuccess(state, action);
-    case actionTypes.GET_BOOKS_FAILURE: return getBooksFailure(state, action);
+    case actionTypes.GET_BBOOKS_STARTED: return getBBooksStarted(state, action);
+    case actionTypes.GET_BBOOKS_SUCCESS: return getBBooksSuccess(state, action);
+    case actionTypes.GET_BBOOKS_FAILURE: return getBBooksFailure(state, action);
     default: return state;
   }
 };
@@ -67,6 +67,6 @@ const bookCopiesReducer = (state = initialState, action) => {
 
 
 export {
-  booksReducer,
+  bBooksReducer,
   bookCopiesReducer,
 };
