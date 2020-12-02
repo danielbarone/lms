@@ -3,6 +3,7 @@
 java-api/LMSHAdmin/src/main/resources/application.properties
 java-api/LMSHBorrower/src/main/resources/application.properties
 terraform/terraform.tfvars
+terraform/*
 terraform/*.key
 terraform/*.pem
 terraform/terraform.tfstate
