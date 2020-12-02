@@ -12,3 +12,6 @@ users-service/.deploy.env
 node-deploy/node_modules
 node-deploy/package-lock.json
 client/.env
+**/.production.env
+**/.development.env
+**/.env.*
