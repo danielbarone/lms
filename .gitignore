@@ -3,3 +3,5 @@
 java-api/LMSHAdmin/src/main/resources/application.properties
 java-api/LMSHBorrower/src/main/resources/application.properties
 terraform
+users-service/.production.env
+api-gateway/.production.env
