@@ -28,13 +28,6 @@ const updateFormColumns = [
 const deleteFormColumns = [
   { field: 'cardNo', label: 'CardNo', type: 'text' }
 ]
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> master
 
 const Borrower = (props) => {
   const classes = useStyles(props);

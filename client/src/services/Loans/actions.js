@@ -20,20 +20,6 @@ const getLoansFailure = (error) => ({
 })
 
 
-const getLoansStarted = (loading) => ({
-  type: GET_LOANS_STARTED,
-  loading,
-});
-
-const getLoansSuccess = (loans) => ({
-  type: GET_LOANS_SUCCESS,
-  loans,
-});
-
-const getLoansFailure = (error) => ({
-  type: GET_LOANS_FAILURE,
-  error,
-});
 
 
 

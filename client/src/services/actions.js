@@ -7,10 +7,7 @@ import * as loanActions from './Loans/actions';
 import * as borrowerActions from './Borrowers/actions';
 import * as librarianActions from './Librarian/actions';
 import * as borrower2Actions from './Borrower/actions';
-import * as borrowerActions from './Borrowers/actions';
-import * as loanActions from './Loans/actions';
 import * as branchBookCopiesActions from './BranchBookCopies/actions';
-import * as publisherActions from './Publishers/actions';
 
 export {
   authorActions,
@@ -21,9 +18,6 @@ export {
   loanActions,
   borrowerActions,
   librarianActions,
-  borrowerActions,
   borrower2Actions,
-  loanActions,
   branchBookCopiesActions,
-  publisherActions,
 };
