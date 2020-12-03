@@ -12,8 +12,11 @@ const deleteConfig = (data, url) => ({
 });
 
 const admin = {
+  authors: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllAuthors`),
+  }),
   books: () => ({
-    // create: (branch) => axios.post(`${adminBaseUrl}/addBranchRE`, branch),
+    create: (book) => axios.post(`${adminBaseUrl}/addBookRE`, book),
     // update: (branch) => axios.post(`${adminBaseUrl}/updateBranchRE`, branch),
     // delete: (branch) => axios(deleteConfig(branch, `${adminBaseUrl}/deleteBranchRE`)),
     getAll: () => axios.get(`${adminBaseUrl}/getAllBooks`),
@@ -39,6 +42,9 @@ const admin = {
   loans: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
     overrideDueDate: (loan) => axios.post(`${adminBaseUrl}/overrideBookLoan`, loan)
+  }),
+  loans: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
   }),
   borrowers: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),

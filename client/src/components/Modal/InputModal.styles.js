@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.colors.text.primary,
     minHeight: '1.5em',
     marginBottom: '0.5em',
-    maxWidth: 300
+    maxWidth: 300,
   },
   toggleModal: {
     ...theme.buttons.custom('filled', 'PURPLE'),
@@ -96,6 +96,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.colors.text.primary,
     marginTop: '0.75em',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 300,
   },
 }));
 

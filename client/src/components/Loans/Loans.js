@@ -22,7 +22,6 @@ const Loans = (props) => {
     const loans = useSelector((state) => state.loans.loans);
     const loading = useSelector((state) => state.loans.loading);
     const dispatch = useDispatch();
-    console.log(loans)
 
     const getLoans = () => dispatch(loanActions.getLoans());
 
