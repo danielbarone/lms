@@ -15,8 +15,6 @@ export {
   borrowerActions,
   borrower2Actions,
   loanActions,
-  borrowerActions,
   branchBookCopiesActions,
   publisherActions,
-
 };
