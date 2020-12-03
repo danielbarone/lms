@@ -1,0 +1,1 @@
+aws s3 sync build s3://<BUCKET_NAME> --delete --profile <AWS_CLI_PROFILE_CREDENTIALS_NAME>
