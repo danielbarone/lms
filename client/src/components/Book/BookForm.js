@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { genreActions } from '../../services/actions';
+import { authorActions, genreActions } from '../../services/actions';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -34,23 +34,34 @@ export default function BookForm(props) {
     action,
     classes,
     details,
+    refresh,
+    setOpen,
     title,
   } = props;
   const dispatch = useDispatch();
+
   const [formError, setFormError] = useState();
 
+  // Book Title
+  const [bookTitle, setBookTitle] = useState('');
+  const handleTextFieldChange = (event) => {
+    setBookTitle(event.target.value);
+  };
+
+  // Authors
+  const authors = useSelector((state) => state.authors.authors);
+  const getAuthors = () => dispatch(authorActions.getAuthors());
+  const [author, setAuthor] = useState([]);
+  const handleChangeAuthor = (event) => {
+    setAuthor(event.target.value);
+  };
+
+  // Genres
   const genres = useSelector((state) => state.genres.genres);
   const getGenres = () => dispatch(genreActions.getGenres());
   const [genre, setGenre] = useState([]);
-
-  const [bookTitle, setBookTitle] = useState('');
-
-  const handleChange = (event) => {
+  const handleChangeGenre = (event) => {
     setGenre(event.target.value);
-  };
-
-  const handleTextFieldChange = (event) => {
-    setBookTitle(event.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -58,6 +69,9 @@ export default function BookForm(props) {
     try {
       const bookData = {
         title: bookTitle,
+        authors: author.map((a) => ({
+          authorId: a.id,
+        })),
         genres: genre.map((g) => ({
           genreId: g.id,
         })),
@@ -66,12 +80,15 @@ export default function BookForm(props) {
       if (!response.data) {
         throw new Error(response.error);
       }
+      setOpen(false);
+      refresh();
     } catch (error) {
       setFormError(error.message.split(':')[1]);
     }
   };
 
   useEffect(() => {
+    getAuthors();
     getGenres();
   }, []);
 
@@ -89,13 +106,36 @@ export default function BookForm(props) {
           onChange={handleTextFieldChange}
         />
         <FormControl className={classes.formControl}>
+          <InputLabel id='author-multiple-checkbox-label'>Author</InputLabel>
+          <Select
+            labelId='author-multiple-checkbox-label'
+            id='author-multiple-checkbox'
+            multiple
+            value={author}
+            onChange={handleChangeAuthor}
+            input={<Input />}
+            renderValue={(selected) => {
+              const authorNames = selected.map((s) => s.name);
+              return authorNames.join(', ');
+            }}
+            MenuProps={MenuProps}
+          >
+            {authors ? authors.map((a) => (
+              <MenuItem key={`${a.name}-${a.id}`} value={a}>
+                <Checkbox checked={author.indexOf(a) > -1} />
+                <ListItemText primary={a.name} />
+              </MenuItem>
+            )) : []}
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <InputLabel id="demo-mutiple-checkbox-label">Genre</InputLabel>
           <Select
             labelId="demo-mutiple-checkbox-label"
             id="demo-mutiple-checkbox"
             multiple
             value={genre}
-            onChange={handleChange}
+            onChange={handleChangeGenre}
             input={<Input />}
             renderValue={(selected) => {
               const genreNames = selected.map((s) => s.name);
@@ -104,7 +144,7 @@ export default function BookForm(props) {
             MenuProps={MenuProps}
           >
             {genres ? genres.map((g) => (
-              <MenuItem key={g.name} value={g}>
+              <MenuItem key={`${g.name}-${g.id}`} value={g}>
                 <Checkbox checked={genre.indexOf(g) > -1} />
                 <ListItemText primary={g.name} />
               </MenuItem>
@@ -126,7 +166,9 @@ export default function BookForm(props) {
 
 BookForm.propTypes = {
   action: PropTypes.func,
-  details: PropTypes.string,
-  title: PropTypes.string,
   classes: PropTypes.any,
+  details: PropTypes.string,
+  refresh: PropTypes.func,
+  setOpen: PropTypes.func,
+  title: PropTypes.string,
 };

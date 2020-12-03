@@ -61,9 +61,11 @@ const InputModal = (props) => {
         {CustomForm ? (
           <CustomForm
             action={action}
-            details={details}
-            title={title}
             classes={classes}
+            details={details}
+            refresh={refresh}
+            setOpen={setOpen}
+            title={title}
           />
         ) : (
           <form onSubmit={onSubmit} className={classes.formModalContainer}>
