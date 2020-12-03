@@ -4,6 +4,10 @@ import axios from 'axios';
 const borrowerBaseUrl = process.env.REACT_APP_BORROWER_SERVICE_URL;
 
 const borrower= {
+        books: () => ({
+               
+                getAll: () => axios.get(`${borrowerBaseUrl}/getAllBooks`),
+              }),
   branches: () => ({
     getAll: () => axios.get(`${borrowerBaseUrl}/getAllBranches`),
   }),

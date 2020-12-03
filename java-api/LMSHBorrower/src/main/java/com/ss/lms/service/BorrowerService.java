@@ -177,6 +177,13 @@ public class BorrowerService {
 	}
 	
 	
+	@RequestMapping(value = "/getAllBooks", method = RequestMethod.GET, produces = "application/json")
+	public List<Book> getAllBooks() {
+		List<Book> books = new ArrayList<>();
+		books = brepo.findAll();
+		return books;
+	}
+	
 	@RequestMapping(value = "/getAllBookCopies", method = RequestMethod.GET, produces = "application/json")
 	public List<BookCopies> getAllBookCopies() {
 		List<BookCopies> bookCopies = new ArrayList<>();
