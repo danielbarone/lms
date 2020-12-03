@@ -2,3 +2,11 @@
 **/.node_modules
 java-api/LMSHAdmin/src/main/resources/application.properties
 java-api/LMSHBorrower/src/main/resources/application.properties
+terraform
+users-service/.production.env
+api-gateway/.production.env
+stripe-service
+client/deploy.sh
+node-deploy
+api-gateway/.deploy.env
+users-service/.deploy.env

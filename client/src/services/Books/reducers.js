@@ -3,36 +3,36 @@ import * as actionTypes from './actionTypes';
 import updateObject from '../utils';
 
 /* CREATE */
-// const initialStateCreate = {
-//   book: null,
-//   error: null,
-//   loading: false,
-// };
+const initialStateCreate = {
+  book: null,
+  error: null,
+  loading: false,
+};
 
-// const addBookStarted = (state, action) => updateObject(state, {
-//   error: null,
-//   loading: true,
-// });
+const addBookStarted = (state, action) => updateObject(state, {
+  error: null,
+  loading: true,
+});
 
-// const addBookSuccess = (state, action) => updateObject(state, {
-//   book: action.book,
-//   error: null,
-//   loading: false,
-// });
+const addBookSuccess = (state, action) => updateObject(state, {
+  book: action.book,
+  error: null,
+  loading: false,
+});
 
-// const addBookFailure = (state, action) => updateObject(state, {
-//   error: action.error,
-//   loading: false,
-// });
+const addBookFailure = (state, action) => updateObject(state, {
+  error: action.error,
+  loading: false,
+});
 
-// const bookReducer = (state = initialStateCreate, action) => {
-//   switch (action.type) {
-//     case actionTypes.ADD_BOOK_STARTED: return addBookStarted(state, action);
-//     case actionTypes.ADD_BOOK_SUCCESS: return addBookSuccess(state, action);
-//     case actionTypes.ADD_BOOK_FAILURE: return addBookFailure(state, action);
-//     default: return state;
-//   }
-// };
+const bookReducer = (state = initialStateCreate, action) => {
+  switch (action.type) {
+    case actionTypes.ADD_BOOK_STARTED: return addBookStarted(state, action);
+    case actionTypes.ADD_BOOK_SUCCESS: return addBookSuccess(state, action);
+    case actionTypes.ADD_BOOK_FAILURE: return addBookFailure(state, action);
+    default: return state;
+  }
+};
 
 // /* UPDATE */
 // const initialStateUpdate = {
@@ -133,7 +133,7 @@ const booksReducer = (state = initialState, action) => {
 
 export {
   // deletedBookReducer,
-  // bookReducer,
+  bookReducer,
   booksReducer,
   // updatedBookReducer,
 };

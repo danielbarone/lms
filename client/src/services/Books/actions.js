@@ -1,32 +1,33 @@
 import * as actionTypes from './actionTypes';
 import admin from '../api';
+import {borrower}  from '../api';
 
 /* CREATE */
-// const addBookStarted = (loading) => ({
-//   type: actionTypes.ADD_BOOK_STARTED,
-//   loading,
-// });
+const addBookStarted = (loading) => ({
+  type: actionTypes.ADD_BOOK_STARTED,
+  loading,
+});
 
-// const addBookSuccess = (book) => ({
-//   type: actionTypes.ADD_BOOK_SUCCESS,
-//   book,
-// });
+const addBookSuccess = (book) => ({
+  type: actionTypes.ADD_BOOK_SUCCESS,
+  book,
+});
 
-// const addBookFailure = (error) => ({
-//   type: actionTypes.ADD_BOOK_FAILURE,
-//   error,
-// });
+const addBookFailure = (error) => ({
+  type: actionTypes.ADD_BOOK_FAILURE,
+  error,
+});
 
-// const addBook = (book) => (dispatch) => {
-//   dispatch(addBookStarted(true));
+const addBook = (book) => (dispatch) => {
+  dispatch(addBookStarted(true));
 
-//   return admin.books().create(book)
-//     .then((response) => {
-//       dispatch(addBookSuccess(book));
-//       return response;
-//     })
-//     .catch((e) => dispatch(addBookFailure(e)));
-// };
+  return admin.books().create(book)
+    .then((response) => {
+      dispatch(addBookSuccess(book));
+      return response;
+    })
+    .catch((e) => dispatch(addBookFailure(e)));
+};
 
 /* UPDATE */
 // const updateBookStarted = (loading) => ({
@@ -108,6 +109,17 @@ const parseBookData = (books) => books.map(
   }),
 );
 
+const parseBookData2 = (books) => books.map(
+  (b) => ({
+    id: b.bookId,
+    title: b.title || '--',
+    authors: b.authors,
+    genres: b.genres,
+    publisher: b.publisher,
+    bookId: b.bookId,
+  }),
+);
+
 const getBooks = () => (dispatch) => {
   dispatch(getBooksStarted(true));
 
@@ -120,9 +132,22 @@ const getBooks = () => (dispatch) => {
     .catch((e) => dispatch(getBooksFailure(e)));
 };
 
+const getBooks2 = () => (dispatch) => {
+  dispatch(getBooksStarted(true));
+
+  borrower.books().getAll()
+    .then((response) => {
+      const books = parseBookData2(response.data);
+      dispatch(getBooksSuccess(books));
+      //console.log(response.data);
+    })
+    .catch((e) => dispatch(getBooksFailure(e)));
+};
+
 export {
-  // addBook,
+  addBook,
   // deleteBook,
   // updateBook,
   getBooks,
+  getBooks2,
 };
