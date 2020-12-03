@@ -3,31 +3,31 @@ import admin from '../api';
 import {borrower}  from '../api';
 
 /* CREATE */
-// const addBookStarted = (loading) => ({
-//   type: actionTypes.ADD_BOOK_STARTED,
-//   loading,
-// });
+const addBookStarted = (loading) => ({
+  type: actionTypes.ADD_BOOK_STARTED,
+  loading,
+});
 
-// const addBookSuccess = (book) => ({
-//   type: actionTypes.ADD_BOOK_SUCCESS,
-//   book,
-// });
+const addBookSuccess = (book) => ({
+  type: actionTypes.ADD_BOOK_SUCCESS,
+  book,
+});
 
-// const addBookFailure = (error) => ({
-//   type: actionTypes.ADD_BOOK_FAILURE,
-//   error,
-// });
+const addBookFailure = (error) => ({
+  type: actionTypes.ADD_BOOK_FAILURE,
+  error,
+});
 
-// const addBook = (book) => (dispatch) => {
-//   dispatch(addBookStarted(true));
+const addBook = (book) => (dispatch) => {
+  dispatch(addBookStarted(true));
 
-//   return admin.books().create(book)
-//     .then((response) => {
-//       dispatch(addBookSuccess(book));
-//       return response;
-//     })
-//     .catch((e) => dispatch(addBookFailure(e)));
-// };
+  return admin.books().create(book)
+    .then((response) => {
+      dispatch(addBookSuccess(book));
+      return response;
+    })
+    .catch((e) => dispatch(addBookFailure(e)));
+};
 
 /* UPDATE */
 // const updateBookStarted = (loading) => ({
@@ -145,7 +145,7 @@ const getBooks2 = () => (dispatch) => {
 };
 
 export {
-  // addBook,
+  addBook,
   // deleteBook,
   // updateBook,
   getBooks,
