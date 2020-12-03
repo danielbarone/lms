@@ -2,18 +2,18 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import {
-  Home,
   BorrowerHome,
+  Librarian,
   Preview,
 } from '../components';
 
-const UnauthRoutes = () => (
+const LibrarianRoutes = () => (
   <Switch>
     <Route exact path="/admin" component={Preview} />
     <Route exact path="/borrower" component={BorrowerHome} />
-    <Route exact path="/Librarian" component={Preview} />
-    <Route path="/" component={Home} />
+    <Route exact path="/Librarian" component={Librarian} />
+    <Route path="/" component={Librarian} />
   </Switch>
 );
 
-export default UnauthRoutes;
+export default LibrarianRoutes;

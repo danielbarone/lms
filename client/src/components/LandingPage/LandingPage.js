@@ -173,7 +173,7 @@ function LandingPage(props) {
               onClick={(event) => handleListItemClick(event, '')}
             >
               <Typography variant="h6" className={classes.appBarText} noWrap>
-                LMS
+                LMS {props.userData ? `- ${props.userData.userType}` : ''}
               </Typography>
             </div>
             <div className={classes.appBarRightItems}>
@@ -224,7 +224,7 @@ function LandingPage(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-          {props.routes}
+          {props.userData ? props.userData.routes : props.routes}
       </main>
       <Dialog
         open={open}

@@ -7,13 +7,13 @@ import {
   Preview,
 } from '../components';
 
-const UnauthRoutes = () => (
+const BorrowerRoutes = () => (
   <Switch>
     <Route exact path="/admin" component={Preview} />
     <Route exact path="/borrower" component={BorrowerHome} />
     <Route exact path="/Librarian" component={Preview} />
-    <Route path="/" component={Home} />
+    <Route path="/" component={BorrowerHome} />
   </Switch>
 );
 
-export default UnauthRoutes;
+export default BorrowerRoutes;
