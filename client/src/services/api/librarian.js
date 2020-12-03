@@ -14,9 +14,7 @@ const librarian = {
                 },
                 "numOfCopies": numOfCopies
             }
-
         )
-
     })
 }
 

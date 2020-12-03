@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './Librarian.styles';
@@ -39,6 +38,12 @@ const formColumnsUpdateCopies = [
   }
 ]
 
+const formColsUpdDel = [
+  { field: 'branchId', label: 'Branch ID', type: 'text' },
+  { field: 'branchName', label: 'Branch Name', type: 'text' },
+  { field: 'branchAddress', label: 'Branch Address', type: 'text' },
+];
+
 const bookColumns = [
   { field: 'id', headerName: 'ID', width: 75 },
   { field: 'title', headerName: 'Title', width: 450 },
@@ -52,6 +57,8 @@ const Librarian = (props) => {
   const [bookId, setBookId] = useState(0);
   const [indivCopies, setIndivCopies] = useState(0);
   const [bookSelection, setBookSelection] = useState(false);
+
+  const [newCopiesNo, setNewCopiesNo] = useState(0);
 
 
 
@@ -67,17 +74,34 @@ const Librarian = (props) => {
   console.log(copies);
   console.log(bookId);
   console.log(branchId);
+  console.log(newCopiesNo);
 
   const getBranches = () => dispatch(branchActions.getBranches());
   const getBooks = (branchId) => dispatch(librarianActions.getBranchBooks(branchId));
   const getCopies = (branchId) => dispatch(librarianActions.getBranchCopies(branchId));
-  const updateCopies = (branchId, bookId, numOfCopies) => librarianActions.updateBookCopies(branchId, bookId, numOfCopies);
+  const updateCopies = (branchId, bookId, numOfCopies) => dispatch(librarianActions.updateBookCopies(branchId, bookId, numOfCopies));
+  const updateBranch = (branch) => branchActions.updateBranch(branch);
 
 
   useEffect(() => {
     getBranches();
   }, []);
 
+
+  const handleSubmit = () => {
+
+    if (bookId == 0 || bookId == undefined) {
+      alert("Please select a valid book")
+    } else if (newCopiesNo == 0 || newCopiesNo == undefined) {
+      alert("Please enter a valid new copies number entry")
+    } else {
+      alert("Copies updated successfully")
+      updateCopies(branchId, bookId, newCopiesNo);
+      window.location.reload(false);
+    }
+
+
+  }
 
 
   const handleBranchId = (id) => {
@@ -115,6 +139,7 @@ const Librarian = (props) => {
             loading={bookLoading}
             rows={books}
           />
+
           <div>This book has {indivCopies} copies </div>
 
         </div>)
@@ -128,6 +153,14 @@ const Librarian = (props) => {
   return (
 
     <div className={classes.root}>
+
+      <InputModal
+        action={updateBranch}
+        columns={formColsUpdDel}
+        details='Edit details for the branch you would like to update.'
+        title='Update Branch'
+        refresh={getBranches}
+      />
 
       <EntityTable
         cols={columns}
@@ -168,13 +201,33 @@ const Librarian = (props) => {
                 variant="filled"
                 onChange={(e) => handleBookId(e.target.value)}
               />
-              <InputModal
+              <div>
+                New number of copies:
+                <div> <TextField
+                  id="filled-number"
+                  label="New Copies Amount"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="filled"
+                  onChange={(e) => setNewCopiesNo(e.target.value)}
+                />
+                </div>
+                <div>
+                  <Button variant="contained" color="primary" onClick={() => handleSubmit()}>
+                    Submit
+                  </Button>
+                </div>
+
+              </div>
+              {/* <InputModal
                 action={updateCopies}
                 columns={formColumnsUpdateCopies}
                 details='Insert new Book Copies for the selected book'
                 title='Update Book Copies'
                 refresh={getBranches}
-              />
+              /> */}
             </div>
           );
           case false: return null;

@@ -87,13 +87,16 @@ const editBookCopiesFailure = (error) => ({
 })
 
 
-const updateBookCopies = (copies) => (dispatch) => {
-    dispatch(editBookCopiesStarted(true))
+const updateBookCopies = (branchId, bookId, numOfCopies) => (dispatch) => {
+    dispatch(editBookCopiesStarted(true));
 
-    librarian.service().editBookCopies(copies).then((res) => {
+    librarian.service().editBookCopies(branchId, bookId, numOfCopies).then((res) => {
+        const copies = parseCopiesData(res.data);
         dispatch(editBookCopiesSuccess(copies));
         return res;
-    }).catch((e) => dispatch(editBookCopiesFailure(e)));
+    }).catch((e) => {
+        dispatch(editBookCopiesFailure(e));
+    });
 }
 
 export {
