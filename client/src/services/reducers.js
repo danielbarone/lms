@@ -20,15 +20,11 @@ export { genresReducer as genres } from './Genres/reducers';
 export { genreReducer as genre } from './Genres/reducers';
 export { updatedGenreReducer as updatedGenre } from './Genres/reducers';
 
-/* Borrower Reducers */
-export { default as borrower2 } from './Borrower/reducers';
-//export { default as loans } from './Loans/reducers';
-export { bBooksReducer as branchBooks } from './BranchBookCopies/reducers';
-export { bookCopiesReducer as branchBooksCopies } from './BranchBookCopies/reducers';
-// Admin Loans Reducers
+//Admin Loans Reducers
 export { loansReducer as loans } from './Loans/reducers';
+export { overrideReducer as updatedLoan } from './Loans/reducers';
 
-// Admin Publisher Reducers
+//Admin Publisher Reducers
 export { publishersReducer as publishers } from './Publishers/reducers';
 export { createPublisherReducer as publisher } from './Publishers/reducers';
 export { updatePublisherReducer as updatedPublisher } from './Publishers/reducers';
@@ -39,3 +35,8 @@ export { borrowersReducer as borrowers } from './Borrowers/reducers';
 export { createBorrowerReducer as borrower } from './Borrowers/reducers';
 export { updateBorrowerReducer as updatedBorrower } from './Borrowers/reducers';
 export { deleteBorrowerReducer as deletedBorrower } from './Borrowers/reducers';
+
+//Librarian Reducers
+export { editBookCopiesReducer as updatedCopies } from './Librarian/reducers';
+export { copiesReducer as copies } from './Librarian/reducers';
+export { branchBooksReducer as branchBooks } from './Librarian/reducers';

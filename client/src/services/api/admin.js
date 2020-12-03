@@ -37,7 +37,11 @@ const admin = {
     getAll: () => axios.get(`${adminBaseUrl}/getAllPublishers`),
     create: (publisher) => axios.post(`${adminBaseUrl}/addPublisher`, publisher),
     update: (publisher) => axios.post(`${adminBaseUrl}/updatePublisher`, publisher),
-    delete: (publisher) => axios(deleteConfig(publisher, `${adminBaseUrl}/deletePublisherRE`)),
+    delete: (publisher) => axios(deleteConfig(publisher, `${adminBaseUrl}/deletePublisherRE`))
+  }),
+  loans: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
+    overrideDueDate: (loan) => axios.post(`${adminBaseUrl}/overrideBookLoan`, loan)
   }),
   loans: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
@@ -46,8 +50,8 @@ const admin = {
     getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),
     create: (borrower) => axios.post(`${adminBaseUrl}/addBorrower`, borrower),
     update: (borrower) => axios.post(`${adminBaseUrl}/updateBorrowerById`, borrower),
-    delete: (borrower) => axios.post(`${adminBaseUrl}/deleteBorrowerById`, borrower),
-  }),
+    delete: (borrower) => axios.post(`${adminBaseUrl}/deleteBorrowerById`, borrower)
+  })
 };
 
 export default admin;
