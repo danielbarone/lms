@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loanActions } from '../../services/actions';
 import { EntityTable } from '..';
 import { EntityTable3 } from '..';
+import { branchBookCopiesActions } from '../../services/actions';
+import { bookActions } from '../../services/actions';
 
 
 /* Components */
@@ -16,6 +18,8 @@ const GetBorrowerBranchLoans = (props) => {
   const classes = useStyles(props);
   const loans = useSelector((state) => state.loans.loans);
   const lState = useSelector((state) => state);
+  const branchBooks = useSelector((state) => state.branchBooks.books);
+  const allBooks = useSelector((state) => state.books.books);
   const dispatch = useDispatch();
   //const [loans, setLoans] = useState([]);
   const cardNo = 111;
@@ -34,8 +38,9 @@ const GetBorrowerBranchLoans = (props) => {
   const columns = [
     // { field: 'id', headerName: 'ID', width: 75 },
     // { field: 'cardNo', headerName: 'CardNo', width: 75 },
-     { field: 'branchId', headerName: 'BranchId', width: 100 },
+    //  { field: 'branchId', headerName: 'BranchId', width: 100 },
      { field: 'bookId', headerName: 'BookId', width: 100 },
+     { field: 'title', headerName: 'Book Title', width: 200 },
      { field: 'dateOut', headerName: 'DateOut', width: 110 },
      { field: 'dueDate', headerName: 'DueDate', width: 110 },
      { field: 'dateIn', headerName: 'DateIn', width: 110 },
@@ -63,7 +68,7 @@ const GetBorrowerBranchLoans = (props) => {
   ////This code brok my comp for a bit be carful with uncommenting
   useEffect(() => {
     if(bookReturn){
-      console.log("Returning book")
+      //console.log("Returning book")
       //alert("Book returned");
       // return(
       //   <div>
@@ -75,15 +80,17 @@ const GetBorrowerBranchLoans = (props) => {
       dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
     }
     // if(bookReturn){
-    //   setBookReturn(false)
-    //   console.log("Book Returned")
-    //   dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
-    // }
-    // else{  
-    //   console.log("nope");
-    // }  
-    else{
-
+      //   setBookReturn(false)
+      //   console.log("Book Returned")
+      //   dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
+      // }
+      // else{  
+        //   console.log("nope");
+        // }  
+        else{
+          dispatch(bookActions.getBooks2());
+          dispatch(branchBookCopiesActions.getBothByBranchId(branchId2));
+         //dispatch(branchBookCopiesActions.getBooks());
       dispatch(loanActions.getLoansByCardNo(props.cardNo));
     }
   },[bookReturn]);
@@ -151,7 +158,7 @@ const GetBorrowerBranchLoans = (props) => {
     setDueDate(DD2);
     setDateIn(DI2);
     setBookReturn(true);
-    console.log("isReturning")
+    //console.log("isReturning")
   
     // useEffect(() => {
     //   dispatch(loanActions.checkOutBook(bookId, props.branchId, props.cardNo, dateOut, dueDate));
@@ -164,6 +171,7 @@ const GetBorrowerBranchLoans = (props) => {
 // console.log("Loans");
 // console.log(loans);
  var loans2;
+ var loans3 = [];
 if(loans[0]){
     // console.log("Loans1");
     // console.log(loans);
@@ -177,6 +185,26 @@ if(loans[0]){
   loans2= loans2.filter(function(loan){
     return loan.cardNo == props.cardNo;
 } );
+if(branchBooks!== null && allBooks !== null)
+loans2.forEach(function(item, index, array) {
+
+
+  var lFilter= allBooks.filter(function(book){
+    return book.bookId == item.bookId;
+} );
+//  console.log("AllBooks");
+//   console.log(allBooks);
+//   console.log("Item");
+//   console.log(item);
+  // console.log("Index: "+index);
+  // console.log("IlFilter");
+  // console.log(lFilter);
+  var title = '';
+  if(lFilter.length > 0)
+   title = lFilter[0].title;
+
+  loans3.push({title: title, cardNo: item.cardNo, branchId: item.branchId, bookId: item.bookId, dateOut: item.dateOut, dueDate: item.dueDate, dateIn: item.dateIn, id: item.id})
+});
   //console.log(loans2);
 }
 else{
@@ -194,6 +222,14 @@ if(!loans2[0]){
 
 
 
+// console.log("BranchBooks");
+// console.log(branchBooks);
+// console.log("State");
+// console.log(lState);
+// console.log("Loans3");
+// console.log(loans3);
+
+
   return (
     <div>
     ----------------Loans from Branch {props.branchId}---------------
@@ -201,7 +237,7 @@ if(!loans2[0]){
     {/* CardNo: {loans.cardNo}<br />
     Name: {borrower.name} */}
     <EntityTable3
-        rows={loans2}
+        rows={loans3}
         cols={columns}
         loading={loading}
       /> <br/>

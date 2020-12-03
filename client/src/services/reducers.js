@@ -19,7 +19,7 @@ export { updatedGenreReducer as updatedGenre } from './Genres/reducers';
 /* Borrower Reducers*/
 export { default as borrower2 } from './Borrower/reducers';
 //export { default as loans } from './Loans/reducers';
-export { booksReducer as branchBooks } from './BranchBookCopies/reducers';
+export { bBooksReducer as branchBooks } from './BranchBookCopies/reducers';
 export { bookCopiesReducer as branchBooksCopies } from './BranchBookCopies/reducers';
 //Admin Loans Reducers
 export { loansReducer as loans } from './Loans/reducers';
