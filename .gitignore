@@ -5,3 +5,4 @@ java-api/LMSHBorrower/src/main/resources/application.properties
 terraform
 users-service/.production.env
 api-gateway/.production.env
+stripe-service

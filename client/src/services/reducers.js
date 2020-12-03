@@ -1,7 +1,6 @@
 /* User Session */
 export { default as session } from './Session/reducers';
 export { bookReducer as book } from './Books/reducers';
-
 export { booksReducer as books } from './Books/reducers';
 
 /* Admin Branch Reducers */
@@ -15,6 +14,11 @@ export { genresReducer as genres } from './Genres/reducers';
 export { genreReducer as genre } from './Genres/reducers';
 export { updatedGenreReducer as updatedGenre } from './Genres/reducers';
 
+/* Borrower Reducers*/
+export { default as borrower2 } from './Borrower/reducers';
+//export { default as loans } from './Loans/reducers';
+export { booksReducer as branchBooks } from './BranchBookCopies/reducers';
+export { bookCopiesReducer as branchBooksCopies } from './BranchBookCopies/reducers';
 //Admin Loans Reducers
 export { loansReducer as loans } from './Loans/reducers';
 

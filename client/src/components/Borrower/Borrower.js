@@ -29,6 +29,10 @@ const deleteFormColumns = [
   { field: 'cardNo', label: 'CardNo', type: 'text' }
 ]
 
+
+
+
+
 const Borrower = (props) => {
   const classes = useStyles(props);
   const borrowers = useSelector((state) => state.borrowers.borrowers);
