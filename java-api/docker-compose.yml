@@ -19,6 +19,16 @@ services:
       - spring-boot-mysql-network
     depends_on: 
       - lms-admin-service-db
+  lms-borrower-service:
+    build: 
+      context: ./LMSHBorrower/
+      dockerfile: Dockerfile
+    ports:
+      - 8090:8090
+    networks:
+      - spring-boot-mysql-network
+    depends_on: 
+      - lms-admin-service-db
 
 networks:
   spring-boot-mysql-network:
