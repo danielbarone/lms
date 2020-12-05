@@ -1,0 +1,25 @@
+version: "3"
+
+services: 
+  lms-admin-service-db:
+    image: mysql:5.7
+    networks:
+      - spring-boot-mysql-network
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=library
+  lms-admin-service:
+    build: 
+      context: ./LMSHAdmin/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - spring-boot-mysql-network
+    depends_on: 
+      - lms-admin-service-db
+
+networks:
+  spring-boot-mysql-network:
+    driver: bridge
