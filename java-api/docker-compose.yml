@@ -9,6 +9,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=library
+    ports:
+      - 0.0.0.0:7201:3306
   lms-admin-service:
     build: 
       context: ./LMSHAdmin/
