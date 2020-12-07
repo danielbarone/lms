@@ -1,4 +1,5 @@
 **/.DS_Store
+**/.mvn
 **/.node_modules
 java-api/LMSHAdmin/src/main/resources/application.properties
 java-api/LMSHBorrower/src/main/resources/application.properties
