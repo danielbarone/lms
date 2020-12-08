@@ -28,8 +28,6 @@ import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.Branch;
 import com.ss.lms.entity.Genre;
-import com.ss.lms.entity.Loans;
-import com.ss.lms.entity.LoansId;
 import com.ss.lms.entity.BookLoans;
 import com.ss.lms.entity.BookLoansId;
 import com.ss.lms.entity.Publisher;
