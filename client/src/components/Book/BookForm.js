@@ -11,12 +11,17 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
+  Radio,
   Select,
   TextField,
   Typography,
 } from '@material-ui/core';
 
-import { authorActions, genreActions } from '../../services/actions';
+import {
+  authorActions,
+  genreActions,
+  publisherActions,
+} from '../../services/actions';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -64,11 +69,22 @@ export default function BookForm(props) {
     setGenre(event.target.value);
   };
 
+  // Publishers
+  const publishers = useSelector((state) => state.publishers.publishers);
+  const getPublishers = () => dispatch(publisherActions.getPublishers());
+  const [publisher, setPublisher] = useState();
+  const handleChangePublisher = (event) => {
+    setPublisher(event.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const bookData = {
         title: bookTitle,
+        publisher: {
+          publisherId: publisher.id,
+        },
         authors: author.map((a) => ({
           authorId: a.id,
         })),
@@ -90,6 +106,7 @@ export default function BookForm(props) {
   useEffect(() => {
     getAuthors();
     getGenres();
+    getPublishers();
   }, []);
 
   return (
@@ -105,6 +122,27 @@ export default function BookForm(props) {
           type='text'
           onChange={handleTextFieldChange}
         />
+        <FormControl className={classes.formControl}>
+          <InputLabel id='publisher-checkbox-label'>Publisher</InputLabel>
+          <Select
+            labelId='publisher-checkbox-label'
+            id='publisher-checkbox'
+            value={publisher}
+            onChange={handleChangePublisher}
+            input={<Input />}
+            renderValue={(selected) => {
+              return selected.name;
+            }}
+            MenuProps={MenuProps}
+          >
+            {publishers ? publishers.map((p) => (
+              <MenuItem key={`${p.name}-${p.id}`} value={p}>
+                <Radio checked={publisher === p} />
+                <ListItemText primary={p.name} />
+              </MenuItem>
+            )) : []}
+          </Select>
+        </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel id='author-multiple-checkbox-label'>Author</InputLabel>
           <Select
