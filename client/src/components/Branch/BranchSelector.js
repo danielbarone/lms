@@ -45,27 +45,7 @@ const BranchSelector = (props) => {
     <div className={classes.root}>
       {/* Temp div style */}
       <div style={{ display: 'flex', justifyContent: 'start' }}>
-        {/* <InputModal
-          action={createBranch}
-          columns={formColumns}
-          details='Enter details for the new branch you would like to add.'
-          title='New Branch'
-          refresh={getBranches}
-        />
-        <InputModal
-          action={updateBranch}
-          columns={formColsUpdDel}
-          details='Edit details for the branch you would like to update.'
-          title='Update Branch'
-          refresh={getBranches}
-        />
-        <InputModal
-          action={deleteBranch}
-          columns={formColsUpdDel}
-          details='Review details of the branch you are about to delete.'
-          title='Delete Branch'
-          refresh={getBranches}
-        /> */}
+    
       </div>
       Select which branch you want
       <EntityTable4

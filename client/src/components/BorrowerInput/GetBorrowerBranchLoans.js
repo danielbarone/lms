@@ -39,7 +39,7 @@ const GetBorrowerBranchLoans = (props) => {
     // { field: 'id', headerName: 'ID', width: 75 },
     // { field: 'cardNo', headerName: 'CardNo', width: 75 },
     //  { field: 'branchId', headerName: 'BranchId', width: 100 },
-     { field: 'bookId', headerName: 'BookId', width: 100 },
+    // { field: 'bookId', headerName: 'BookId', width: 100 },
      { field: 'title', headerName: 'Book Title', width: 200 },
      { field: 'dateOut', headerName: 'DateOut', width: 110 },
      { field: 'dueDate', headerName: 'DueDate', width: 110 },
@@ -47,46 +47,13 @@ const GetBorrowerBranchLoans = (props) => {
    ];
 
 
- // console.log(props.cardNo);
-//   console.log("cardNo");
-//   console.log(props);
 
-  // const loadBorrower = useCallback(() => {
-  //   borrowerApi.borrower().getLoansByCardNo(props.cardNo).then((response) => {
-  //     setLoans(response.data);
-  //   //  console.log("branch and card id");
-  //   //  console.log(props.branchId);
-  //   //  console.log(props.cardNo);
 
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   loadBorrower();
-  // }, [loadBorrower]);
-
-  ////This code brok my comp for a bit be carful with uncommenting
+ 
   useEffect(() => {
     if(bookReturn){
-      //console.log("Returning book")
-      //alert("Book returned");
-      // return(
-      //   <div>
-      //     Book Returned
-      //   </div>
-      // )
-      //console.log("BookId: "+bookId2+" branchId: "+branchId2+" cardNo: "+cardNo2);
-      //console.log("DateIn: "+dateIn2);
       dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
     }
-    // if(bookReturn){
-      //   setBookReturn(false)
-      //   console.log("Book Returned")
-      //   dispatch(loanActions.returnBook(bookId2, branchId2, cardNo2, dateOut2, dueDate2, dateIn2));
-      // }
-      // else{  
-        //   console.log("nope");
-        // }  
         else{
           dispatch(bookActions.getBooks2());
           dispatch(branchBookCopiesActions.getBothByBranchId(branchId2));
@@ -107,12 +74,6 @@ const GetBorrowerBranchLoans = (props) => {
 
   function isReturning (loan){
     
-    // CardNo: {val.cardNo}<br />
-    // BranchId: {val.branchId}<br />
-    // BookId: {val.bookId}<br />
-    // DateOut: {val.dateOut}<br />
-    // DueDate: {val.dueDate}<br />
-    // DateIn: {val.dateIn}<br />
 
     var cardNo = loan.cardNo;
     var branchId = loan.branchId;
@@ -124,32 +85,12 @@ const GetBorrowerBranchLoans = (props) => {
     let sqlDI = new Date(dateIn).toISOString().slice(0, 19).replace('T', ' ');
     let sqlDD = new Date(dueDate).toISOString().slice(0, 19).replace('T', ' ');
     
-    // console.log(props);
-    // console.log(bookId+" "+props.branchId+" "+props.cardNo+" "+noOfCopies)
-    // console.log("DateOut DueDate DateIn")
-    // console.log(dateOut)
-    // console.log(dueDate)
 
-// let sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-// let output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-// let d = sdf.parse(dateOut);
-// let formattedTime = output.format(d);
-// console.log("Format");
-// console.log(new Date().toISOString());
-// console.log(dateOut);
-
-    // console.log("Sql Format");
-    // console.log(sqlDO)
-    // console.log(sqlDD)
-    // console.log(sqlDI)
 
     let DO2 = sqlDO.substring(0,10)+"T00:00:00.000Z";
     let DD2 = sqlDD.substring(0,10)+"T00:00:00.000Z";
     let DI2 = sqlDI.substring(0,10)+"T00:00:00.000Z";
-    // console.log("Added bit")
-    // console.log(DO2);
-    //   console.log(DD2);
-    //     console.log(DI2);
+ 
 
     setBookId(bookId);
     setBranchId(branchId);
@@ -160,9 +101,6 @@ const GetBorrowerBranchLoans = (props) => {
     setBookReturn(true);
     //console.log("isReturning")
   
-    // useEffect(() => {
-    //   dispatch(loanActions.checkOutBook(bookId, props.branchId, props.cardNo, dateOut, dueDate));
-    // }, []);  
   }
 
 
@@ -173,10 +111,7 @@ const GetBorrowerBranchLoans = (props) => {
  var loans2;
  var loans3 = [];
 if(loans[0]){
-    // console.log("Loans1");
-    // console.log(loans);
-    // console.log("branches");
-    // console.log(props.branchId);
+
 
   ///Loan will sometimes return all loans so this needs to filter
   loans2= loans.filter(function(loan){
@@ -188,24 +123,18 @@ if(loans[0]){
 if(branchBooks!== null && allBooks !== null)
 loans2.forEach(function(item, index, array) {
 
-
+  // console.log("Loan item");
+  // console.log(item);
   var lFilter= allBooks.filter(function(book){
     return book.bookId == item.bookId;
 } );
-//  console.log("AllBooks");
-//   console.log(allBooks);
-//   console.log("Item");
-//   console.log(item);
-  // console.log("Index: "+index);
-  // console.log("IlFilter");
-  // console.log(lFilter);
   var title = '';
   if(lFilter.length > 0)
    title = lFilter[0].title;
 
   loans3.push({title: title, cardNo: item.cardNo, branchId: item.branchId, bookId: item.bookId, dateOut: item.dateOut, dueDate: item.dueDate, dateIn: item.dateIn, id: item.id})
 });
-  //console.log(loans2);
+
 }
 else{
     loans2 = loans;
@@ -222,47 +151,22 @@ if(!loans2[0]){
 
 
 
-// console.log("BranchBooks");
-// console.log(branchBooks);
-// console.log("State");
-// console.log(lState);
-// console.log("Loans3");
-// console.log(loans3);
+
 
 
   return (
     <div>
-    ----------------Loans from Branch {props.branchId}---------------
+    ----------------Loans from Branch {props.branch.name}---------------
     <br />
-    {/* CardNo: {loans.cardNo}<br />
-    Name: {borrower.name} */}
+
     <EntityTable3
         rows={loans3}
         cols={columns}
         loading={loading}
+        branch = {props.branch}
       /> <br/>
 
-    {/* <ol>
-    {loans2.map(
-        (val, index) => (
-            <div key={`loan${index}-loanId${val.dateOut}`}>
-             <br />
-             <li key={val.dateOut}>
-             <Button onClick={() => {isReturning(val)}}>
-             Select
-              </Button><br/>
-              CardNo: {val.cardNo}<br />
-              BranchId: {val.branchId}<br />
-              BookId: {val.bookId}<br />
-              DateOut: {val.dateOut}<br />
-              DueDate: {val.dueDate}<br />
-              DateIn: {val.dateIn}<br />
-             </li>
-            </div>
-        ),
-      )}
-      </ol>
-    <br /> */}
+ 
     ---------------------------------------
     <br />   
       

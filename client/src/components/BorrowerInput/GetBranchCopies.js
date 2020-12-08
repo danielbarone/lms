@@ -51,63 +51,30 @@ const theState = useSelector((state) => state);
   const columns = [
     { field: 'title', headerName: 'Title', width: 200 },
     { field: 'numOfCopies', headerName: 'Copies', width: 100 },
-    { field: 'isCheckedOut', headerName: 'isCheckedOut', width: 100 },
+    { field: 'isCheckedOut', headerName: 'isCheckedOut', width: 130 },
     //  { field: 'branchId', headerName: 'BranchId', width: 100 },
     //  { field: 'bookId', headerName: 'BookId', width: 100 },
    ];
 
    
-  //const cardNo = 111;
- // console.log(props.cardNo);
-//   console.log("cardNo");
-//   console.log(props);
+
 
 const dispatch = useDispatch();
 
-// useEffect(() => {
-//   dispatch(borrowerActions.getBorrower());
-// }, []);
 
-///This will need to be reworked rn its not using the store
-  // const loadBranchCopies = useCallback(() => {
-  //   borrowerApi.borrower().getBookCopiesByBranchId(props.branchId).then((response) => {
-  //       setBranchCopies(response.data);
-   
-  //   });
-  //   // console.log("branchId");
-  //   // console.log(props.branchId);
-  //   borrowerApi.borrower().getBranchBooks(props.branchId).then((response) => {
-  //       setBranchBooks(response.data);
-  //   });
-  // }, []);
 
-  // useEffect(() => {
-  //   loadBranchCopies();
-  //   if((bookId==0)){
-  //     console.log("It's time")
-  //     console.log("bookId: "+bookId)
-  //   }
-  //   else{
-  //     console.log("No book id")
-  //   }
-  // }, [loadBranchCopies]);
+
   useEffect(() => {
     if(bookCheckedOut){
       //setBookCheckedOut(false);
-      console.log("You checked out a book")
+      //console.log("You checked out a book")
       console.log("BookId: "+bookId);
       dispatch(loanActions.checkOutBook(bookId, branchId, cardNo, dateOut2, dueDate2));
     }
-    // else{
-    //   console.log("No book id")
-    // }
-    //dispatch(bookActions.getBooksByBranchId(branchId));
-    //console.log("Use Effect");
     dispatch(branchBookCopiesActions.getBothByBranchId(branchId));
     //dispatch(branchBookCopiesActions.getBooksByBranchId(branchId));
     //dispatch(branchBookCopiesActions.getBookCopiesByBranchId(branchId));
     dispatch(loanActions.getLoansByCardNo(props.cardNo));
-    //loadBranchCopies();
   },[bookCheckedOut]);
 
   if (!branchCopies) {
@@ -135,21 +102,8 @@ const dispatch = useDispatch();
     setDueDate(dueDate);
     setBookCheckedOut(true);
   
-    // useEffect(() => {
-    //   dispatch(loanActions.checkOutBook(bookId, props.branchId, props.cardNo, dateOut, dueDate));
-    // }, []);  
+    
   }
-
-
-
-
-
-//   console.log("branchCopies");
-//   console.log(branchCopies);
-  
-//   console.log(branchCopies[1]);
-//  console.log("branchBooks");
-//  console.log(branchBooks);
 
 if(!branchCopies[0]){
     return(
@@ -170,8 +124,6 @@ if(loans && loans.length > 0){
   loans2= loans.filter(function(loan){
     return loan.cardNo == props.cardNo;
 } );
-//console.log("All borrowers loans")
-  //console.log(loans2);
 }
 
 
@@ -184,8 +136,7 @@ branchBooks.forEach(function(item, index, array) {
 //  console.log(item, index)
 
   var bookCopy = branchCopies.find(({bookId}) => bookId === item.bookId);
-  // console.log("bookCopy");
-  // console.log(bookCopy);
+ 
 
   ///Need to make sure branchBooks and branchCopies are both updated
   //Need to make this make sure bB and bC are on the same branch rn it can be fooled
@@ -207,21 +158,17 @@ branchBooks.forEach(function(item, index, array) {
   }
 
   var isCheckedOut = false;
+  var cobBranchId = 0;
   if(loans2 && loans2.length > 0){
     var loans3= loans2.filter(function(loan){
       return loan.bookId == item.bookId;
   } );
   if(loans3 && loans3.length > 0 ){
-    // console.log("Loan length");
-    // console.log(loans3.length);
-
-      // console.log("This is the loan");
-      // console.log(loans3);
-      // console.log(loans3[0].dateIn);
       loans3.forEach(function(item, index, array) {
-        //console.log("Loans3: "+index)
+        cobBranchId= item.branchId;
         if((item.dateIn == "null" || item.dateIn == null) && item.dateOut != null){
           isCheckedOut = true;
+          
         }
       });
 
@@ -233,13 +180,11 @@ branchBooks.forEach(function(item, index, array) {
     
   }
   }
-  branchBookCopies.push({title: item.title, numOfCopies: bookCopy.numOfCopies, bookId: bookCopy.bookId, branchId: bookCopy.branchId, id: item.bookId, isCheckedOut: isCheckedOut, locked: isCheckedOut});
+  branchBookCopies.push({title: item.title, numOfCopies: bookCopy.numOfCopies, bookId: bookCopy.bookId, branchId: bookCopy.branchId, id: item.bookId, isCheckedOut: isCheckedOut, locked: isCheckedOut, cobBranchId: cobBranchId});
   
 });
 
 
-// console.log("branchBookCopies");
-// console.log(branchBookCopies);
 
 if(!branchBookCopies[0]){
   return(
@@ -251,46 +196,19 @@ if(!branchBookCopies[0]){
 }
 
 
-
-// console.log("The state");
-// console.log(theState);
-// console.log("BranchBooks2");
-// console.log(branchBooks);
-// console.log("Book Copies");
-// console.log(branchBookCopies);
-
-
-
   return (
     <div>
 
-    ----------------Available Books For Branch {props.branchId}---------------
+    ----------------Available Books For Branch {props.branch.name}---------------
     <EntityTable2
         rows={branchBookCopies}
         cols={columns}
         loading={loading}
         cardNo = {props.cardNo}
+        branch ={props.branch}
       /> <br/>
 
-    {/* <br />
-    <ol>
-    
-      {branchBooks.map(
-        (val, index) => (
-            <div key={val.bookId}>
-             <br />
-             <li key={val.bookId}>
-              BookId: {val.bookId}<br />
-              <Button onClick={() => { isCheckingOut(props, val.bookId, branchCopies[index].numOfCopies )}}>
-               {val.title}<br />
-              Copies: {branchCopies[index].numOfCopies}<br/>
-              </Button>
-             </li>
-            </div>
-        ),
-      )}
-      </ol>
-    <br /> */}
+  
     ---------------------------------------
     <br />   
       

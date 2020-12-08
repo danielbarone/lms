@@ -146,7 +146,7 @@ public class LibrarianService {
 	}
 	
 	///Shorter version of body u need to send. Just CardNo, not wrapped in id
-	@RequestMapping(value = "/getBookLoansByCardNo", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByCardNo", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
 	public List<BookLoans> getBookLoansByCardNo(@RequestBody Borrower borrower) throws SQLException { 
 		if(borrower.getCardNo()==null)
 			return null;
@@ -157,7 +157,7 @@ public class LibrarianService {
 	}
 	
 	///// cardNo needs to be wrapped in id
-	@RequestMapping(value = "/getBookLoansByCardNo2", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByCardNo2", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
 	public List<BookLoans> getBookLoansByCardNo2(@RequestBody BookLoans loan) throws SQLException { 
 		if(loan.getId().getCardNo()==null)
 			return null;
@@ -299,7 +299,11 @@ public class LibrarianService {
 	
 	
 	public BookLoans getBookLoansById(int bookId, int branchId, int cardNo) throws SQLException{
-		List<BookLoans> bookLoans = blrepo.readBookLoansById(bookId, branchId, cardNo);
+//		System.out.println("Get Book Loans:");
+//		System.out.println("bookId: "+bookId+" branchId: "+branchId+" CardNo: "+cardNo);
+		List<BookLoans> bookLoans = new ArrayList<>();
+		bookLoans = blrepo.readBookLoansById(bookId, branchId, cardNo);
+		//List<BookLoans> bookLoans = blrepo.readBookLoansById(bookId, branchId, cardNo);
 		if(!bookLoans.isEmpty())
 			return bookLoans.get(0);
 		return null;

@@ -40,10 +40,7 @@ useEffect(() => {
   dispatch(borrowerActions.getBorrowerByCardNo(props.cardNo));
 }, []);
 // const borrower2 = useSelector((state) => state.borrower.borrowers);
-// console.log("Borrower");
-// console.log(borrower);
-// console.log(borrower2);
-// console.log(props.cardNo);
+
 
   if (!borrower) {
     return (
@@ -65,15 +62,21 @@ useEffect(() => {
 
 
   return (
-    <div>
-    ----------------Borrower---------------
+    <div 
+   // style={{ backgroundColor: 'green' }}
+   className={classes.borrowerCardBackground}
+    >
+
+    <div className={classes.borrowerCardText}>
+    
+    <span className={classes.borrowerCardLines}> Borrower Card </span>
     <br />
-        CardNo: {borrower.cardNo}<br />
-        Name: {borrower.name}
+        CardNo: <span className={classes.borrowerCardInfo1}> {borrower.cardNo}</span> <br />
+        Name: <span className={classes.borrowerCardInfo1}> {borrower.name} </span>
     <br />
     ---------------------------------------
     <br />   
-      
+    </div>
     </div>
   );
 };

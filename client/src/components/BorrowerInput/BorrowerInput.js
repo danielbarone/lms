@@ -150,8 +150,6 @@ const BorrowerInput = (props) => {
     }
 
     const RenderBranches = () =>{
-        // console.log("The State");
-        // console.log(theState);
         if(!isBorrowLock){
             return null;
         }
@@ -185,7 +183,6 @@ const BorrowerInput = (props) => {
                    <Button onClick={() => { handleIsReturning()}} label={"return"}>
                 Return A Book
                 </Button>
-               {/* <RenderBranchCopies /> */}
                 </div>
             
             )
@@ -193,27 +190,6 @@ const BorrowerInput = (props) => {
         else{
             return(
             <div>
-            {/* ########
-            <br/>
-            Branch List
-            <br />
-            ######## */}
-                {/* <BranchList /> */}
-                {/*This text field will be taken out once the ui table works */}
-                {/* <TextField id="branchIdField" type="number"  InputProps={{
-                        className: classes.root
-                    }}
-                    // disabled={isBorrowLock}
-                    autoFocus={true} 
-                    label="branchId"
-                    placeholder="000"
-                    style = {{width: 70}}
-                        onChange={(e) => handleBranchId(e.target.value)}
-                    />
-                    <Button onClick={() => { handleBranchSelected() } } label ={"branchSelect"}>
-                {buttonName3}
-                </Button> */}
-                {/* <Branch /> */}
                 <BranchSelector cardNo={cardNo} />
             </div>
         )
