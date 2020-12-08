@@ -45,6 +45,13 @@ const admin = {
   }),
   loans: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
+    override: (bookId, branchId, cardNo, newDueDate) => axios.put(`${adminBaseUrl}/overwrite?bookId=${bookId}&branchId=${branchId}&cardNo=${cardNo}&newDueDate=${newDueDate}`, {
+      "id": {
+        "bookId": bookId,
+        "branchId": branchId,
+        "cardNo": cardNo
+      }
+    })
   }),
   borrowers: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),
