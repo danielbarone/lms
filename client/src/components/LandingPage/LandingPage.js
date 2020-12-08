@@ -19,7 +19,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { history } from '../../navigation';
+import { history, UnauthRoutes } from '../../navigation';
 import useStyles from './LandingPage.styles';
 import { useTheme } from '../../theme/ThemeContext';
 import {
@@ -222,10 +222,14 @@ function LandingPage(props) {
           </Drawer>
         </Hidden>
       </nav>
+
+      {/* Main Content */}
       <main className={classes.content}>
         <div className={classes.toolbar} />
-          {props.userData ? props.userData.routes : props.routes}
+        {props.userData ? props.userData.routes : <UnauthRoutes />}
       </main>
+
+      {/* Authentication Dialogs */}
       <Dialog
         open={open}
         onClose={() => handleClose('login')}
@@ -259,9 +263,9 @@ LandingPage.propTypes = {
   authBtn: PropTypes.string,
   contactId: PropTypes.string,
   isSigningUp: PropTypes.bool,
-  routes: PropTypes.any,
   session: PropTypes.any,
   setIsSigningUp: PropTypes.func,
+  userData: PropTypes.any,
 };
 
 export default LandingPage;

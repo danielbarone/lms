@@ -7,12 +7,18 @@ import {
   Preview,
 } from '../components';
 
-const BorrowerRoutes = () => (
+const BorrowerRoutes = (props) => (
   <Switch>
     <Route exact path="/admin" component={Preview} />
-    <Route exact path="/borrower" component={BorrowerHome} />
-    <Route exact path="/Librarian" component={Preview} />
-    <Route path="/" component={BorrowerHome} />
+    <Route
+      exact
+      path="/borrower"
+      render={() => (
+        <BorrowerHome {...props} />
+      )}
+    />
+    <Route exact path="/librarian" component={Preview} />
+    <Route path="/" component={Home} />
   </Switch>
 );
 

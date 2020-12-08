@@ -8,12 +8,30 @@ import {
   Librarian,
 } from '../components';
 
-const AdminRoutes = () => (
+const AdminRoutes = (props) => (
   <Switch>
-    <Route exact path="/admin" component={Admin} />
-    <Route exact path="/borrower" component={BorrowerHome} />
-    <Route exact path="/Librarian" component={Librarian} />
-    <Route path="/" component={Admin} />
+    <Route
+      exact
+      path="/admin"
+      render={() => (
+        <Admin {...props} />
+      )}
+    />
+    <Route
+      exact
+      path="/borrower"
+      render={() => (
+        <BorrowerHome {...props} />
+      )}
+    />
+    <Route
+      exact
+      path="/librarian"
+      render={() => (
+        <Librarian {...props} />
+      )}
+    />
+    <Route path="/" component={Home} />
   </Switch>
 );
 
