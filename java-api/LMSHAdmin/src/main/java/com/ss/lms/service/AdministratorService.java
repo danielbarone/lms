@@ -237,6 +237,17 @@ public class AdministratorService {
 				 return(getAllBooks());
 		
 	}
+
+	@RequestMapping(value = "/deleteBookRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deleteBookRE(@RequestBody Book book) {
+		try {
+			brepo.delete(book);
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete book", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@Transactional
 	@RequestMapping(value = "/updateBook", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")

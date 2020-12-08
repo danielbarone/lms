@@ -82,6 +82,8 @@ const Book = (props) => {
   const dispatch = useDispatch();
   
   const createBook = (book) => bookActions.addBook(book);
+  const updateBook = (book) => bookActions.updateBook(book);
+  const deleteBook = (book) => bookActions.deleteBook(book);
   const getBooks = () => dispatch(bookActions.getBooks());
 
   useEffect(() => {
@@ -90,13 +92,32 @@ const Book = (props) => {
 
   return (
     <div className={classes.root}>
-      <InputModal
-        action={createBook}
-        details='Enter details for the new book you would like to add.'
-        title='New Book'
-        refresh={getBooks}
-        CustomForm={BookForm}
-      />
+      {/* Temp div style */}
+      <div style={{ display: 'flex', justifyContent: 'start' }}>
+        <InputModal
+          action={createBook}
+          details='Enter details for the new book you would like to add.'
+          title='New Book'
+          refresh={getBooks}
+          CustomForm={BookForm}
+        />
+        <InputModal
+          action={updateBook}
+          details='Edit details for the book you would like to update.'
+          title='Update Book'
+          refresh={getBooks}
+          CustomForm={BookForm}
+          requireId={true}
+        />
+        <InputModal
+          action={deleteBook}
+          details='Edit details for the book you would like to delete.'
+          title='Delete Book'
+          refresh={getBooks}
+          CustomForm={BookForm}
+          requireId={true}
+        />
+      </div>
       <EntityTable
         rows={books}
         cols={columns}

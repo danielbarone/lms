@@ -40,6 +40,7 @@ export default function BookForm(props) {
     classes,
     details,
     refresh,
+    requireId,
     setOpen,
     title,
   } = props;
@@ -51,6 +52,12 @@ export default function BookForm(props) {
   const [bookTitle, setBookTitle] = useState('');
   const handleTextFieldChange = (event) => {
     setBookTitle(event.target.value);
+  };
+
+  // Book ID
+  const [bookId, setBookId] = useState('');
+  const handleTextFieldChangeId = (event) => {
+    setBookId(event.target.value);
   };
 
   // Authors
@@ -83,7 +90,7 @@ export default function BookForm(props) {
       const bookData = {
         title: bookTitle,
         publisher: {
-          publisherId: publisher.id,
+          publisherId: publisher ? publisher.id : '',
         },
         authors: author.map((a) => ({
           authorId: a.id,
@@ -92,6 +99,9 @@ export default function BookForm(props) {
           genreId: g.id,
         })),
       };
+      if (requireId) {
+        bookData.bookId = bookId;
+      }
       const response = await dispatch(action(bookData));
       if (!response.data) {
         throw new Error(response.error);
@@ -113,6 +123,17 @@ export default function BookForm(props) {
       <form onSubmit={(e) => handleSubmit(e)} className={classes.formModalContainer}>
         <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
         <Typography className={classes.formError}>{formError}</Typography>
+        {requireId ? (
+          <TextField
+            className={classes.modalInput}
+            id='book-id'
+            variant='outlined'
+            label='Book ID'
+            name='book-id'
+            type='text'
+            onChange={handleTextFieldChangeId}
+          />
+        ) : ''}
         <TextField
           className={classes.modalInput}
           id='new-book-title'
@@ -207,6 +228,7 @@ BookForm.propTypes = {
   classes: PropTypes.any,
   details: PropTypes.string,
   refresh: PropTypes.func,
+  requireId: PropTypes.bool,
   setOpen: PropTypes.func,
   title: PropTypes.string,
 };

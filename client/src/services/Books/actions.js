@@ -30,58 +30,58 @@ const addBook = (book) => (dispatch) => {
 };
 
 /* UPDATE */
-// const updateBookStarted = (loading) => ({
-//   type: actionTypes.UPDATE_BOOK_STARTED,
-//   loading,
-// });
+const updateBookStarted = (loading) => ({
+  type: actionTypes.UPDATE_BOOK_STARTED,
+  loading,
+});
 
-// const updateBookSuccess = (book) => ({
-//   type: actionTypes.UPDATE_BOOK_SUCCESS,
-//   book,
-// });
+const updateBookSuccess = (book) => ({
+  type: actionTypes.UPDATE_BOOK_SUCCESS,
+  book,
+});
 
-// const updateBookFailure = (error) => ({
-//   type: actionTypes.UPDATE_BOOK_FAILURE,
-//   error,
-// });
+const updateBookFailure = (error) => ({
+  type: actionTypes.UPDATE_BOOK_FAILURE,
+  error,
+});
 
-// const updateBook = (book) => (dispatch) => {
-//   dispatch(updateBookStarted(true));
+const updateBook = (book) => (dispatch) => {
+  dispatch(updateBookStarted(true));
 
-//   return admin.books().update(book)
-//     .then((response) => {
-//       dispatch(updateBookSuccess(book));
-//       return response;
-//     })
-//     .catch((e) => dispatch(updateBookFailure(e)));
-// };
+  return admin.books().update(book)
+    .then((response) => {
+      dispatch(updateBookSuccess(book));
+      return response;
+    })
+    .catch((e) => dispatch(updateBookFailure(e)));
+};
 
 /* DELETE */
-// const deleteBookStarted = (loading) => ({
-//   type: actionTypes.DELETE_BOOK_STARTED,
-//   loading,
-// });
+const deleteBookStarted = (loading) => ({
+  type: actionTypes.DELETE_BOOK_STARTED,
+  loading,
+});
 
-// const deleteBookSuccess = (book) => ({
-//   type: actionTypes.DELETE_BOOK_SUCCESS,
-//   book,
-// });
+const deleteBookSuccess = (book) => ({
+  type: actionTypes.DELETE_BOOK_SUCCESS,
+  book,
+});
 
-// const deleteBookFailure = (error) => ({
-//   type: actionTypes.DELETE_BOOK_FAILURE,
-//   error,
-// });
+const deleteBookFailure = (error) => ({
+  type: actionTypes.DELETE_BOOK_FAILURE,
+  error,
+});
 
-// const deleteBook = (book) => (dispatch) => {
-//   dispatch(deleteBookStarted(true));
+const deleteBook = (book) => (dispatch) => {
+  dispatch(deleteBookStarted(true));
 
-//   return admin.books().delete(book)
-//     .then((response) => {
-//       dispatch(deleteBookSuccess(book));
-//       return response;
-//     })
-//     .catch((e) => dispatch(deleteBookFailure(e)));
-// };
+  return admin.books().delete(book)
+    .then((response) => {
+      dispatch(deleteBookSuccess(book));
+      return response;
+    })
+    .catch((e) => dispatch(deleteBookFailure(e)));
+};
 
 /* READ */
 const getBooksStarted = (loading) => ({
@@ -146,8 +146,8 @@ const getBooks2 = () => (dispatch) => {
 
 export {
   addBook,
-  // deleteBook,
-  // updateBook,
+  deleteBook,
+  updateBook,
   getBooks,
   getBooks2,
 };
