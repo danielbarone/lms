@@ -18,3 +18,4 @@ client/.env
 **/.env.*
 client/deploy.sh
 terraform/.terraform
+terraform/.terraform.tfstate.lock.info
