@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '4em',
     backgroundColor: theme.colors.background.primary,
   },
+  hiddenInput: {
+    display: 'none',
+  },
   logInInput: {
     marginBottom: '1em',
     '& > label': {
