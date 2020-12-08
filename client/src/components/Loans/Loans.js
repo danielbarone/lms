@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './loanStyles';
 import { EntityTable, InputModal } from '..';
 import { loanActions } from '../../services/actions';
+
+import LoanModal from './LoanModal'
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 75 },
@@ -25,17 +27,21 @@ const Loans = (props) => {
 
     const getLoans = () => dispatch(loanActions.getLoans());
 
+    const [refresher, setRefresher] = useState(0);
+
     useEffect(() => {
         getLoans();
-    }, [])
+    }, [refresher])
 
     return (
         <div className={classes.root}>
+            <LoanModal refresh={refresher} setRefresher={setRefresher} />
             <EntityTable
                 cols={columns}
                 icon='library'
                 loading={loading}
                 rows={loans}
+                refresh={getLoans}
             />
         </div>
     )
