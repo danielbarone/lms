@@ -103,7 +103,7 @@ const Register = (props) => {
         label='Confirm Password'
         name='confirmPassword'
         type='password'
-        inputRed={register}
+        inputRef={register}
       />
       <Button
         className={classes.logInButton}
