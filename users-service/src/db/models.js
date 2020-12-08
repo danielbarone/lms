@@ -31,6 +31,10 @@ User.init(
     passwordHash: {
       allowNull: false,
       type: DataTypes.CHAR(64)
+    },
+    userType: {
+      allowNull: true,
+      type: DataTypes.STRING
     }
   },
   {

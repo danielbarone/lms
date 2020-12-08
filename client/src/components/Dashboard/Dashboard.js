@@ -16,7 +16,7 @@ const TYPE_BORROWER = '002';
 const parseUserData = (session) => {
   /* userDataArr --> [user type, user data 1, user data 2] */
   const userDataArr = session.user.contactId.split('-').slice(0, 3);
-  const userType = userDataArr[0];
+  const userType = session.user.userType;
 
   switch (userType) {
     case TYPE_ADMIN:

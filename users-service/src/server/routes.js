@@ -124,7 +124,8 @@ const setupRoutes = app => {
         lastName: req.body.lastName,
         email: req.body.email,
         id: UUID,
-        passwordHash: hashPassword(req.body.password)
+        passwordHash: hashPassword(req.body.password),
+        userType: userType
       });
 
       return res.json(newUser);
