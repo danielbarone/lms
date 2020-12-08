@@ -28,9 +28,13 @@ import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.Branch;
 import com.ss.lms.entity.Genre;
+import com.ss.lms.entity.Loans;
+import com.ss.lms.entity.LoansId;
 import com.ss.lms.entity.BookLoans;
+import com.ss.lms.entity.BookLoansId;
 import com.ss.lms.entity.Publisher;
 import com.ss.lms.repo.AuthorRepo;
+import com.ss.lms.repo.AveryLoansRepo;
 import com.ss.lms.repo.BookLoansRepo;
 import com.ss.lms.repo.BookRepo;
 import com.ss.lms.repo.BorrowerRepo;
@@ -60,6 +64,9 @@ public class AdministratorService {
 	
 	@Autowired
 	BorrowerRepo borepo;
+	
+	@Autowired
+	AveryLoansRepo alrepo;
 	
 	@Autowired
 	public BookLoansRepo blrepo;
@@ -511,6 +518,36 @@ public class AdministratorService {
 			return new ResponseEntity<>("Could not add branch.", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	//readAllLoans(Avery test version)
+			@RequestMapping(value = "/getAllLoans", method = RequestMethod.GET, produces = "application/json")
+			public List<BookLoans> getAllLoans(){
+				List<BookLoans> loans = new ArrayList<>();
+				loans = alrepo.findAll();
+				return loans;
+			}
+			
+	//automated override with no parameters(Avery test version)
+			@Transactional
+			@RequestMapping(value = "/overwrite", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+			public List<BookLoans> overwrite(@RequestParam Integer bookId, @RequestParam Integer branchId, @RequestParam Integer cardNo, @RequestParam String newDueDate, @RequestBody BookLoans loan) throws SQLException {
+						List<BookLoans> oldLoan = alrepo.readLoansById(bookId, branchId, cardNo);
+						BookLoansId id = new BookLoansId(bookId, branchId, cardNo);
+						loan.setId(id);
+//						loan.setBookId(oldLoan.get(0).getId().getBookId());
+						loan.setDateIn(oldLoan.get(0).getDateIn());
+						loan.setDateOut(oldLoan.get(0).getDateOut());
+//						loan.setBranchId(oldLoan.get(0).getId().getBranchId());
+//						loan.setCardNo(oldLoan.get(0).getId().getCardNo());
+						if(newDueDate == null) {
+							loan.setDueDate(oldLoan.get(0).getDueDate());
+						}else {
+							loan.setDueDate(newDueDate);
+						}
+						
+						alrepo.save(loan);
+						return alrepo.findAll();
+			}
 	
 	///meant for overriding due date but can be used to change any of the loan's values
 	@RequestMapping(value = "/overrideBookLoan", method = RequestMethod.POST, produces = "application/json")

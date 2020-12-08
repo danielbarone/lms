@@ -138,13 +138,18 @@ const overrideFailure = (error) => ({
   error
 })
 
-const overrideLoan = (loan) => (dispatch) => {
+const overrideLoan = (bookId, branchId, cardNo, newDueDate) => (dispatch) => {
   dispatch(overrideStarted(true));
 
-  return admin.loans().overrideDueDate(loan).then((res) => {
-    dispatch(overrideSuccess(loan));
+  return admin.loans().override(bookId, branchId, cardNo, newDueDate).then((res) => {
+    dispatch(overrideSuccess(res));
+    window.alert("The overwrite was a success")
     return res;
-  }).catch((err) => dispatch(overrideFailure(err)));
+  }).catch((err) => {
+    dispatch(overrideFailure(err))
+    window.alert("The overwrite was a failure")
+  }
+  );
 }
 
 // export {
