@@ -17,8 +17,8 @@ const admin = {
   }),
   books: () => ({
     create: (book) => axios.post(`${adminBaseUrl}/addBookRE`, book),
-    // update: (branch) => axios.post(`${adminBaseUrl}/updateBranchRE`, branch),
-    // delete: (branch) => axios(deleteConfig(branch, `${adminBaseUrl}/deleteBranchRE`)),
+    update: (book) => axios.post(`${adminBaseUrl}/updateBook`, book),
+    delete: (book) => axios(deleteConfig(book, `${adminBaseUrl}/deleteBookRE`)),
     getAll: () => axios.get(`${adminBaseUrl}/getAllBooks`),
   }),
   branches: () => ({

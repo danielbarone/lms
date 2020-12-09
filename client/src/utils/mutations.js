@@ -27,6 +27,7 @@ export const createSession = gql`
         id
         firstName
         lastName
+        userType
       }
     }
   }

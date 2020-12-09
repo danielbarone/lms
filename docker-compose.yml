@@ -4,6 +4,8 @@ services:
     build: "./api-gateway"
     depends_on: 
       - users-service
+    environment:
+      - USERS_SERVICE_URI=http://users-service:7100
     ports:
       - 7000:7000
     volumes: 

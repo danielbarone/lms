@@ -80,10 +80,10 @@ const Book = (props) => {
   const books = useSelector((state) => state.books.books);
   const loading = useSelector((state) => state.books.loading);
   const dispatch = useDispatch();
-
+  
   const createBook = (book) => bookActions.addBook(book);
-  // const updateBook = (book) => bookActions.updateBook(book);
-  // const deleteBook = (book) => bookActions.deleteBook(book);
+  const updateBook = (book) => bookActions.updateBook(book);
+  const deleteBook = (book) => bookActions.deleteBook(book);
   const getBooks = () => dispatch(bookActions.getBooks());
 
   useEffect(() => {
@@ -92,30 +92,32 @@ const Book = (props) => {
 
   return (
     <div className={classes.root}>
-      <InputModal
-        action={createBook}
-        details='Enter details for the new book you would like to add.'
-        title='New Book'
-        refresh={getBooks}
-        CustomForm={BookForm}
-      />
       {/* Temp div style */}
-      {/* <div style={{ display: 'flex', justifyContent: 'start' }}>
+      <div style={{ display: 'flex', justifyContent: 'start' }}>
+        <InputModal
+          action={createBook}
+          details='Enter details for the new book you would like to add.'
+          title='New Book'
+          refresh={getBooks}
+          CustomForm={BookForm}
+        />
         <InputModal
           action={updateBook}
-          columns={formColsUpdDel}
           details='Edit details for the book you would like to update.'
           title='Update Book'
           refresh={getBooks}
+          CustomForm={BookForm}
+          requireId={true}
         />
         <InputModal
           action={deleteBook}
-          columns={formColsUpdDel}
-          details='Review details of the book you are about to delete.'
+          details='Edit details for the book you would like to delete.'
           title='Delete Book'
           refresh={getBooks}
+          CustomForm={BookForm}
+          requireId={true}
         />
-      </div> */}
+      </div>
       <EntityTable
         rows={books}
         cols={columns}

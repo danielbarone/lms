@@ -101,14 +101,31 @@ const setupRoutes = app => {
     if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password || !req.body.contactId) {
       return next(new Error("Invalid body!"));
     }
+
+    const TYPE_ADMIN     = '000';
+    const TYPE_LIBRARIAN = '001';
+    const TYPE_BORROWER  = '002';
+    const USER_TYPES     = [TYPE_ADMIN, TYPE_LIBRARIAN, TYPE_BORROWER];
+
+    const regKey = req.body.contactId;
+    if (regKey.length !== 11) {
+      return next(new Error("Invalid registration key length!"));
+    }
+    const userType = regKey.split('-')[0]; // Format: 000-000-000 (user_type-data-data2)
+    if (regKey.split('-').length !== 3 || USER_TYPES.includes(userType) === false) {
+      return next(new Error("Invalid registration key format!"));
+    }
+
     try {
+      const UUID = generateUUID();
       const newUser = await User.create({
-        contactId: req.body.contactId,
+        contactId: `${regKey}-${UUID}}`,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        id: generateUUID(),
-        passwordHash: hashPassword(req.body.password)
+        id: UUID,
+        passwordHash: hashPassword(req.body.password),
+        userType: userType
       });
 
       return res.json(newUser);

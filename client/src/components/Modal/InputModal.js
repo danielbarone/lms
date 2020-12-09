@@ -19,6 +19,7 @@ const InputModal = (props) => {
     CustomForm,
     details,
     refresh,
+    requireId,
     title,
   } = props;
   const [formError, setFormError] = useState();
@@ -66,6 +67,7 @@ const InputModal = (props) => {
             refresh={refresh}
             setOpen={setOpen}
             title={title}
+            requireId={requireId}
           />
         ) : (
           <form onSubmit={onSubmit} className={classes.formModalContainer}>
@@ -106,6 +108,7 @@ InputModal.propTypes = {
   columns: PropTypes.array,
   details: PropTypes.string,
   refresh: PropTypes.func,
+  requireId: PropTypes.bool,
   title: PropTypes.string,
   CustomForm: PropTypes.any,
 };

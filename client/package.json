@@ -61,7 +61,9 @@
   "scripts": {
     "start": "react-scripts start",
     "noauth": "REACT_APP_NOAUTH=true npm start",
-    "build": "react-scripts build",
+    "build": "rm -rf build && NODE_ENV=production react-scripts build",
+    "deploy": "./deploy.sh",
+    "predeploy": "NODE_ENV=production npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
