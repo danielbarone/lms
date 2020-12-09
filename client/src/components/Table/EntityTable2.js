@@ -152,9 +152,9 @@ function isCheckingOut (book){
   
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           Slide in alert dialog
-        </Button>
+        </Button> */}
         <Dialog
           open={open}
           TransitionComponent={Transition}

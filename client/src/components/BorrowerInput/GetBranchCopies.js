@@ -68,7 +68,7 @@ const dispatch = useDispatch();
     if(bookCheckedOut){
       //setBookCheckedOut(false);
       //console.log("You checked out a book")
-      console.log("BookId: "+bookId);
+      //console.log("BookId: "+bookId);
       dispatch(loanActions.checkOutBook(bookId, branchId, cardNo, dateOut2, dueDate2));
     }
     dispatch(branchBookCopiesActions.getBothByBranchId(branchId));
@@ -199,7 +199,7 @@ if(!branchBookCopies[0]){
   return (
     <div>
 
-    ----------------Available Books For Branch {props.branch.name}---------------
+    ----------------Available Books For Branch <span className={classes.highlight}>{props.branch.name}</span>---------------
     <EntityTable2
         rows={branchBookCopies}
         cols={columns}

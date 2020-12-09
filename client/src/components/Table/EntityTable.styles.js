@@ -57,6 +57,20 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     paddingTop: '40ch',
   },
+  highlight:{
+    // color: `${theme.colors.text.primary}`,
+    color: `${theme.colors.text.secondary}`,
+     // fontSize: "16px",
+      fontWeight: "bold",
+
+ },
+ button1:{
+  ...theme.buttons.primary,
+  borderRadius: 0,
+  borderBottomLeftRadius: '5px',
+  borderBottomRightRadius: '5px',
+  marginRight: '20px',
+  },
 }));
 
 export default useStyles;

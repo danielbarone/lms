@@ -11,8 +11,8 @@ const BorrowerHome = (props) => {
   const classes = useStyles(props);
   return (
     <div className={classes.root}>
-      Borrowers.....
-      Please enter your borrower Id
+      {/* Borrowers.....
+      Please enter your borrower Id */}
       <BorrowerInput />
     </div>
   );

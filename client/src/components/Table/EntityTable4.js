@@ -119,7 +119,7 @@ function selectBranch (branch){
    if(isCheckingOut | isReturning){
         return(
             <div>
-                <Button onClick={() => { handleBackCheckReturn()}} label={"checkout"}>
+                <Button onClick={() => { handleBackCheckReturn()}} label={"checkout"} className={classes.button1}>
             Go Back
             </Button>
             <RenderBranchCopies />
@@ -131,17 +131,18 @@ function selectBranch (branch){
 
       <div>
       
-           <Button onClick={() => { setBranchSelected(false)}} label={"checkout"}>
+           <Button onClick={() => { setBranchSelected(false)}} label={"checkout"} className={classes.button1}>
                 Go Back To Branch Selection
                 </Button> <br />
                 <br/>
-                    Current Branch: {branch.name} <br />
-                   Do you which to checkout a book or return a book? 
+                    Current Branch: <span className={classes.highlight}>{branch.name}</span> <br />
+                   Do you wish to checkout a book or return a book? 
                    <br/> 
-                <Button onClick={() => { setIsCheckingOut(true)}} label={"checkout"}>
+                   <br/>
+                <Button onClick={() => { setIsCheckingOut(true)}} label={"checkout"} className={classes.button1}>
                 Checkout
                 </Button>
-                   <Button onClick={() => { setIsReturning(true)}} label={"return"}>
+                   <Button onClick={() => { setIsReturning(true)}} label={"return"} className={classes.button1}>
                 Return A Book
                 </Button>
                 {/* <GetBranchCopies branchId={branchId} cardNo={cardNo}  /> */}
@@ -154,6 +155,7 @@ function selectBranch (branch){
   
   return (
     <div>
+    Select which branch you want
       <div className={classes.root}>
         <DataGrid
           //checkboxSelection

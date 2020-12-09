@@ -1,6 +1,6 @@
 /* React */
 import React, { useEffect, useState, useCallback } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { borrower2Actions as borrowerActions } from '../../services/actions';
 
@@ -42,6 +42,7 @@ useEffect(() => {
 // const borrower2 = useSelector((state) => state.borrower.borrowers);
 
 
+
   if (!borrower) {
     return (
       <div className={classes.spinnerContainer}>
@@ -62,6 +63,17 @@ useEffect(() => {
 
 
   return (
+    <div>
+
+{/* <Button 
+  onClick={() => { console.log("Click")} }
+   label ={"Lock"}
+    className={classes.button1}
+   
+    >
+      Submit
+  </Button>  */}
+
     <div 
    // style={{ backgroundColor: 'green' }}
    className={classes.borrowerCardBackground}
@@ -76,6 +88,7 @@ useEffect(() => {
     <br />
     ---------------------------------------
     <br />   
+    </div>
     </div>
     </div>
   );

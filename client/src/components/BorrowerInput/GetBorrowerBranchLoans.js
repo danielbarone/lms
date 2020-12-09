@@ -156,7 +156,7 @@ if(!loans2[0]){
 
   return (
     <div>
-    ----------------Loans from Branch {props.branch.name}---------------
+    ----------------Loans from Branch <span className={classes.highlight}>{props.branch.name}</span>---------------
     <br />
 
     <EntityTable3
