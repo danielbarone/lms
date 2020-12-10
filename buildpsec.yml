@@ -10,6 +10,9 @@ phases:
       - aws s3 cp s3://lms-api-gateway-config-files/.production.env api-gateway/.production.env
   build:
     commands:
+      - sudo yum install -y yum-utils
+      - sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+      - sudo yum -y install terraform
       - cd terraform
       - terraform init
       - terraform apply
