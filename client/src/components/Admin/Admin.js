@@ -30,7 +30,7 @@ const Admin = (props) => {
         variant='h5'
         className={classes.dashboardH1}
       >
-        Administrator Dashboard
+        AdministratorMM
       </Typography>
       <TabbedMenu data={adminTabs} />
     </div>
