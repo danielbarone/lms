@@ -556,28 +556,32 @@ public class AdministratorService {
 			}
 	
 	///meant for overriding due date but can be used to change any of the loan's values
-//		LibrarianService ls = new LibrarianService();
-//			return null;
-//		int bookId = bookLoans.getId().getBookId();
-//		int branchId = bookLoans.getId().getBranchId();
-//		int cardNo = bookLoans.getId().getCardNo();
-//		BookLoans oldLoan = ls.getBookLoansById(bookId, branchId, cardNo);
-//		
-//		if(bookLoans.getDateIn()!=null) {
-//			oldLoan.setDateIn(bookLoans.getDateIn());
-//		}
-//		if(bookLoans.getDateOut()!=null) {
-//			oldLoan.setDateOut(bookLoans.getDateOut());
-//		}
-//
-//		if(bookLoans.getDueDate()!=null) {
-//			oldLoan.setDueDate(bookLoans.getDueDate());
-//		}
-//		
-//		blrepo.save(bookLoans);
-//		
-//		return ls.getAllBookLoans();
-//	}
+	@RequestMapping(value = "/overrideBookLoan", method = RequestMethod.POST, produces = "application/json")
+	public List<BookLoans> overrideBookLoan(@RequestBody BookLoans bookLoans) throws SQLException { 
+		
+		LibrarianService ls = new LibrarianService();
+		if(bookLoans.getId().getBookId() == null|bookLoans.getId().getBranchId() == null |bookLoans.getId().getCardNo() == null)
+			return null;
+		int bookId = bookLoans.getId().getBookId();
+		int branchId = bookLoans.getId().getBranchId();
+		int cardNo = bookLoans.getId().getCardNo();
+		BookLoans oldLoan = ls.getBookLoansById(bookId, branchId, cardNo);
+		
+		if(bookLoans.getDateIn()!=null) {
+			oldLoan.setDateIn(bookLoans.getDateIn());
+		}
+		if(bookLoans.getDateOut()!=null) {
+			oldLoan.setDateOut(bookLoans.getDateOut());
+		}
+
+		if(bookLoans.getDueDate()!=null) {
+			oldLoan.setDueDate(bookLoans.getDueDate());
+		}
+		
+		blrepo.save(bookLoans);
+		
+		return ls.getAllBookLoans();
+	}
 	
 	
 	

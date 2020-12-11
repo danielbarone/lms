@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ss.lms.entity.Book;
 import com.ss.lms.entity.BookCopies;
-import com.ss.lms.entity.BookCopiesId;
 import com.ss.lms.entity.BookLoans;
 import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.Branch;
@@ -51,7 +50,7 @@ public class BorrowerService {
 	
 	
 	
-	@RequestMapping(value = "/getBorrowerByCardNo", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
+	@RequestMapping(value = "/getBorrowerByCardNo", method = RequestMethod.GET, produces = "application/json")
 	public Borrower getBorrowerByCardNo(@RequestBody Borrower borrower) throws SQLException { 
 		if(borrower.getCardNo() == null)
 			return null;
@@ -65,32 +64,24 @@ public class BorrowerService {
 		
 		addBookLoan(bookLoans);
 		BookCopies bookCopy = new BookCopies();
-		int bookId =bookLoans.getId().getBookId();
-		int branchId = bookLoans.getId().getBranchId();
-		BookCopiesId id = new BookCopiesId(bookId, branchId); 
-		bookCopy.setId(id);
-		bookCopy.getId().setBookId(bookId);
-		bookCopy.getId().setBranchId(branchId);
+		bookCopy.getId().setBookId(bookLoans.getId().getBookId());
+		bookCopy.getId().setBranchId(bookLoans.getId().getBranchId());
 		bookCopy = getBookCopyNo(bookCopy);
 		bookCopy.setNumOfCopies(bookCopy.getNumOfCopies()-1);
 		updateBookCopies(bookCopy);
+		
 		return getAllBookLoans();
 	}
 	
 	@Transactional
-	@RequestMapping(value = "/returnBook", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
+	@RequestMapping(value = "/returnBook", method = RequestMethod.POST, produces = "application/json")
 	public List<BookLoans> returnBook(@RequestBody BookLoans bookLoans) throws SQLException { 
 		
-	
 		updateBookLoan(bookLoans);
 		BookCopies bookCopy = new BookCopies();
-		int bookId =bookLoans.getId().getBookId();
-		int branchId = bookLoans.getId().getBranchId();
-		BookCopiesId id = new BookCopiesId(bookId, branchId); 
-		bookCopy.setId(id);
-		
+		bookCopy.getId().setBookId(bookLoans.getId().getBookId());
+		bookCopy.getId().setBranchId(bookLoans.getId().getBranchId());
 		bookCopy = getBookCopyNo(bookCopy);
-		
 		bookCopy.setNumOfCopies(bookCopy.getNumOfCopies()+1);
 		updateBookCopies(bookCopy);
 		
@@ -122,9 +113,6 @@ public class BorrowerService {
 		int branchId = bookLoans.getId().getBranchId();
 		int cardNo = bookLoans.getId().getCardNo();
 		BookLoans oldLoan = getBookLoansById(bookId, branchId, cardNo);
-	
-	
-		
 		
 		if(bookLoans.getDateIn()!=null) {
 			oldLoan.setDateIn(bookLoans.getDateIn());
@@ -199,7 +187,7 @@ public class BorrowerService {
 		return bookLoans;
 	}
 	
-	@RequestMapping(value = "/getBranchBooks", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/getBranchBooks", method = RequestMethod.GET, produces = "application/json")
 	public List<Book> getBranchBooks(@RequestBody Branch sBranch) throws SQLException { 
 		List<Book> books = new ArrayList<>();
 		if(sBranch.getBranchId()==null)
@@ -215,7 +203,7 @@ public class BorrowerService {
 	}
 	
 	
-	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	@RequestMapping(value = "/getBookCopiesByBranchId", method = RequestMethod.GET, produces = "application/json")
 	public List<BookCopies> getBookCopiesByBranchId(@RequestBody Branch sBranch) throws SQLException { 
 		if(sBranch.getBranchId()==null)
 			return null;
@@ -225,14 +213,14 @@ public class BorrowerService {
 		return bc;
 	}
 	
-	@RequestMapping(value = "/getBookCopyNo", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/getBookCopyNo", method = RequestMethod.GET, produces = "application/json")
 	public BookCopies getBookCopyNo(@RequestBody BookCopies bookCopies) throws SQLException { 
 		if(bookCopies.getId().getBranchId()==null)
 			return null;
 		int branchId = bookCopies.getId().getBranchId();
 		if(bookCopies.getId().getBookId()==null)
 			return null;
-		int bookId = bookCopies.getId().getBookId();
+		int bookId = bookCopies.getId().getBranchId();
 		BookCopies bc = getBookCopiesById(bookId, branchId);	
 		return bc;
 	}
@@ -263,7 +251,7 @@ public class BorrowerService {
 	}
 	
 	///Shorter version of body u need to send. Just CardNo, not wrapped in id
-	@RequestMapping(value = "/getBookLoansByCardNo", method = RequestMethod.POST, produces = "application/json", consumes="application/json")
+	@RequestMapping(value = "/getBookLoansByCardNo", method = RequestMethod.GET, produces = "application/json")
 	public List<BookLoans> getBookLoansByCardNo(@RequestBody Borrower borrower) throws SQLException { 
 		if(borrower.getCardNo()==null)
 			return null;
@@ -274,7 +262,7 @@ public class BorrowerService {
 	}
 	
 	///// cardNo needs to be wrapped in id
-	@RequestMapping(value = "/getBookLoansByCardNo2", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByCardNo2", method = RequestMethod.GET, produces = "application/json")
 	public List<BookLoans> getBookLoansByCardNo2(@RequestBody BookLoans loan) throws SQLException { 
 		if(loan.getId().getCardNo()==null)
 			return null;
@@ -284,7 +272,7 @@ public class BorrowerService {
 		return bl;
 	}
 	
-	@RequestMapping(value = "/getBookLoansByBranchId", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/getBookLoansByBranchId", method = RequestMethod.GET, produces = "application/json")
 	public List<BookLoans> getBookLoansByBranchId(@RequestBody BookLoans loan) throws SQLException { 
 		List<Book> books = new ArrayList<>();
 		if(loan.getId().getBranchId()==null)
