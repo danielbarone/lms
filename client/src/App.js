@@ -17,6 +17,7 @@ const query = gql`
         id
         firstName
         lastName
+        userType
       }
     }
   }

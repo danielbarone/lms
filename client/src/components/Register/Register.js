@@ -49,17 +49,16 @@ const Register = (props) => {
       <Typography className={classes.welcomeMsg} variant='h6'>Welcome to Temp</Typography>
       <Typography className={classes.authError}>{authError}</Typography>
       <TextField
-        className={classes.logInInput}
+        className={cId ? classes.hiddenInput : classes.logInInput}
         id='contactId'
         variant='outlined'
         label='Registration Key'
         name='contactId'
         inputRef={register}
-        disabled={cId || false}
         defaultValue={cId || ''}
       />
       <TextField
-        className={classes.passwordInput}
+        className={cId ? classes.logInInput : classes.passwordInput}
         id='firstName'
         variant='outlined'
         label='First Name'
@@ -103,7 +102,7 @@ const Register = (props) => {
         label='Confirm Password'
         name='confirmPassword'
         type='password'
-        inputRed={register}
+        inputRef={register}
       />
       <Button
         className={classes.logInButton}

@@ -43,7 +43,8 @@ const theState = useSelector((state) => state);
   const books = useSelector((state) => state.books.books);
   const loading = useSelector((state) => state.loans.loading);
   const branchCopies = useSelector((state) => state.branchBooksCopies.bookCopies) 
-  const branchBooks = useSelector((state) => state.branchBooks.books);
+  //const branchBooks = useSelector((state) => state.branchBooks.books);
+  const branchBooks = useSelector((state) => state.branchBooks2.books);
   const loans = useSelector((state) => state.loans.loans);
 
 
@@ -199,7 +200,7 @@ if(!branchBookCopies[0]){
   return (
     <div>
 
-    ----------------Available Books For Branch <span className={classes.highlight}>{props.branch.name}</span>---------------
+    Available Books For Branch <span className={classes.highlight}>{props.branch.name}</span>
     <EntityTable2
         rows={branchBookCopies}
         cols={columns}
@@ -208,8 +209,6 @@ if(!branchBookCopies[0]){
         branch ={props.branch}
       /> <br/>
 
-  
-    ---------------------------------------
     <br />   
       
     </div>

@@ -30,9 +30,9 @@ public class BookLoans implements Serializable {
 	
 	@Column(name = "dateOut")
 	@NonNull
-	private Date dateOut;
+	private String dateOut;
 	@Column(name = "dueDate")
-	private Date dueDate;
+	private String dueDate;
 	@Column(name = "dateIn")
 	private Date dateIn;
 	
@@ -47,20 +47,20 @@ public class BookLoans implements Serializable {
 		this.id = id;
 	}
 	
-	public Date getDateOut() {
+	public String getDateOut() {
 		return dateOut;
 	}
 
 
-	public void setDateOut(Date dateOut) {
+	public void setDateOut(String dateOut) {
 		this.dateOut = dateOut;
 	}
 
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 

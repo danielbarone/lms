@@ -9,7 +9,7 @@ const client = new ApolloClient({
   cache,
   link: new HttpLink({
     credentials: 'include',
-    uri: services_uri,
+    uri: process.env.REACT_APP_SERVICES_URI + '/graphql',
   }),
 });
 

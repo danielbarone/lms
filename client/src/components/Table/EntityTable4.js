@@ -122,6 +122,8 @@ function selectBranch (branch){
                 <Button onClick={() => { handleBackCheckReturn()}} label={"checkout"} className={classes.button1}>
             Go Back
             </Button>
+            <br/>
+            <br/>
             <RenderBranchCopies />
             <RenderBorrowerBranchLoans />
             </div>
@@ -162,6 +164,12 @@ function selectBranch (branch){
           className={classes.dataGrid}
           //disableClickEventBubbling
          // disableSelectionOnClick = {(true) ? false : true}
+         //disableExtendRowFullWidth = {true}
+         //autoPageSize = {true}
+         //spacing={6}
+         scrollbarSize={20}
+         hideFooter={true}
+     
           onSelectionChange={(newSelection) => {
             setSelection(newSelection.rows);
           }}

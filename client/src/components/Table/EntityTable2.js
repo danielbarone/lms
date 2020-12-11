@@ -220,6 +220,7 @@ function isCheckingOut (book){
             setSelection(newSelection.rows);
           }}
          // rows={data}
+         hideFooter={true}
          rows={data.map((rows) => ({
             ...rows,
             

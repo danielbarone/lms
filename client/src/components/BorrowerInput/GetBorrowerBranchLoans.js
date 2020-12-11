@@ -18,7 +18,8 @@ const GetBorrowerBranchLoans = (props) => {
   const classes = useStyles(props);
   const loans = useSelector((state) => state.loans.loans);
   const lState = useSelector((state) => state);
-  const branchBooks = useSelector((state) => state.branchBooks.books);
+  //const branchBooks = useSelector((state) => state.branchBooks.books);
+  const branchBooks = useSelector((state) => state.branchBooks2.books);
   const allBooks = useSelector((state) => state.books.books);
   const dispatch = useDispatch();
   //const [loans, setLoans] = useState([]);
@@ -134,7 +135,6 @@ loans2.forEach(function(item, index, array) {
 
   loans3.push({title: title, cardNo: item.cardNo, branchId: item.branchId, bookId: item.bookId, dateOut: item.dateOut, dueDate: item.dueDate, dateIn: item.dateIn, id: item.id})
 });
-
 }
 else{
     loans2 = loans;
@@ -153,10 +153,9 @@ if(!loans2[0]){
 
 
 
-
   return (
     <div>
-    ----------------Loans from Branch <span className={classes.highlight}>{props.branch.name}</span>---------------
+    Loans from Branch <span className={classes.highlight}>{props.branch.name}</span>
     <br />
 
     <EntityTable3
@@ -166,8 +165,6 @@ if(!loans2[0]){
         branch = {props.branch}
       /> <br/>
 
- 
-    ---------------------------------------
     <br />   
       
     </div>

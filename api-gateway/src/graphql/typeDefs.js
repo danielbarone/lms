@@ -9,6 +9,7 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     id: ID!
+    userType: String!
   }
 
   type UserSession {

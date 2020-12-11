@@ -13,7 +13,7 @@ const BorrowerHome = (props) => {
     <div className={classes.root}>
       {/* Borrowers.....
       Please enter your borrower Id */}
-      <BorrowerInput />
+      <BorrowerInput cardNo={props.cardNo} />
     </div>
   );
 };

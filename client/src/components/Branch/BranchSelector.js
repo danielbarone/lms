@@ -56,7 +56,9 @@ const BranchSelector = (props) => {
     )
     }
     else{
-      if(!borrower.borrowers.cardNo)
+      console.log("Borrower");
+      console.log(borrower);
+      if( !borrower.borrowers || !borrower.borrowers.cardNo)
       return(
         <div>
        <Alert severity="error"> No user found with this cardNo. Please double check your number.  </Alert>

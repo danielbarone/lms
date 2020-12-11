@@ -270,7 +270,7 @@ const BorrowerInput = (props) => {
     const RenderTextHead = () =>{
         return(
             <div>
-                Borrowers.....
+                
       Please enter your borrower Id<br/>
             </div>
         )
@@ -278,13 +278,32 @@ const BorrowerInput = (props) => {
 
 
     //Fix color on text field later
+   if (props.cardNo){
+       if(!cardNo){
+           setCardNo(props.cardNo)
+       }
+    // handleBorrowLock()
+    if(!isBorrowLock){
+        setBorrowLock(true)
+    }
+    return(
+        <div>
+        {/* CardNo {props.cardNo} */}
+        
+        <RenderBorrower /> 
+        <br />
+        <RenderBranches /> <br />
+        </div> 
+    )
+   }
+   else
 return(
     <div className={classes.root}>
       {/* Borrowers.....
       Please enter your borrower Id<br/> */}
       { isBorrowLock ? null : <RenderTextHead /> }
     {/* <RenderCardNoInput /> */}
-    
+      {props.cardNo}
     { isBorrowLock ? null :
     <TextField id="cardNoField" type="number"  InputProps={{
     className: classes.root

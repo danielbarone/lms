@@ -29,8 +29,10 @@ import com.ss.lms.entity.Borrower;
 import com.ss.lms.entity.Branch;
 import com.ss.lms.entity.Genre;
 import com.ss.lms.entity.BookLoans;
+import com.ss.lms.entity.BookLoansId;
 import com.ss.lms.entity.Publisher;
 import com.ss.lms.repo.AuthorRepo;
+import com.ss.lms.repo.AveryLoansRepo;
 import com.ss.lms.repo.BookLoansRepo;
 import com.ss.lms.repo.BookRepo;
 import com.ss.lms.repo.BorrowerRepo;
@@ -62,7 +64,21 @@ public class AdministratorService {
 	BorrowerRepo borepo;
 	
 	@Autowired
+	AveryLoansRepo alrepo;
+	
+	@Autowired
 	public BookLoansRepo blrepo;
+
+	@RequestMapping(value = "/addBookRE", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<?> addBookRE(@RequestBody Book book) {
+		try {
+			brepo.save(book);
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to add book", HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@Transactional
 	@RequestMapping(value = "/addBook", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
@@ -217,11 +233,7 @@ public class AdministratorService {
 				 return(getAllBorrowers());
 		
 	}
-	
-	
-	
 
-	
 	@Transactional
 	@RequestMapping(value = "/deleteBook", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<Book> deleteBook(@RequestBody Book book) throws SQLException { 
@@ -229,6 +241,17 @@ public class AdministratorService {
 				brepo.delete(book);
 				 return(getAllBooks());
 		
+	}
+
+	@RequestMapping(value = "/deleteBookRE", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<?> deleteBookRE(@RequestBody Book book) {
+		try {
+			brepo.delete(book);
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to delete book", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@Transactional
@@ -502,33 +525,59 @@ public class AdministratorService {
 		}
 	}
 	
+	//readAllLoans(Avery test version)
+			@RequestMapping(value = "/getAllLoans", method = RequestMethod.GET, produces = "application/json")
+			public List<BookLoans> getAllLoans(){
+				List<BookLoans> loans = new ArrayList<>();
+				loans = alrepo.findAll();
+				return loans;
+			}
+			
+	//automated override with no parameters(Avery test version)
+			@Transactional
+			@RequestMapping(value = "/overwrite", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+			public List<BookLoans> overwrite(@RequestParam Integer bookId, @RequestParam Integer branchId, @RequestParam Integer cardNo, @RequestParam String newDueDate, @RequestBody BookLoans loan) throws SQLException {
+						List<BookLoans> oldLoan = alrepo.readLoansById(bookId, branchId, cardNo);
+						BookLoansId id = new BookLoansId(bookId, branchId, cardNo);
+						loan.setId(id);
+//						loan.setBookId(oldLoan.get(0).getId().getBookId());
+						loan.setDateIn(oldLoan.get(0).getDateIn());
+						loan.setDateOut(oldLoan.get(0).getDateOut());
+//						loan.setBranchId(oldLoan.get(0).getId().getBranchId());
+//						loan.setCardNo(oldLoan.get(0).getId().getCardNo());
+						if(newDueDate == null) {
+							loan.setDueDate(oldLoan.get(0).getDueDate());
+						}else {
+							loan.setDueDate(newDueDate);
+						}
+						
+						alrepo.save(loan);
+						return alrepo.findAll();
+			}
+	
 	///meant for overriding due date but can be used to change any of the loan's values
-	@RequestMapping(value = "/overrideBookLoan",  method = RequestMethod.POST, produces = "application/json", consumes="application/json")
-	public List<BookLoans> overrideBookLoan(@RequestBody BookLoans bookLoans) throws SQLException { 
-		
-		LibrarianService ls = new LibrarianService();
-		if(bookLoans.getId().getBookId() == null|bookLoans.getId().getBranchId() == null |bookLoans.getId().getCardNo() == null)
-			return null;
-		int bookId = bookLoans.getId().getBookId();
-		int branchId = bookLoans.getId().getBranchId();
-		int cardNo = bookLoans.getId().getCardNo();
-		BookLoans oldLoan = ls.getBookLoansById(bookId, branchId, cardNo);
-		
-		if(bookLoans.getDateIn()!=null) {
-			oldLoan.setDateIn(bookLoans.getDateIn());
-		}
-		if(bookLoans.getDateOut()!=null) {
-			oldLoan.setDateOut(bookLoans.getDateOut());
-		}
-
-		if(bookLoans.getDueDate()!=null) {
-			oldLoan.setDueDate(bookLoans.getDueDate());
-		}
-		
-		blrepo.save(bookLoans);
-		
-		return ls.getAllBookLoans();
-	}
+//		LibrarianService ls = new LibrarianService();
+//			return null;
+//		int bookId = bookLoans.getId().getBookId();
+//		int branchId = bookLoans.getId().getBranchId();
+//		int cardNo = bookLoans.getId().getCardNo();
+//		BookLoans oldLoan = ls.getBookLoansById(bookId, branchId, cardNo);
+//		
+//		if(bookLoans.getDateIn()!=null) {
+//			oldLoan.setDateIn(bookLoans.getDateIn());
+//		}
+//		if(bookLoans.getDateOut()!=null) {
+//			oldLoan.setDateOut(bookLoans.getDateOut());
+//		}
+//
+//		if(bookLoans.getDueDate()!=null) {
+//			oldLoan.setDueDate(bookLoans.getDueDate());
+//		}
+//		
+//		blrepo.save(bookLoans);
+//		
+//		return ls.getAllBookLoans();
+//	}
 	
 	
 	

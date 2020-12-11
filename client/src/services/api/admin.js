@@ -12,10 +12,13 @@ const deleteConfig = (data, url) => ({
 });
 
 const admin = {
+  authors: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllAuthors`),
+  }),
   books: () => ({
-    // create: (branch) => axios.post(`${adminBaseUrl}/addBranchRE`, branch),
-    // update: (branch) => axios.post(`${adminBaseUrl}/updateBranchRE`, branch),
-    // delete: (branch) => axios(deleteConfig(branch, `${adminBaseUrl}/deleteBranchRE`)),
+    create: (book) => axios.post(`${adminBaseUrl}/addBookRE`, book),
+    update: (book) => axios.post(`${adminBaseUrl}/updateBook`, book),
+    delete: (book) => axios(deleteConfig(book, `${adminBaseUrl}/deleteBookRE`)),
     getAll: () => axios.get(`${adminBaseUrl}/getAllBooks`),
   }),
   branches: () => ({
@@ -37,7 +40,18 @@ const admin = {
     delete: (publisher) => axios(deleteConfig(publisher, `${adminBaseUrl}/deletePublisherRE`))
   }),
   loans: () => ({
-    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`)
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
+    overrideDueDate: (loan) => axios.post(`${adminBaseUrl}/overrideBookLoan`, loan)
+  }),
+  loans: () => ({
+    getAll: () => axios.get(`${adminBaseUrl}/getAllBookLoans`),
+    override: (bookId, branchId, cardNo, newDueDate) => axios.put(`${adminBaseUrl}/overwrite?bookId=${bookId}&branchId=${branchId}&cardNo=${cardNo}&newDueDate=${newDueDate}`, {
+      "id": {
+        "bookId": bookId,
+        "branchId": branchId,
+        "cardNo": cardNo
+      }
+    })
   }),
   borrowers: () => ({
     getAll: () => axios.get(`${adminBaseUrl}/getAllBorrowers`),
