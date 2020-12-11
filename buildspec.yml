@@ -1,0 +1,46 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - mkdir ~/.aws
+      - touch ~/.aws/credentials
+      - echo \[$credentials_profile_name] > ~/.aws/credentials
+      - echo aws_access_key_id=$aws_access_key_id >> ~/.aws/credentials
+      - echo aws_secret_access_key=$aws_secret_access_key >> ~/.aws/credentials
+      - cd client && npm i
+      - touch .env.production
+      - echo REACT_APP_ADMIN_SERVICE_URL=$REACT_APP_ADMIN_SERVICE_URL > .env.production
+      - echo REACT_APP_BORROWER_SERVICE_URL=$REACT_APP_BORROWER_SERVICE_URL >> .env.production
+      - echo REACT_APP_SERVICES_URI=$REACT_APP_SERVICES_URI >> .env.production
+      - touch deploy.sh
+      - echo aws s3 sync build s3://lms-app-microservices-client-app --delete --profile $credentials_profile_name > deploy.sh
+      - chmod +x ./deploy.sh
+      - cd ..
+      - aws s3 cp s3://lma-terraform-config-files/terraform.tfstate terraform/terraform.tfstate
+      - touch api-gateway/.production.env
+      - echo USERS_SERVICE_URI=$USERS_SERVICE_URI > api-gateway/.production.env
+      - touch api-gateway/.deploy.env
+      - echo APPLICATION_NAME=api-gateway > api-gateway/.deploy.env
+      - echo AWS_ACCESS_KEY_ID=$aws_access_key_id >> api-gateway/.deploy.env
+      - echo AWS_ACCESS_KEY_SECRET=$aws_secret_access_key >> api-gateway/.deploy.env
+      - echo CODEDEPLOY_DEPLOYMENT_GROUP_NAME=prod >> api-gateway/.deploy.env
+      - cd node-deploy && npm i
+      - npm link
+      - cd ..
+      - cd api-gateway && npm i
+      - npm run linkall
+      - cd ..
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling...
+      - cd client
+      - npm run deploy
+      - cd ..
+      - cd api-gateway
+      - npm run deploy
+      - cd ..
+  post_build:
+    commands:
+      - echo Build completed on `date`
