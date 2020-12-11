@@ -3,18 +3,20 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - aws s3 cp s3://lma-terraform-config-files/microservices_demo.key terraform/microservices_demo.key
-      - aws s3 cp s3://lma-terraform-config-files/microservices_demo.pem terraform/microservices_demo.pem
-      - aws s3 cp s3://lma-terraform-config-files/terraform.tfvars terraform/terraform.tfvars
-      - aws s3 cp s3://lms-api-gateway-config-files/.deploy.env api-gateway/.deploy.env
-      - aws s3 cp s3://lms-api-gateway-config-files/.production.env api-gateway/.production.env
+      - cd client && npm i
+      - touch .production.env
+      - echo REACT_APP_ADMIN_SERVICE_URL=http://3.138.189.210:8080 > .production.env
+      - echo REACT_APP_BORROWER_SERVICE_URL=http://54.172.169.206:8090 >> .production.env
+      - echo REACT_APP_SERVICES_URI=http://54.167.167.103 >> .production.env
+      - touch deploy.sh
+      - echo aws s3 sync build s3://lms-app-microservices-client-app --delete --profile microservices-lms > deploy.sh
+      - chmod +x ./deploy.sh
+      - cd ..
   build:
     commands:
-      - cd terraform
-      - terraform init
-      - terraform apply
-      - cd ../node-deploy && npm i
-      - npm run link
-      - cd ../api-gateway && npm i
-      - npm run linkall
-      - npm run deploy
+      - echo Build started on `date`
+      - echo Compiling...
+      - cd client && npm run deploy
+  post_build:
+    commands:
+      - echo Build completed on `date`
