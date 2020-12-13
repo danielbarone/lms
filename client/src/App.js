@@ -28,21 +28,39 @@ const App = () => {
 
   const dispatch = useDispatch();
   const [initialised, setInitialised] = useState(false);
+  const [failedGetSession, setFailedGetSession] = useState(false);
 
-  useEffect(() => {
-    graphqlClient.query({ query }).then(({ data }) => {
+  const getSession = () => graphqlClient.query({ query })
+    .then(({ data }) => {
       if (data.userSession) {
         dispatch(setSession(data.userSession));
       }
       setInitialised(true);
     });
+
+  const sessionTimeout = () => {
+    const timer = setTimeout(() => {
+      setFailedGetSession(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  };
+
+  useEffect(() => {
+    getSession();
+    sessionTimeout();
   }, []);
 
   if (!initialised) {
     return (
-      <div className={classes.spinnerContainer}>
-        <CircularProgress className={classes.spinner}/>
-      </div>
+      <>
+        {failedGetSession ? (
+          <h1>Network error.</h1>
+        ) : (
+          <div className={classes.spinnerContainer}>
+            <CircularProgress className={classes.spinner}/>
+          </div>
+        )}
+      </>
     );
   }
 
