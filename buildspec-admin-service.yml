@@ -11,7 +11,15 @@ phases:
   build:
     commands:
       - echo Building lms admin service...
-      - cd java-api/LMSHAdmin
+      - cd java-api/LMSHAdmin/src/main
+      - mkdir resources && cd resources
+      - touch application.properties
+      - echo spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver > application.properties
+      - echo spring.datasource.username=$db_username >> application.properties
+      - echo spring.datasource.password=$db_password >> application.properties
+      - echo spring.datasource.url=$db_url >> application.properties
+      - echo spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl >> application.properties
+      - cd ../../..
       - mvn install
       - cd ../..
 artifacts:
