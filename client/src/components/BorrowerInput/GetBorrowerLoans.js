@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loanActions } from '../../services/actions';
 import { EntityTable } from '..';
 
-
-/* Components */
-import { borrowerApi } from '../../utils/api';
 /* Styles */
 import useStyles from './BorrowerInput.styles';
 

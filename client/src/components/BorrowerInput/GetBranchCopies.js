@@ -12,10 +12,6 @@ import { EntityTable2 } from '..';
 // import java.sql.Date;
 
 
-
-/* Components */
-//import { borrowerApi } from '../../utils/api';
-
 ///This will need to be reworked
 import {borrower as borrowerApi} from "../../services/api/";
 
