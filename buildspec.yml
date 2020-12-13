@@ -3,6 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      # client
       - mkdir ~/.aws
       - touch ~/.aws/credentials
       - echo \[$credentials_profile_name] > ~/.aws/credentials
@@ -17,6 +18,7 @@ phases:
       - echo aws s3 sync build s3://lms-app-microservices-client-app --delete --profile $credentials_profile_name > deploy.sh
       - chmod +x ./deploy.sh
       - cd ..
+      # api-gateway
       - aws s3 cp s3://lma-terraform-config-files/terraform.tfstate terraform/terraform.tfstate
       - touch api-gateway/.production.env
       - echo USERS_SERVICE_URI=$USERS_SERVICE_URI > api-gateway/.production.env
@@ -31,6 +33,17 @@ phases:
       - cd api-gateway && npm i
       - npm run linkall
       - cd ..
+      # users-service
+      - touch users-service/.production.env
+      - echo DB_URI=$DB_URI > users-service/.production.env
+      - touch users-service/.deploy.env
+      - echo APPLICATION_NAME=users-service > users-service/.deploy.env
+      - echo AWS_ACCESS_KEY_ID=$aws_access_key_id >> users-service/.deploy.env
+      - echo AWS_ACCESS_KEY_SECRET=$aws_secret_access_key >> users-service/.deploy.env
+      - echo CODEDEPLOY_DEPLOYMENT_GROUP_NAME=prod >> users-service/.deploy.env
+      - cd users-service && npm i
+      - npm run linkall
+      - cd ..
   build:
     commands:
       - echo Build started on `date`
@@ -39,6 +52,9 @@ phases:
       - npm run deploy
       - cd ..
       - cd api-gateway
+      - npm run deploy
+      - cd ..
+      - cd users-service
       - npm run deploy
       - cd ..
   post_build:
