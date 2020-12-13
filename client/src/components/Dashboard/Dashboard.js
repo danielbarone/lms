@@ -14,14 +14,15 @@ const TYPE_LIBRARIAN = '001';
 const TYPE_BORROWER = '002';
 
 const parseUserData = (session) => {
-  /* userDataArr --> [user type, user data 1, user data 2] */
   const userDataArr = session.user.contactId.split('-').slice(0, 3);
+  const fullName = `${session.user.firstName} ${session.user.lastName}`;
   const userType = session.user.userType;
 
   switch (userType) {
     case TYPE_ADMIN:
       return {
-        userType: 'Administrator',
+        userType: 'Admin',
+        fullName,
         routes: (
           <AdminRoutes
             userType={userType}
@@ -31,6 +32,7 @@ const parseUserData = (session) => {
     case TYPE_BORROWER:
       return {
         userType: 'Borrower',
+        fullName,
         routes: (
           <BorrowerRoutes
             cardNo={parseInt(userDataArr[1] + userDataArr[2], 10)}
@@ -41,6 +43,7 @@ const parseUserData = (session) => {
     case TYPE_LIBRARIAN:
       return {
         userType: 'Librarian',
+        fullName,
         routes: (
           <LibrarianRoutes
             branchId={parseInt(userDataArr[1] + userDataArr[2], 10)}
