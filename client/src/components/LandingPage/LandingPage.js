@@ -22,6 +22,7 @@ import {
 import { history, UnauthRoutes } from '../../navigation';
 import useStyles from './LandingPage.styles';
 import { useTheme } from '../../theme/ThemeContext';
+import libraryIcon from '../../assets/img/library_icon.webp';
 import {
   AuthButton,
   AvatarBtn,
@@ -172,8 +173,9 @@ function LandingPage(props) {
               className={classes.appBarTitleContainer}
               onClick={(event) => handleListItemClick(event, '')}
             >
+              <img src={libraryIcon} height='60' style={{ marginRight: '8px' }} />
               <Typography variant="h6" className={classes.appBarText} noWrap>
-                LMS {props.userData ? `- ${props.userData.userType}` : ''}
+                {props.userData ? `${props.userData.fullName}` : 'Library MS'}
               </Typography>
             </div>
             <div className={classes.appBarRightItems}>

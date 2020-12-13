@@ -2,9 +2,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Button, CircularProgress, TextField, Hidden } from '@material-ui/core';
 
-
-/* Components */
-import { borrowerApi } from '../../utils/api';
 /* Styles */
 import useStyles from './BorrowerInput.styles';
 import GetBorrower from './GetBorrower';
