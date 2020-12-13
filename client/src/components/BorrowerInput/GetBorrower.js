@@ -4,9 +4,6 @@ import { CircularProgress, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { borrower2Actions as borrowerActions } from '../../services/actions';
 
-
-/* Components */
-import { borrowerApi } from '../../utils/api';
 /* Styles */
 import useStyles from './BorrowerInput.styles';
 

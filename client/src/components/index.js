@@ -20,6 +20,7 @@ import Icon from './Icon/Icon';
 import InputModal from './Modal/InputModal';
 import LandingPage from './LandingPage/LandingPage';
 import Librarian from './Librarian/Librarian';
+import Loading from './Feedback/Loading';
 import LogIn from './LogIn/LogIn';
 import Preview from './Preview/Preview';
 import Register from './Register/Register';
@@ -49,6 +50,7 @@ export {
   InputModal,
   LandingPage,
   Librarian,
+  Loading,
   LogIn,
   Preview,
   Register,

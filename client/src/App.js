@@ -1,54 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { CircularProgress } from '@material-ui/core';
-import gql from 'graphql-tag';
-import { Dashboard } from './components';
-import graphqlClient from './utils/graphqlClient';
+import { graphqlClient, queries } from './utils';
 import { setSession } from './services/Session/actions';
-import useStyles from './App.styles';
+import { Dashboard, Loading } from './components';
 
-const query = gql`
-  {
-    userSession(me: true) {
-      id
-      user {
-        contactId
-        email
-        id
-        firstName
-        lastName
-        userType
-      }
-    }
-  }
-`;
+const query = queries.userSession;
 
 const App = () => {
-  const classes = useStyles();
-
   const dispatch = useDispatch();
   const [initialised, setInitialised] = useState(false);
 
-  useEffect(() => {
-    graphqlClient.query({ query }).then(({ data }) => {
+  const getSession = () => graphqlClient.query({ query })
+    .then(({ data }) => {
       if (data.userSession) {
         dispatch(setSession(data.userSession));
       }
       setInitialised(true);
     });
+
+  useEffect(() => {
+    getSession();
   }, []);
 
-  if (!initialised) {
-    return (
-      <div className={classes.spinnerContainer}>
-        <CircularProgress className={classes.spinner}/>
-      </div>
-    );
-  }
-
-  return (
-    <Dashboard />
-  );
+  return initialised
+    ? <Dashboard />
+    : <Loading duration={3000} timeoutMsg={'Network Error.'} />;
 };
 
 export default App;

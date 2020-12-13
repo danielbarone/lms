@@ -8,9 +8,6 @@ import { EntityTable3 } from '..';
 import { branchBookCopiesActions } from '../../services/actions';
 import { bookActions } from '../../services/actions';
 
-
-/* Components */
-import { borrowerApi } from '../../utils/api';
 /* Styles */
 import useStyles from './BorrowerInput.styles';
 
