@@ -10,7 +10,7 @@ import GetBorrowerBranchLoans from './GetBorrowerBranchLoans';
 import Branch from '../Branch/Branch';
 import BranchSelector from '../Branch/BranchSelector';
 import GetBranchCopies from './GetBranchCopies';
-//import { useDispatch, useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 //import { BranchList } from '..';
 
 
@@ -26,6 +26,7 @@ const BorrowerInput = (props) => {
     //const cardNo = 123;
     //var textCardNo = 111;
     //const theState = useSelector((state) => state);
+    
     const [cardNo, setCardNo] = useState(0); 
     const [isBorrowLock, setBorrowLock] = useState(false); 
     const [buttonName1, setButtonName1] = useState("Submit");
@@ -36,6 +37,7 @@ const BorrowerInput = (props) => {
     const [branchId, setBranchId] = useState(2);
     const [isCheckingOut, setIsCheckingOut] = useState(false);
     const [isReturning, setIsReturning] = useState(false);
+    const [isCardNoGood, setIsCardNoGood] = useState(false);
 
 
     //componentWillMount(){
@@ -50,10 +52,14 @@ const BorrowerInput = (props) => {
     
     const handleCardNo = (cardNo) =>{
         if(cardNo == undefined){
-
+            setIsCardNoGood(false);
         }
         else{
             setCardNo(cardNo)
+            if(cardNo>0)
+            setIsCardNoGood(true);
+            else
+            setIsCardNoGood(false);
         }
     }
 
@@ -71,7 +77,7 @@ const BorrowerInput = (props) => {
             setButtonName1("Submit");
         }
         else{
-            setButtonName1("Back");
+            setButtonName1("Back to Borrower Selection");
         }
         setBorrowLock(!isBorrowLock)
         
@@ -147,8 +153,6 @@ const BorrowerInput = (props) => {
     }
 
     const RenderBranches = () =>{
-        // console.log("The State");
-        // console.log(theState);
         if(!isBorrowLock){
             return null;
         }
@@ -182,7 +186,6 @@ const BorrowerInput = (props) => {
                    <Button onClick={() => { handleIsReturning()}} label={"return"}>
                 Return A Book
                 </Button>
-               {/* <RenderBranchCopies /> */}
                 </div>
             
             )
@@ -190,27 +193,6 @@ const BorrowerInput = (props) => {
         else{
             return(
             <div>
-            {/* ########
-            <br/>
-            Branch List
-            <br />
-            ######## */}
-                {/* <BranchList /> */}
-                {/*This text field will be taken out once the ui table works */}
-                {/* <TextField id="branchIdField" type="number"  InputProps={{
-                        className: classes.root
-                    }}
-                    // disabled={isBorrowLock}
-                    autoFocus={true} 
-                    label="branchId"
-                    placeholder="000"
-                    style = {{width: 70}}
-                        onChange={(e) => handleBranchId(e.target.value)}
-                    />
-                    <Button onClick={() => { handleBranchSelected() } } label ={"branchSelect"}>
-                {buttonName3}
-                </Button> */}
-                {/* <Branch /> */}
                 <BranchSelector cardNo={cardNo} />
             </div>
         )
@@ -282,14 +264,44 @@ const BorrowerInput = (props) => {
         }
     }
     
+    const RenderTextHead = () =>{
+        return(
+            <div>
+                
+      Please enter your borrower Id<br/>
+            </div>
+        )
+    }
 
 
     //Fix color on text field later
+   if (props.cardNo){
+       if(!cardNo){
+           setCardNo(props.cardNo)
+       }
+    // handleBorrowLock()
+    if(!isBorrowLock){
+        setBorrowLock(true)
+    }
+    return(
+        <div>
+        {/* CardNo {props.cardNo} */}
+        
+        <RenderBorrower /> 
+        <br />
+        <RenderBranches /> <br />
+        </div> 
+    )
+   }
+   else
 return(
     <div className={classes.root}>
-    
+      {/* Borrowers.....
+      Please enter your borrower Id<br/> */}
+      { isBorrowLock ? null : <RenderTextHead /> }
     {/* <RenderCardNoInput /> */}
-    
+      {props.cardNo}
+    { isBorrowLock ? null :
     <TextField id="cardNoField" type="number"  InputProps={{
     className: classes.root
   }}
@@ -298,21 +310,25 @@ return(
   label="cardNo"
   placeholder="000"
   style = {{width: 70}}
+  hidden={isBorrowLock}
   
 onChange={(e) => handleCardNo(e.target.value)}
    />
+    }
 
  
-  <Button onClick={() => { handleBorrowLock() } } label ={"Lock"}>
+  <Button 
+  onClick={() => { handleBorrowLock() } }
+   label ={"Lock"}
+    className={classes.button1}
+    disabled={!isCardNoGood}
+    >
       {buttonName1}
   </Button> 
-       <RenderBorrower /> <br />
-       <RenderBorrowerLoansButton /> <br />
-       <RenderBranches /> <br />
-       {/* For Testing remove later */}
-       {/* <GetBranchCopies branchId={1} cardNo={123}  /><br/> */}
-       {/* <GetBorrowerBranchLoans cardNo={123} branchId={1} /><br/> */}
-        
+       <RenderBorrower /> 
+       <br />
+       {/* <RenderBorrowerLoansButton /> <br /> */}
+       <RenderBranches /> <br />      
     </div>
 );
 }

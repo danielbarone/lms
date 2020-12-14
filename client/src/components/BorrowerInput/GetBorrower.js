@@ -1,6 +1,6 @@
 /* React */
 import React, { useEffect, useState, useCallback } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { borrower2Actions as borrowerActions } from '../../services/actions';
 
@@ -37,10 +37,8 @@ useEffect(() => {
   dispatch(borrowerActions.getBorrowerByCardNo(props.cardNo));
 }, []);
 // const borrower2 = useSelector((state) => state.borrower.borrowers);
-// console.log("Borrower");
-// console.log(borrower);
-// console.log(borrower2);
-// console.log(props.cardNo);
+
+
 
   if (!borrower) {
     return (
@@ -63,14 +61,32 @@ useEffect(() => {
 
   return (
     <div>
-    ----------------Borrower---------------
+
+{/* <Button 
+  onClick={() => { console.log("Click")} }
+   label ={"Lock"}
+    className={classes.button1}
+   
+    >
+      Submit
+  </Button>  */}
+
+    <div 
+   // style={{ backgroundColor: 'green' }}
+   className={classes.borrowerCardBackground}
+    >
+
+    <div className={classes.borrowerCardText}>
+    
+    <span className={classes.borrowerCardLines}> Borrower Card </span>
     <br />
-        CardNo: {borrower.cardNo}<br />
-        Name: {borrower.name}
+        CardNo: <span className={classes.borrowerCardInfo1}> {borrower.cardNo}</span> <br />
+        Name: <span className={classes.borrowerCardInfo1}> {borrower.name} </span>
     <br />
     ---------------------------------------
     <br />   
-      
+    </div>
+    </div>
     </div>
   );
 };

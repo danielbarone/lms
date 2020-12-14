@@ -4,7 +4,8 @@ import {
   DataGrid,
   GridOverlay,
 } from '@material-ui/data-grid';
-import { CircularProgress, LinearProgress } from '@material-ui/core';
+import { CircularProgress, LinearProgress, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide} from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import useStyles from './EntityTable.styles';
 import { CustomChip, Icon, Svg } from '..';
 import { loanActions } from '../../services/actions';
@@ -64,10 +65,34 @@ const EntityTable3 = (props) => {
   const [returningBook, setReturningBook] = useState(false);
   const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
+  const [currentLoan, setCurrentLoan]= useState([]);
+  const [warnAlert, setWarnAlert] = useState(true);
+  const [seeAlert, setSeeAlert] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loanSucc, setLoanSucc] = useState("The return was a success.")
   const dispatch = useDispatch();
 //    console.log("Table2");
 //    console.log(props);
 //   console.log(data);
+
+
+const LoanAlert = () => {
+  if(warnAlert){
+  return(
+    <div>
+  <Alert severity="warning">You have already returned the book '{currentLoan.title}' on {currentLoan.dateIn}.</Alert>
+    </div>
+  )
+}
+else{
+  return(
+    <div>
+  <Alert severity="success"> {loanSucc}   </Alert>
+    </div>
+  )
+}
+}
+
 
 
 function isReturningBook (loan){
@@ -103,10 +128,77 @@ function isReturningBook (loan){
 
     ///Should this have a confirmation like checkout?
     //Also will change bookId to just have title
-    alert("You have returned bookId: '"+ loan.bookId+"' on "+DI2)
+    //alert("You have returned bookId: '"+ loan.bookId+"' on "+DI2)
+    var shortDI2=(""+DI2).substring(0,10);
+    setLoanSucc("You have succesfully returned the book: '"+ loan.title+"' on "+shortDI2);
+    setSeeAlert(true);
+    setWarnAlert(false);
+    setCurrentLoan([]);
     //console.log("isReturning")
   }
 
+
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  
+
+   function AlertDialogSlide() {
+  
+     function returnBook (){
+      isReturningBook(currentLoan);    
+     }
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+      <div>
+        {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Slide in alert dialog
+        </Button> */}
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">{"Confirm return."}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Please confirm that you wish to return the book '
+              <span style={{ color: 'blue' }}>
+              {currentLoan.title}
+              </span>
+              '.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() =>{setOpen(false)}} color="primary">
+              Cancel
+            </Button>
+            <Button onClick= {()=>
+            {  
+              returnBook();
+              setOpen(false);
+               }
+            } 
+             
+                color="primary">
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
 
 
 
@@ -126,6 +218,8 @@ function isReturningBook (loan){
   return (
     <div>
       <div className={classes.root}>
+      { seeAlert ? <LoanAlert /> : null }
+      { open ? <AlertDialogSlide /> : null }
         <DataGrid
           //checkboxSelection
           className={classes.dataGrid}
@@ -135,6 +229,7 @@ function isReturningBook (loan){
             setSelection(newSelection.rows);
           }}
          // rows={data}
+         hideFooter={true}
          rows={data.map((rows) => ({
             ...rows,
             
@@ -146,16 +241,22 @@ function isReturningBook (loan){
           }))}
           
           onRowClick={(evt,rowData)=>{{
-             //console.log("RowData");
-              //console.log(evt);
-             //console.log(evt.rowModel);
+            //  console.log("RowData");
+            //   console.log(evt);
+            //  console.log(evt.rowModel);
+             setCurrentLoan(evt.rowModel.data);
               if(evt.rowModel.data.dateIn!= null && evt.rowModel.data.dateIn != "null" ){
                 
                   //console.log("You have already returned this book");
-                  alert("You have already returned this book");
+                  setWarnAlert(true);
+                  setSeeAlert(true);
+                  //alert("You have already returned this book");
               }
               else{
-                isReturningBook(evt.rowModel.data);
+                setCurrentLoan(evt.rowModel.data);
+                AlertDialogSlide();
+                setOpen(true);
+                //isReturningBook(evt.rowModel.data);
                   //console.log("Returned Book");
               }
               }}}

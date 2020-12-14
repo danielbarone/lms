@@ -20,6 +20,11 @@ export { genresReducer as genres } from './Genres/reducers';
 export { genreReducer as genre } from './Genres/reducers';
 export { updatedGenreReducer as updatedGenre } from './Genres/reducers';
 
+/* Borrower Reducers*/
+export { default as borrower2 } from './Borrower/reducers';
+//export { default as loans } from './Loans/reducers';
+export { bBooksReducer as branchBooks2 } from './BranchBookCopies/reducers';
+export { bookCopiesReducer as branchBooksCopies } from './BranchBookCopies/reducers';
 //Admin Loans Reducers
 export { loansReducer as loans } from './Loans/reducers';
 export { overrideReducer as updatedLoan } from './Loans/reducers';

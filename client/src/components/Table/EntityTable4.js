@@ -57,10 +57,8 @@ CustomOverlay.propTypes = {
 const EntityTable4 = (props) => {
   const classes = useStyles(props);
   const { cols, rows } = props;
-//   const cardNo = props.cardNo;
   const [selection, setSelection] = useState([]);
   const [branch, setBranch] = useState([]);
-
   const [selectingBranch, setSelectingBranch] = useState(false);
   const [branchSelected, setBranchSelected] = useState(false);
   const [branchId, setBranchId] = useState();
@@ -68,11 +66,8 @@ const EntityTable4 = (props) => {
   const [data, setData] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
-  //const dispatch = useDispatch();
   const cardNo = props.cardNo;
-//    console.log("Table2");
-//    console.log(props);
-//   console.log(data);
+
 
 const handleBackCheckReturn = () =>{
     setIsCheckingOut(false);
@@ -85,7 +80,7 @@ const RenderBranchCopies = () =>{
 
     return(
         <div>
-        <GetBranchCopies branchId={branchId} cardNo={cardNo}  />
+        <GetBranchCopies branchId={branchId} cardNo={cardNo} branchName={branch.name} branch={branch} />
         </div>
     )
 }
@@ -96,29 +91,24 @@ const RenderBorrowerBranchLoans = () =>{
 
     return(
         <div>
-        
-        <GetBorrowerBranchLoans cardNo={cardNo} branchId={branchId} />
+        <GetBorrowerBranchLoans cardNo={cardNo} branchId={branchId} branch={branch} />
         </div>
     )
 }
 
 
 function selectBranch (branch){
-    // console.log("Branch");
-    // console.log(branch);
     setSelectingBranch(true);
     setCounter(counter+1);
     setBranchId(branch.id);
-    //console.log("selecting Branch")
+    setBranch(branch);
   }
 
 
 
 
   useEffect(() => {
-      //console.log("ET4 Use Effect");
       if(selectingBranch){
-          //console.log("Selecting Branch");
         setSelectingBranch(false);
         setBranchSelected(true);
       }
@@ -129,9 +119,11 @@ function selectBranch (branch){
    if(isCheckingOut | isReturning){
         return(
             <div>
-                <Button onClick={() => { handleBackCheckReturn()}} label={"checkout"}>
+                <Button onClick={() => { handleBackCheckReturn()}} label={"checkout"} className={classes.button1}>
             Go Back
             </Button>
+            <br/>
+            <br/>
             <RenderBranchCopies />
             <RenderBorrowerBranchLoans />
             </div>
@@ -141,17 +133,18 @@ function selectBranch (branch){
 
       <div>
       
-           <Button onClick={() => { setBranchSelected(false)}} label={"checkout"}>
+           <Button onClick={() => { setBranchSelected(false)}} label={"checkout"} className={classes.button1}>
                 Go Back To Branch Selection
                 </Button> <br />
                 <br/>
-                    Current Branch: {branchId} <br />
-                   Do you which to checkout a book or return a book? 
+                    Current Branch: <span className={classes.highlight}>{branch.name}</span> <br />
+                   Do you wish to checkout a book or return a book? 
                    <br/> 
-                <Button onClick={() => { setIsCheckingOut(true)}} label={"checkout"}>
+                   <br/>
+                <Button onClick={() => { setIsCheckingOut(true)}} label={"checkout"} className={classes.button1}>
                 Checkout
                 </Button>
-                   <Button onClick={() => { setIsReturning(true)}} label={"return"}>
+                   <Button onClick={() => { setIsReturning(true)}} label={"return"} className={classes.button1}>
                 Return A Book
                 </Button>
                 {/* <GetBranchCopies branchId={branchId} cardNo={cardNo}  /> */}
@@ -164,12 +157,19 @@ function selectBranch (branch){
   
   return (
     <div>
+    Select which branch you want
       <div className={classes.root}>
         <DataGrid
           //checkboxSelection
           className={classes.dataGrid}
           //disableClickEventBubbling
          // disableSelectionOnClick = {(true) ? false : true}
+         //disableExtendRowFullWidth = {true}
+         //autoPageSize = {true}
+         //spacing={6}
+         scrollbarSize={20}
+         hideFooter={true}
+     
           onSelectionChange={(newSelection) => {
             setSelection(newSelection.rows);
           }}

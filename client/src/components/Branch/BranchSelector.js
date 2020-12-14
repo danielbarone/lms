@@ -1,6 +1,9 @@
 /* React */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+/* Material UI*/
+import {Button, CircularProgress, LinearProgress } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 /* Styles */
 import useStyles from './Branch.styles';
 /* Components */
@@ -27,13 +30,16 @@ const formColsUpdDel = [
 
 const BranchSelector = (props) => {
   const classes = useStyles(props);
+  //Cant call state or you will get an infinite loop
+  // const theState = useSelector((state) => state);
+  const borrower = useSelector((state) => state.borrower2);
   const branches = useSelector((state) => state.branches.branches);
   const loading = useSelector((state) => state.branches.loading);
   const dispatch = useDispatch();
 
-  const createBranch = (branch) => branchActions.addBranch(branch);
-  const updateBranch = (branch) => branchActions.updateBranch(branch);
-  const deleteBranch = (branch) => branchActions.deleteBranch(branch);
+  // const createBranch = (branch) => branchActions.addBranch(branch);
+  // const updateBranch = (branch) => branchActions.updateBranch(branch);
+  // const deleteBranch = (branch) => branchActions.deleteBranch(branch);
   const getBranches = () => dispatch(branchActions.getBranches2());
   const cardNo = props.cardNo;
 
@@ -41,33 +47,32 @@ const BranchSelector = (props) => {
     getBranches();
   }, []);
 
+  
+  if(branches === null){
+    return(
+    <div className={classes.spinnerContainer}>
+    <CircularProgress className={classes.spinner} />
+  </div>
+    )
+    }
+    else{
+      console.log("Borrower");
+      console.log(borrower);
+      if( !borrower.borrowers || !borrower.borrowers.cardNo)
+      return(
+        <div>
+       <Alert severity="error"> No user found with this cardNo. Please double check your number.  </Alert>
+        </div>
+      )
+      else{
+       
   return (
     <div className={classes.root}>
       {/* Temp div style */}
       <div style={{ display: 'flex', justifyContent: 'start' }}>
-        {/* <InputModal
-          action={createBranch}
-          columns={formColumns}
-          details='Enter details for the new branch you would like to add.'
-          title='New Branch'
-          refresh={getBranches}
-        />
-        <InputModal
-          action={updateBranch}
-          columns={formColsUpdDel}
-          details='Edit details for the branch you would like to update.'
-          title='Update Branch'
-          refresh={getBranches}
-        />
-        <InputModal
-          action={deleteBranch}
-          columns={formColsUpdDel}
-          details='Review details of the branch you are about to delete.'
-          title='Delete Branch'
-          refresh={getBranches}
-        /> */}
+    
       </div>
-      Select which branch you want
+      {/* Select which branch you want */}
       <EntityTable4
         cols={columns}
         icon='library'
@@ -78,5 +83,7 @@ const BranchSelector = (props) => {
     </div>
   );
 };
+    }
+}
 
 export default BranchSelector;
