@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { graphqlClient, queries } from './utils';
-import { setSession } from './services/Session/actions';
 import { Dashboard, Loading } from './components';
+import { setSession } from './services/Session/actions';
 
 const query = queries.userSession;
 
