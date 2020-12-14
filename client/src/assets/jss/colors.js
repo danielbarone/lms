@@ -10,7 +10,6 @@ const SUCCESS = '#A3BE8C';
 const WARNING = '#D08770';
 const WHITE = '#fff';
 const YELLOW = '#EBCB8B';
-
 export {
   DISABLED,
   DARKS,
