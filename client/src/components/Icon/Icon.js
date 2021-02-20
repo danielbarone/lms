@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -38,6 +39,7 @@ const icons = {
   default: SentimentVeryDissatisfiedIcon,
   email: MailOutlineIcon,
   face: FaceIcon,
+  forward: ArrowForwardIosIcon,
   help: LiveHelpIcon,
   info: DevicesIcon,
   library: AccountBalanceIcon,

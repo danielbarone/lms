@@ -5,6 +5,33 @@ import { colors } from '../assets';
 const light = createMuiTheme({
   // Buttons
   buttons: {
+    jumbotron: {
+      filled: {
+        backgroundColor: colors.DARKS[1],
+        borderColor: 'transparent',
+        borderRadius: '0',
+        boxShadow: 'none !important',
+        color: colors.WHITE,
+        textTransform: 'none',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: `${colors.HIGHLIGHTS[1]} !important`,
+        },
+      },
+      outlined: {
+        backgroundColor: 'transparent',
+        border: `solid 1px ${colors.DARKS[1]}`,
+        borderRadius: '0',
+        boxShadow: 'none !important',
+        color: colors.DARKS[1],
+        textTransform: 'none',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: `${colors.HIGHLIGHTS[1]} !important`,
+          color: colors.DARKS[0],
+        },
+      },
+    },
     primary: {
       color: colors.DARKS[2],
       borderColor: 'transparent',
@@ -92,6 +119,7 @@ const light = createMuiTheme({
       disabled: colors.DISABLED[0],
       error: colors.ERROR,
       highlight: colors.HIGHLIGHTS[1],
+      labelValue: colors.DISABLED[0],
       purple: colors.PURPLE,
       success: colors.SUCCESS,
       warning: colors.WARNING,
@@ -118,7 +146,7 @@ const light = createMuiTheme({
   // Fonts
   fonts: {
     logo: {
-      background: `-webkit-linear-gradient(45deg, ${colors.DARKS[4]}, ${colors.HIGHLIGHTS[3]} 80%)`,
+      background: `-webkit-linear-gradient(45deg, ${colors.DARKS[0]}, ${colors.DARKS[0]} 80%)`,
       '-webkit-background-clip': 'text',
       '-webkit-text-fill-color': 'transparent',
       fontSize: '1.2em',
@@ -187,6 +215,35 @@ const light = createMuiTheme({
 const dark = createMuiTheme({
   // Buttons
   buttons: {
+    jumbotron: {
+      filled: {
+        backgroundColor: colors.HIGHLIGHTS[3],
+        borderColor: 'transparent',
+        borderRadius: '0',
+        boxShadow: 'none !important',
+        color: colors.WHITE,
+        textTransform: 'none',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: `${colors.HIGHLIGHTS[3]} !important`,
+          color: colors.WHITE,
+          filter: 'brightness(75%)',
+        },
+      },
+      outlined: {
+        backgroundColor: 'transparent',
+        border: `solid 1px ${colors.DARKS[4]}`,
+        borderRadius: '0',
+        boxShadow: 'none !important',
+        color: colors.WHITES[0],
+        textTransform: 'none',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: 'rgba(94, 129, 172, 0.2)',
+          border: `solid 1px ${colors.HIGHLIGHTS[3]}`,
+        },
+      },
+    },
     primary: {
       color: colors.DARKS[2],
       borderColor: 'transparent',
@@ -272,6 +329,7 @@ const dark = createMuiTheme({
       disabled: colors.DISABLED[0],
       error: colors.ERROR,
       highlight: colors.HIGHLIGHTS[1],
+      labelValue: colors.WHITES[0],
       purple: colors.PURPLE,
       success: colors.SUCCESS,
       warning: colors.WARNING,
@@ -298,7 +356,7 @@ const dark = createMuiTheme({
   // Fonts
   fonts: {
     logo: {
-      background: `-webkit-linear-gradient(45deg, ${colors.WHITES[2]}, ${colors.HIGHLIGHTS[1]} 80%)`,
+      background: `-webkit-linear-gradient(45deg, ${colors.WHITES[3]}, ${colors.WHITES[3]} 80%)`,
       '-webkit-background-clip': 'text',
       '-webkit-text-fill-color': 'transparent',
       fontSize: '1.2em',

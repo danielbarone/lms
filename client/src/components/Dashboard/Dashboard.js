@@ -25,6 +25,7 @@ const parseUserData = (session) => {
         fullName,
         routes: (
           <AdminRoutes
+            session={session}
             userType={userType}
           />
         ),
@@ -36,6 +37,7 @@ const parseUserData = (session) => {
         routes: (
           <BorrowerRoutes
             cardNo={parseInt(userDataArr[1] + userDataArr[2], 10)}
+            session={session}
             userType={userType}
           />
         ),
@@ -47,6 +49,7 @@ const parseUserData = (session) => {
         routes: (
           <LibrarianRoutes
             branchId={parseInt(userDataArr[1] + userDataArr[2], 10)}
+            session={session}
             userType={userType}
           />
         ),
