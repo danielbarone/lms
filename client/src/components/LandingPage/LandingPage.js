@@ -175,7 +175,7 @@ function LandingPage(props) {
             >
               <img src={libraryIcon} height='60' style={{ marginRight: '8px' }} />
               <Typography variant="h6" className={classes.appBarText} noWrap>
-                {props.userData ? `${props.userData.fullName}` : 'LMS'}
+                {props.userData ? `${props.userData.fullName} - Dashboard` : 'LMS'}
               </Typography>
             </div>
             <div className={classes.appBarRightItems}>

@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Book.styles';
 /* Components */
-import { BookForm, EntityTable, InputModal } from '..';
+import {
+  BookForm,
+  EntityTable,
+  Icon,
+  InputModal,
+} from '..';
 import { bookActions } from '../../services/actions';
 
 const formatAuthors = (authors) => {
@@ -93,32 +98,44 @@ const Book = (props) => {
   return (
     <div className={classes.root}>
       {/* Temp div style */}
-      <div style={{ display: 'flex', justifyContent: 'start' }}>
-        <InputModal
-          action={createBook}
-          details='Enter details for the new book you would like to add.'
-          title='New Book'
-          refresh={getBooks}
-          CustomForm={BookForm}
-        />
-        <InputModal
-          action={updateBook}
-          details='Edit details for the book you would like to update.'
-          title='Update Book'
-          refresh={getBooks}
-          CustomForm={BookForm}
-          requireId={true}
-        />
-        <InputModal
-          action={deleteBook}
-          details='Edit details for the book you would like to delete.'
-          title='Delete Book'
-          refresh={getBooks}
-          CustomForm={BookForm}
-          requireId={true}
-        />
-      </div>
       <EntityTable
+        addAction={() => (
+          <InputModal
+            action={createBook}
+            details='Enter details for the new book you would like to add.'
+            title={<Icon name='add' color='white' />}
+            titleText='New Book'
+            refresh={getBooks}
+            CustomForm={BookForm}
+          />
+        )}
+        deleteAction={(info) => (
+          <InputModal
+            action={deleteBook}
+            details='Edit details for the book you would like to delete.'
+            info={info}
+            modal='delete'
+            title={<Icon name='delete' color='white' />}
+            titleText='Delete Book'
+            refresh={getBooks}
+            CustomForm={BookForm}
+            requireId={true}
+          />
+        )}
+        updateAction={(info) => (
+          <InputModal
+            action={updateBook}
+            details='Edit details for the book you would like to update.'
+            info={info}
+            modal='update'
+            title={<Icon name='edit' color='white' />}
+            titleText='Update Book'
+            refresh={getBooks}
+            CustomForm={BookForm}
+            requireId={true}
+          />
+        )}
+        icon={'library'}
         rows={books}
         cols={columns}
         loading={loading}

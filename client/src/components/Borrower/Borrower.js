@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './Borrower.styles';
-import { EntityTable, InputModal } from '..';
+import { EntityTable, Icon, InputModal } from '..';
 import { borrowerActions } from '../../services/actions';
 
 const columns = [
@@ -47,30 +47,41 @@ const Borrower = (props) => {
 
   return (
     <div className={classes.root}>
-      <div style={{ display: 'flex', justifyContent: 'start' }}>
-        <InputModal
-          action={addBorrower}
-          columns={addFormColumns}
-          details='Enter details for the new borrower you would like to add.'
-          title='New Borrower'
-          refresh={getBorrowers}
-        />
-        <InputModal
-          action={updateBorrower}
-          columns={updateFormColumns}
-          details='Edit details for the borrower you would like to update.'
-          title='Update Borrower'
-          refresh={getBorrowers}
-        />
-        <InputModal
-          action={deleteBorrower}
-          columns={deleteFormColumns}
-          details='Enter the id of the borrower you would like to delete'
-          title='Delete Borrower'
-          refresh={getBorrowers}
-        />
-      </div>
       <EntityTable
+        addAction={() => (
+          <InputModal
+            action={addBorrower}
+            columns={addFormColumns}
+            details='Enter details for the new borrower you would like to add.'
+            title={<Icon name='add' color='white' />}
+            titleText='New Borrower'
+            refresh={getBorrowers}
+          />
+        )}
+        deleteAction={(info) => (
+          <InputModal
+            action={deleteBorrower}
+            columns={deleteFormColumns}
+            details='Enter the id of the borrower you would like to delete'
+            info={info}
+            modal='delete'
+            title={<Icon name='delete' color='white' />}
+            titleText='Delete Borrower'
+            refresh={getBorrowers}
+          />
+        )}
+        updateAction={(info) => (
+          <InputModal
+            action={updateBorrower}
+            columns={updateFormColumns}
+            details='Edit details for the borrower you would like to update.'
+            info={info}
+            modal='update'
+            title={<Icon name='edit' color='white' />}
+            titleText='Update Borrower'
+            refresh={getBorrowers}
+          />
+        )}
         cols={columns}
         icon='library'
         loading={loading}

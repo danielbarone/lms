@@ -18,9 +18,12 @@ const InputModal = (props) => {
     columns,
     CustomForm,
     details,
+    info,
+    modal,
     refresh,
     requireId,
     title,
+    titleText,
   } = props;
   const [formError, setFormError] = useState();
 
@@ -64,14 +67,17 @@ const InputModal = (props) => {
             action={action}
             classes={classes}
             details={details}
+            info={info}
+            modal={modal}
             refresh={refresh}
             setOpen={setOpen}
             title={title}
+            titleText={titleText}
             requireId={requireId}
           />
         ) : (
           <form onSubmit={onSubmit} className={classes.formModalContainer}>
-            <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
+            <Typography className={classes.welcomeMsg} variant='h6'>{titleText}</Typography>
             <Typography className={classes.formError}>{formError}</Typography>
             {columns.map((c) => (
                 <TextField
@@ -107,9 +113,12 @@ InputModal.propTypes = {
   action: PropTypes.func,
   columns: PropTypes.array,
   details: PropTypes.string,
+  info: PropTypes.object,
+  modal: PropTypes.string,
   refresh: PropTypes.func,
   requireId: PropTypes.bool,
   title: PropTypes.string,
+  titleText: PropTypes.string,
   CustomForm: PropTypes.any,
 };
 
