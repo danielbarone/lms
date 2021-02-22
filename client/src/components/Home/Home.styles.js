@@ -6,6 +6,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '50px',
     marginBottom: '175px',
   },
+  libImg: {
+    marginTop: '50px',
+    height: '135px',
+  },
   subtitle: {
     color: theme.colors.text.labelValue,
     fontSize: '1.6em',

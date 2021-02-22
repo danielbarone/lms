@@ -13,6 +13,7 @@ import { clearSession } from '../../services/Session/actions';
 import { deleteSession } from '../../utils/mutations';
 import { Icon } from '..';
 import useStyles from './Home.styles';
+import libImg from '../../assets/img/libraryImg.svg';
 
 const Home = (props) => {
   const classes = useStyles(props);
@@ -112,6 +113,19 @@ const Home = (props) => {
               </Grid>
             </Grid>
           )}
+        </Grid>
+        <Grid
+          alignItems='center'
+          container
+          direction='column'
+          item
+          justify='center'
+          xs={12}
+          md
+        >
+          <Grid item>
+            <img className={classes.libImg} src={libImg} />
+          </Grid>
         </Grid>
       </Grid>
     </div>
