@@ -7,12 +7,14 @@ import {
   Preview,
 } from '../components';
 
-const UnauthRoutes = () => (
+const UnauthRoutes = (props) => (
   <Switch>
-    <Route exact path="/admin" component={Preview} />
-    <Route exact path="/borrower" component={BorrowerHome} />
-    <Route exact path="/Librarian" component={Preview} />
-    <Route path="/" component={Home} />
+    <Route exact path='/admin' component={Preview} />
+    <Route exact path='/borrower' component={BorrowerHome} />
+    <Route exact path='/Librarian' component={Preview} />
+    <Route path='/' render={() => (
+      <Home {...props} />
+    )} />
   </Switch>
 );
 

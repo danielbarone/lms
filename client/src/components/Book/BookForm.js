@@ -39,10 +39,13 @@ export default function BookForm(props) {
     action,
     classes,
     details,
+    info,
+    modal,
     refresh,
     requireId,
     setOpen,
     title,
+    titleText,
   } = props;
   const dispatch = useDispatch();
 
@@ -117,11 +120,14 @@ export default function BookForm(props) {
     getAuthors();
     getGenres();
     getPublishers();
+    if (info) {
+      setBookId(info.id);
+    }
   }, []);
 
   return (
       <form onSubmit={(e) => handleSubmit(e)} className={classes.formModalContainer}>
-        <Typography className={classes.welcomeMsg} variant='h6'>{title}</Typography>
+        <Typography className={classes.welcomeMsg} variant='h6'>{titleText}</Typography>
         <Typography className={classes.formError}>{formError}</Typography>
         {requireId ? (
           <TextField
@@ -130,6 +136,7 @@ export default function BookForm(props) {
             variant='outlined'
             label='Book ID'
             name='book-id'
+            defaultValue={info ? info.id : ''}
             type='text'
             onChange={handleTextFieldChangeId}
           />
@@ -140,9 +147,12 @@ export default function BookForm(props) {
           variant='outlined'
           label='Title'
           name='title'
+          defaultValue={info ? info.name : ''}
           type='text'
           onChange={handleTextFieldChange}
         />
+        {modal === 'delete' ? '' : (
+        <>
         <FormControl className={classes.formControl}>
           <InputLabel id='publisher-checkbox-label'>Publisher</InputLabel>
           <Select
@@ -151,9 +161,7 @@ export default function BookForm(props) {
             value={publisher}
             onChange={handleChangePublisher}
             input={<Input />}
-            renderValue={(selected) => {
-              return selected.name;
-            }}
+            renderValue={(selected) => selected.name}
             MenuProps={MenuProps}
           >
             {publishers ? publishers.map((p) => (
@@ -210,6 +218,8 @@ export default function BookForm(props) {
             )) : []}
           </Select>
         </FormControl>
+        </>
+        )}
         <Button
             className={classes.modalSubmitBtn}
             variant='contained'
@@ -227,8 +237,11 @@ BookForm.propTypes = {
   action: PropTypes.func,
   classes: PropTypes.any,
   details: PropTypes.string,
+  info: PropTypes.object,
+  modal: PropTypes.string,
   refresh: PropTypes.func,
   requireId: PropTypes.bool,
   setOpen: PropTypes.func,
   title: PropTypes.string,
+  titleText: PropTypes.string,
 };

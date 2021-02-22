@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './publisherStyles';
-import { EntityTable, InputModal } from '..';
+import { EntityTable, Icon, InputModal } from '..';
 import { publisherActions } from '../../services/actions';
 
 const columns = [
@@ -43,37 +43,48 @@ const Publisher = (props) => {
 
     return (
         <div className={classes.root}>
-            <div style={{ display: 'flex', justifyContent: 'start' }}>
-                <InputModal
-                    action={addPublisher}
-                    columns={addFormColumns}
-                    details='Enter details for the new publisher you would like to add.'
-                    title='New Publisher'
-                    refresh={getPublishers}
-                />
-                <InputModal
-                    action={updatePublisher}
-                    columns={updateFormColumns}
-                    details='Edit details for the publisher you would like to update.'
-                    title='Update Publisher'
-                    refresh={getPublishers}
-                />
-                <InputModal
-                    action={deletePublisher}
-                    columns={deleteFormColumns}
-                    details='Enter the id of the publisher you would like to delete'
-                    title='Delete Publisher'
-                    refresh={getPublishers}
-                />
-            </div>
             <EntityTable
-                cols={columns}
+                addAction={() => (
+                    <InputModal
+                        action={addPublisher}
+                        columns={addFormColumns}
+                        details='Enter details for the new publisher you would like to add.'
+                        title={<Icon name='add' color='white' />}
+                        titleText='New Publisher'
+                        refresh={getPublishers}
+                    />
+                )}
+                deleteAction={(info) => (
+                    <InputModal
+                        action={deletePublisher}
+                        columns={deleteFormColumns}
+                        details='Enter the id of the publisher you would like to delete'
+                        info={info}
+                        modal='delete'
+                        title={<Icon name='delete' color='white' />}
+                        titleText='Delete Publisher'
+                        refresh={getPublishers}
+                    />
+                )}
+                updateAction={(info) => (
+                    <InputModal
+                        action={updatePublisher}
+                        columns={updateFormColumns}
+                        details='Edit details for the publisher you would like to update.'
+                        info={info}
+                        modal='update'
+                        title={<Icon name='edit' color='white' />}
+                        titleText='Update Publisher'
+                        refresh={getPublishers}
+                    />
+                )}
                 icon='library'
+                cols={columns}
                 loading={loading}
                 rows={publishers}
             />
         </div>
-    )
-}
+  );
+};
 
 export default Publisher;

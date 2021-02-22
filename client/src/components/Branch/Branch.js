@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Branch.styles';
 /* Components */
-import { EntityTable, InputModal } from '..';
+import { EntityTable, Icon, InputModal } from '..';
 import { branchActions } from '../../services/actions';
 
 const columns = [
@@ -57,32 +57,43 @@ const Branch = (props) => {
   return (
     <div className={classes.root}>
       {/* Temp div style */}
-      <div style={{ display: 'flex', justifyContent: 'start' }}>
-        <InputModal
-          action={createBranch}
-          columns={formColumns}
-          details='Enter details for the new branch you would like to add.'
-          title='New Branch'
-          refresh={getBranches}
-        />
-        <InputModal
-          action={updateBranch}
-          columns={formColsUpdDel}
-          details='Edit details for the branch you would like to update.'
-          title='Update Branch'
-          refresh={getBranches}
-        />
-        <InputModal
-          action={deleteBranch}
-          columns={formColsUpdDel}
-          details='Review details of the branch you are about to delete.'
-          title='Delete Branch'
-          refresh={getBranches}
-        />
-      </div>
       <EntityTable
-        cols={columns}
+        addAction={() => (
+          <InputModal
+            action={createBranch}
+            columns={formColumns}
+            details='Enter details for the new branch you would like to add.'
+            title={<Icon name='add' color='white' />}
+            titleText='New Branch'
+            refresh={getBranches}
+          />
+        )}
+        deleteAction={(info) => (
+          <InputModal
+            action={deleteBranch}
+            columns={formColsUpdDel}
+            details='Review details of the branch you are about to delete.'
+            info={info}
+            modal='delete'
+            title={<Icon name='delete' color='white' />}
+            titleText='Delete Branch'
+            refresh={getBranches}
+          />
+        )}
+        updateAction={(info) => (
+          <InputModal
+            action={updateBranch}
+            columns={formColsUpdDel}
+            details='Edit details for the branch you would like to update.'
+            info={info}
+            modal='update'
+            title={<Icon name='edit' color='white' />}
+            titleText='Update Branch'
+            refresh={getBranches}
+          />
+        )}
         icon='library'
+        cols={columns}
         loading={loading}
         rows={branches}
       />

@@ -175,7 +175,7 @@ function LandingPage(props) {
             >
               <img src={libraryIcon} height='60' style={{ marginRight: '8px' }} />
               <Typography variant="h6" className={classes.appBarText} noWrap>
-                {props.userData ? `${props.userData.fullName}` : 'Library MS'}
+                {props.userData ? `${props.userData.fullName} - Dashboard` : 'LMS'}
               </Typography>
             </div>
             <div className={classes.appBarRightItems}>
@@ -228,7 +228,7 @@ function LandingPage(props) {
       {/* Main Content */}
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.userData ? props.userData.routes : <UnauthRoutes />}
+        {props.userData ? props.userData.routes : <UnauthRoutes toggle={handleToggle} />}
       </main>
 
       {/* Authentication Dialogs */}

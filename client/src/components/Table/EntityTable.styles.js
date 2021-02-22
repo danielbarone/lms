@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
       outline: '0 !important',
     },
   }),
+  chipContainer: {
+    marginTop: '70px',
+  },
   noRowsOverlay: {
     flexDirection: 'column',
     '& .ant-empty-img-1': {
@@ -41,11 +44,14 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     width: '100%',
   },
-  selectedContainer: {
-    marginTop: '20px',
+  selectedActions: {
     display: 'flex',
-    // justifyContent: 'start',
-    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  selectedContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   spinner: {
     color: theme.colors.text.highlight,
@@ -57,12 +63,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     paddingTop: '40ch',
   },
-  highlight:{
+  highlight: {
     // color: `${theme.colors.text.primary}`,
     color: `${theme.colors.text.secondary}`,
-     // fontSize: "16px",
-      fontWeight: "bold",
-
+    // fontSize: "16px",
+    fontWeight: "bold",
  },
  button1:{
   ...theme.buttons.primary,

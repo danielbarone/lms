@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /* Styles */
 import useStyles from './Genre.styles';
 /* Components */
-import { EntityTable, InputModal } from '..';
+import { EntityTable, Icon, InputModal } from '..';
 import { genreActions } from '../../services/actions';
 
 const columns = [
@@ -39,30 +39,42 @@ const Genre = (props) => {
   return (
     <div className={classes.root}>
       {/* Temp div style */}
-      <div style={{ display: 'flex', justifyContent: 'start' }}>
-        <InputModal
-          action={createGenre}
-          columns={formColumns}
-          details='Enter details for the new genre you would like to add.'
-          title='New Genre'
-          refresh={getGenres}
-        />
-        <InputModal
-          action={updateGenre}
-          columns={formColsUpdDel}
-          details='Edit details for the genre you would like to update.'
-          title='Update Genre'
-          refresh={getGenres}
-        />
-        <InputModal
-          action={deleteGenre}
-          columns={formColsUpdDel}
-          details='Review details of the genre you are about to delete.'
-          title='Delete Genre'
-          refresh={getGenres}
-        />
-      </div>
       <EntityTable
+        addAction={() => (
+          <InputModal
+            action={createGenre}
+            columns={formColumns}
+            details='Enter details for the new genre you would like to add.'
+            title={<Icon name='add' color='white' />}
+            titleText='New Genre'
+            refresh={getGenres}
+          />
+        )}
+        deleteAction={(info) => (
+          <InputModal
+            action={deleteGenre}
+            columns={formColsUpdDel}
+            details='Review details of the genre you are about to delete.'
+            info={info}
+            modal='delete'
+            title={<Icon name='delete' color='white' />}
+            titleText='Delete Genre'
+            refresh={getGenres}
+          />
+        )}
+        updateAction={(info) => (
+          <InputModal
+            action={updateGenre}
+            columns={formColsUpdDel}
+            details='Edit details for the genre you would like to update.'
+            info={info}
+            modal='update'
+            title={<Icon name='edit' color='white' />}
+            titleText='Update Borrower'
+            refresh={getGenres}
+          />
+        )}
+        icon='library'
         rows={genres}
         cols={columns}
         loading={loading}
